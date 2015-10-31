@@ -1,16 +1,16 @@
 ﻿using PizzaNet.Domain.Entities;
 using System;
 using System.Threading.Tasks;
+using System.Transactions;
 
 namespace PizzaNet.Domain.DatabaseAccess
 {
     class PizzaNetDbContext : IPizzaNetDbContext
     {
-        public PizzaNetDbContext()
+        public PizzaNetDbContext(IPizzaNetEntities entities)
         {
-
+            _entities = entities;
         }
-
 
         ~PizzaNetDbContext()
         {
@@ -23,24 +23,43 @@ namespace PizzaNet.Domain.DatabaseAccess
         private object _transcationLock = new object();
         private IPizzaNetEntities _entities;
 
-        public void ExecuteInTransaction(Func<DbOperationContext> operation)
+        public void ExecuteInTransaction(Action<DbOperationContext> operation)
         {
-            throw new NotImplementedException();
+            ExecuteInTransaction(dbOperationContext =>
+            {
+                operation(dbOperationContext);
+                return 0;
+            });
         }
 
         public T ExecuteInTransaction<T>(Func<DbOperationContext, T> operation)
         {
-            throw new NotImplementedException();
+            lock (_transcationLock)
+            {
+                using (var transactionScope = new TransactionScope())
+                {
+                    using (var dbOperationContext = new DbOperationContext(this, _entities))
+                    {
+                        T result = operation(dbOperationContext);
+                        if (!dbOperationContext.RequestRollback)
+                        {
+                            _entities.SaveChanges();
+                            transactionScope.Complete();
+                        }
+                        return result;
+                    }
+                }
+            }
         }
 
         public Task<T> ExecuteInTransactionAsync<T>(Func<DbOperationContext, T> operation)
         {
-            return Task.Run(() => ExecuteInTransaction(operation));
+            return new Task<T>(() => ExecuteInTransaction(operation));
         }
 
-        public Task ExecuteInTransactionAsync(Func<DbOperationContext> operation)
+        public Task ExecuteInTransactionAsync(Action<DbOperationContext> operation)
         {
-            return Task.Run(() => ExecuteInTransaction(operation));
+            return new Task(() => ExecuteInTransaction(operation));
         }
 
         public void Dispose()

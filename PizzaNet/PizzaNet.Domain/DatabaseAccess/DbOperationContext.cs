@@ -3,15 +3,15 @@ using System;
 
 namespace PizzaNet.Domain.DatabaseAccess
 {
-    class DbTransaction : IDisposable
+    class DbOperationContext : IDisposable
     {
-        public DbTransaction(IPizzaNetDbContext context, IPizzaNetDbEntities entities)
+        public DbOperationContext(IPizzaNetDbContext context, PizzaNetEntities entities)
         {
             Context = context;
             Entities = entities;
         }
 
-        public IPizzaNetDbEntities Entities { get; private set; }
+        public PizzaNetEntities Entities { get; private set; }
         public IPizzaNetDbContext Context { get; private set; }
         public bool RequestRollback { get; set; }
         public bool IsDisposed { get; private set; }

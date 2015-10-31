@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
 
 namespace PizzaNet.Domain.Entities
 {
@@ -7,6 +8,10 @@ namespace PizzaNet.Domain.Entities
         static PizzaNetEntities()
         {
             Database.SetInitializer(new DropCreateDatabaseIfModelChanges<PizzaNetEntities>());
+        }
+
+        public PizzaNetEntities()
+        {
         }
     }
 }

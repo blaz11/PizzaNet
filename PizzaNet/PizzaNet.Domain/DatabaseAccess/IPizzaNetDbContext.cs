@@ -7,12 +7,12 @@ namespace PizzaNet.Domain.DatabaseAccess
     {
         bool IsDisposed { get; }
 
-        void ExecuteInTransaction(Func<DbOperationContext> operation);
+        void ExecuteInTransaction(Action<DbOperationContext> operation);
 
         T ExecuteInTransaction<T>(Func<DbOperationContext, T> operation);
 
         Task<T> ExecuteInTransactionAsync<T>(Func<DbOperationContext, T> operation);
 
-        Task ExecuteInTransactionAsync(Func<DbOperationContext> operation);
+        Task ExecuteInTransactionAsync(Action<DbOperationContext> operation);
     }
 }
