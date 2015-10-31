@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PizzaNet", "PizzaNet\PizzaNet.csproj", "{2E1F2606-3856-4FED-8B19-EF97D4ACEADE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PizzaNet.DesktopClient", "PizzaNet\PizzaNet.DesktopClient.csproj", "{2E1F2606-3856-4FED-8B19-EF97D4ACEADE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PizzaNet.Domain", "PizzaNet.Domain\PizzaNet.Domain.csproj", "{3D899D45-E729-42C9-94D0-55F600E5D761}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PizzaNet.Tests", "PizzaNet.Tests\PizzaNet.Tests.csproj", "{61F7FB38-B1CD-44BA-A95F-16C735DF88D2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{2E1F2606-3856-4FED-8B19-EF97D4ACEADE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2E1F2606-3856-4FED-8B19-EF97D4ACEADE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2E1F2606-3856-4FED-8B19-EF97D4ACEADE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D899D45-E729-42C9-94D0-55F600E5D761}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D899D45-E729-42C9-94D0-55F600E5D761}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D899D45-E729-42C9-94D0-55F600E5D761}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D899D45-E729-42C9-94D0-55F600E5D761}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61F7FB38-B1CD-44BA-A95F-16C735DF88D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61F7FB38-B1CD-44BA-A95F-16C735DF88D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61F7FB38-B1CD-44BA-A95F-16C735DF88D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61F7FB38-B1CD-44BA-A95F-16C735DF88D2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
