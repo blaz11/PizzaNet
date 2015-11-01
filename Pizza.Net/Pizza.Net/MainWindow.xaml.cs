@@ -1,17 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Pizza.Net.Domain;
+using Pizza.Net.Domain.DatabaseAccess;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using System.Linq;
 
 namespace Pizza.Net
 {
@@ -23,6 +13,23 @@ namespace Pizza.Net
         public MainWindow()
         {
             InitializeComponent();
+            //Przykład użycia
+            var dbAcess = new PizzaNetDbAccess();
+            //dbAcess.ExecuteInTransaction(oc =>
+            //{
+            //    var p = new Position()
+            //    {
+            //        Name = "CEO"
+            //    };
+            //    oc.Entities.Positions.Add(p);
+            //    var query = oc.Entities.Positions.Where(po => po.Name == p.Name);
+            //    var postition = query.First();
+            //});
+            dbAcess.ExecuteInTransaction(oc =>
+            {
+                var query = oc.Entities.Positions.Where(po => po.Name == "CEO");
+                var postition = query.First();
+            });
         }
     }
 }
