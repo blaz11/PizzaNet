@@ -1,27 +1,25 @@
-﻿using PizzaNet.Domain.Entities;
-using System;
+﻿using System;
 using System.Threading.Tasks;
 using System.Transactions;
 
 namespace PizzaNet.Domain.DatabaseAccess
 {
-    class PizzaNetDbContext : IPizzaNetDbContext
+    class PizzaNetDbAccess : IPizzaNetDbAccess
     {
-        public PizzaNetDbContext(IPizzaNetEntities entities)
+        public PizzaNetDbAccess(PizzaNetDbEntities entities)
         {
             _entities = entities;
         }
 
-        ~PizzaNetDbContext()
+        ~PizzaNetDbAccess()
         {
             Dispose(false);
         }
 
         public bool IsDisposed { get; private set; }
 
-        //TODO(bkula): Investigate if we really need it, maybe db takes care of isolation for us.
         private object _transcationLock = new object();
-        private IPizzaNetEntities _entities;
+        private PizzaNetDbEntities _entities;
 
         public void ExecuteInTransaction(Action<DbOperationContext> operation)
         {
@@ -38,7 +36,7 @@ namespace PizzaNet.Domain.DatabaseAccess
             {
                 using (var transactionScope = new TransactionScope())
                 {
-                    using (var dbOperationContext = new DbOperationContext(this, _entities))
+                    using (var dbOperationContext = new DbOperationContext(_entities))
                     {
                         T result = operation(dbOperationContext);
                         if (!dbOperationContext.RequestRollback)

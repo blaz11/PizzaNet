@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace PizzaNet.Domain.DatabaseAccess
 {
-    interface IPizzaNetDbContext : IDisposable
+    interface IPizzaNetDbAccess : IDisposable
     {
         bool IsDisposed { get; }
 

@@ -64,6 +64,8 @@
       <HintPath>..\packages\Microsoft.SqlServer.Compact.4.0.8876.1\lib\net40\System.Data.SqlServerCe.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Transactions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -73,17 +75,63 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Client.cs">
+      <DependentUpon>PizzaNetDb.tt</DependentUpon>
+    </Compile>
     <Compile Include="DatabaseAccess\DbOperationContext.cs" />
-    <Compile Include="DatabaseAccess\IPizzaNetDbContext.cs" />
-    <Compile Include="Entities\Entity.cs" />
-    <Compile Include="DatabaseAccess\PizzaNetDbContext.cs" />
-    <Compile Include="Entities\IPizzaNetEntities.cs" />
-    <Compile Include="Entities\PizzaNetEntities.cs" />
+    <Compile Include="DatabaseAccess\IPizzaNetDbAccess.cs" />
+    <Compile Include="DatabaseAccess\PizzaNetDbAccess.cs" />
+    <Compile Include="Employee.cs">
+      <DependentUpon>PizzaNetDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ingridient.cs">
+      <DependentUpon>PizzaNetDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Order.cs">
+      <DependentUpon>PizzaNetDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Pizza.cs">
+      <DependentUpon>PizzaNetDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PizzaNetDb.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PizzaNetDb.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PizzaNetDb.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PizzaNetDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PizzaNetDb.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PizzaNetDb.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Pizza_Ingridients.cs">
+      <DependentUpon>PizzaNetDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Pizza_Order.cs">
+      <DependentUpon>PizzaNetDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Position.cs">
+      <DependentUpon>PizzaNetDb.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Size.cs">
+      <DependentUpon>PizzaNetDb.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <EntityDeploy Include="PizzaNetDb.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>PizzaNetDb.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="PizzaNetDb.edmx.diagram">
+      <DependentUpon>PizzaNetDb.edmx</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">
@@ -96,6 +144,21 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="PizzaNetDb.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>PizzaNetDb.edmx</DependentUpon>
+      <LastGenOutput>PizzaNetDb.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="PizzaNetDb.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>PizzaNetDb.edmx</DependentUpon>
+      <LastGenOutput>PizzaNetDb.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

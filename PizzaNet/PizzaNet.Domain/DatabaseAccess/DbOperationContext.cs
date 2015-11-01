@@ -1,24 +1,21 @@
-﻿using PizzaNet.Domain.Entities;
-using System;
+﻿using System;
 
 namespace PizzaNet.Domain.DatabaseAccess
 {
     class DbOperationContext : IDisposable
     {
-        public DbOperationContext(IPizzaNetDbContext context, IPizzaNetEntities entities)
+        public DbOperationContext(PizzaNetDbEntities context)
         {
             Context = context;
-            Entities = entities;
         }
 
-        public IPizzaNetEntities Entities { get; private set; }
-        public IPizzaNetDbContext Context { get; private set; }
+        public PizzaNetDbEntities Context { get; private set; }
         public bool RequestRollback { get; set; }
         public bool IsDisposed { get; private set; }
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            IsDisposed = true;
         }
     }
 }
