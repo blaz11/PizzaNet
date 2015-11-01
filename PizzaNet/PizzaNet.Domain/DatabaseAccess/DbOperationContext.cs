@@ -5,13 +5,13 @@ namespace PizzaNet.Domain.DatabaseAccess
 {
     class DbOperationContext : IDisposable
     {
-        public DbOperationContext(IPizzaNetDbContext context, PizzaNetEntities entities)
+        public DbOperationContext(IPizzaNetDbContext context, IPizzaNetEntities entities)
         {
             Context = context;
             Entities = entities;
         }
 
-        public PizzaNetEntities Entities { get; private set; }
+        public IPizzaNetEntities Entities { get; private set; }
         public IPizzaNetDbContext Context { get; private set; }
         public bool RequestRollback { get; set; }
         public bool IsDisposed { get; private set; }
