@@ -64,6 +64,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Screens\DesignTimeData\ClientsTable.cs" />
+    <Compile Include="Screens\Entities\ClientEntity.xaml.cs">
+      <DependentUpon>ClientEntity.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\DesignTimeData\ClientEntity.cs" />
+    <Compile Include="Screens\Entities\EntityField.xaml.cs">
+      <DependentUpon>EntityField.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\Tables\ClientsTable.xaml.cs">
+      <DependentUpon>ClientsTable.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\Tables\TableLegends\ClientsTableLegend.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -76,6 +88,18 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Screens\Entities\ClientEntity.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Screens\Entities\EntityField.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Screens\Tables\ClientsTable.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -111,6 +135,7 @@
       <Name>Pizza.Net.Domain</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
