@@ -29,7 +29,7 @@ namespace Pizza.Net.Domain.DatabaseAccess
             {
                 using (var transactionScope = new TransactionScope())
                 {
-                    using (var entities = new PizzaNetDatabaseEntities())
+                    using (var entities = new PizzaNetEntities())
                     {
                         using (var dbOperationContext = new DbOperationContext(entities))
                         {

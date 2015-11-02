@@ -12,23 +12,19 @@ namespace Pizza.Net.Domain
     using System;
     using System.Collections.Generic;
     
-    public partial class Order
+    public partial class Account
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Order()
+        public Account()
         {
-            this.PizzaOrders = new HashSet<PizzaOrder>();
+            this.Employees = new HashSet<Employee>();
         }
     
-        public int IDOrder { get; set; }
-        public int IDClient { get; set; }
-        public int IDEmployee { get; set; }
-        public System.DateTime StartOrderDate { get; set; }
-        public System.DateTime FinishOrderDate { get; set; }
+        public int IDAccount { get; set; }
+        public string Username { get; set; }
+        public string Password { get; set; }
     
-        public virtual Client Client { get; set; }
-        public virtual Employee Employee { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PizzaOrder> PizzaOrders { get; set; }
+        public virtual ICollection<Employee> Employees { get; set; }
     }
 }

@@ -13,12 +13,12 @@ namespace Pizza.Net.Screens.DesignTimeData
             }
         }
 
-        public ICollection<Ingridient> Ingredients
+        public ICollection<Ingredient> Ingredients
         {
             get
             {
-                var col = new List<Ingridient>();
-                var ing = new Ingridient()
+                var col = new List<Ingredient>();
+                var ing = new Ingredient()
                 {
                     Name = "Salami",
                 };

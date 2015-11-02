@@ -12,8 +12,8 @@ namespace Pizza.Net.Screens.DesignTimeData
             {
                 return new Client()
                 {
-                    First_Name = "Dariusz",
-                    Last_Name = "Maciejewski"
+                    FirstName = "Dariusz",
+                    LastName = "Maciejewski"
                 };
             }
         }
@@ -24,8 +24,8 @@ namespace Pizza.Net.Screens.DesignTimeData
             {
                 return new Employee()
                 {
-                    First_Name = "Maciej",
-                    Last_Name = "Darekszewicz"
+                    FirstName = "Maciej",
+                    LastName = "Darekszewicz"
                 };
             }
         }
@@ -46,12 +46,12 @@ namespace Pizza.Net.Screens.DesignTimeData
             }
         }
 
-        public ICollection<Pizza_Order> Pizzas
+        public ICollection<PizzaOrder> Pizzas
         {
             get
             {
-                var collection = new List<Pizza_Order>();
-                var item = new Pizza_Order()
+                var collection = new List<PizzaOrder>();
+                var item = new PizzaOrder()
                 {
                     Pizza = new Pizza.Net.Domain.Pizza()
                     {

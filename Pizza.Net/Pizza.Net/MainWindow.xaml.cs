@@ -15,16 +15,14 @@ namespace Pizza.Net
             InitializeComponent();
             //Przykład użycia
             var dbAcess = new PizzaNetDbAccess();
-            //dbAcess.ExecuteInTransaction(oc =>
-            //{
-            //    var p = new Position()
-            //    {
-            //        Name = "CEO"
-            //    };
-            //    oc.Entities.Positions.Add(p);
-            //    var query = oc.Entities.Positions.Where(po => po.Name == p.Name);
-            //    var postition = query.First();
-            //});
+            dbAcess.ExecuteInTransaction(oc =>
+            {
+                var p = new Position()
+                {
+                    Name = "CEO"
+                };
+                oc.Entities.Positions.Add(p);
+            });
             dbAcess.ExecuteInTransaction(oc =>
             {
                 var query = oc.Entities.Positions.Where(po => po.Name == "CEO");

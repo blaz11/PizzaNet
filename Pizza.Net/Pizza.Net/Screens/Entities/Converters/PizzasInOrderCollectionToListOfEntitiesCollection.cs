@@ -10,7 +10,7 @@ namespace Pizza.Net.Screens.Entities
         public object Convert(object value, Type targetType, object parameter,
                             System.Globalization.CultureInfo culture)
         {
-            var items = value as ICollection<Pizza.Net.Domain.Pizza_Order>;
+            var items = value as ICollection<Pizza.Net.Domain.PizzaOrder>;
             if (items == null)
                 return value;
             var converted = new List<string>();

@@ -52,77 +52,80 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Account.cs">
+      <DependentUpon>PizzaNetDatabase.tt</DependentUpon>
+    </Compile>
     <Compile Include="Client.cs">
-      <DependentUpon>PizzaNetEntities.tt</DependentUpon>
+      <DependentUpon>PizzaNetDatabase.tt</DependentUpon>
     </Compile>
     <Compile Include="DatabaseAccess\DbOperationContext.cs" />
     <Compile Include="DatabaseAccess\IPizzaNetDbAccess.cs" />
     <Compile Include="DatabaseAccess\PizzaNetDbAccess.cs" />
     <Compile Include="Employee.cs">
-      <DependentUpon>PizzaNetEntities.tt</DependentUpon>
+      <DependentUpon>PizzaNetDatabase.tt</DependentUpon>
     </Compile>
-    <Compile Include="Ingridient.cs">
-      <DependentUpon>PizzaNetEntities.tt</DependentUpon>
+    <Compile Include="Ingredient.cs">
+      <DependentUpon>PizzaNetDatabase.tt</DependentUpon>
     </Compile>
     <Compile Include="Order.cs">
-      <DependentUpon>PizzaNetEntities.tt</DependentUpon>
+      <DependentUpon>PizzaNetDatabase.tt</DependentUpon>
     </Compile>
     <Compile Include="Pizza.cs">
-      <DependentUpon>PizzaNetEntities.tt</DependentUpon>
+      <DependentUpon>PizzaNetDatabase.tt</DependentUpon>
     </Compile>
-    <Compile Include="PizzaNetEntities.Context.cs">
+    <Compile Include="PizzaIngredient.cs">
+      <DependentUpon>PizzaNetDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PizzaNetDatabase.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>PizzaNetEntities.Context.tt</DependentUpon>
+      <DependentUpon>PizzaNetDatabase.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="PizzaNetEntities.cs">
+    <Compile Include="PizzaNetDatabase.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>PizzaNetEntities.tt</DependentUpon>
+      <DependentUpon>PizzaNetDatabase.tt</DependentUpon>
     </Compile>
-    <Compile Include="PizzaNetEntities.Designer.cs">
+    <Compile Include="PizzaNetDatabase.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>PizzaNetEntities.edmx</DependentUpon>
+      <DependentUpon>PizzaNetDatabase.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Pizza_Ingridients.cs">
-      <DependentUpon>PizzaNetEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Pizza_Order.cs">
-      <DependentUpon>PizzaNetEntities.tt</DependentUpon>
+    <Compile Include="PizzaOrder.cs">
+      <DependentUpon>PizzaNetDatabase.tt</DependentUpon>
     </Compile>
     <Compile Include="Position.cs">
-      <DependentUpon>PizzaNetEntities.tt</DependentUpon>
+      <DependentUpon>PizzaNetDatabase.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Size.cs">
-      <DependentUpon>PizzaNetEntities.tt</DependentUpon>
+      <DependentUpon>PizzaNetDatabase.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-    <EntityDeploy Include="PizzaNetEntities.edmx">
+    <EntityDeploy Include="PizzaNetDatabase.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>PizzaNetEntities.Designer.cs</LastGenOutput>
+      <LastGenOutput>PizzaNetDatabase.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="PizzaNetEntities.edmx.diagram">
-      <DependentUpon>PizzaNetEntities.edmx</DependentUpon>
+    <None Include="PizzaNetDatabase.edmx.diagram">
+      <DependentUpon>PizzaNetDatabase.edmx</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="PizzaNetEntities.Context.tt">
+    <Content Include="PizzaNetDatabase.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>PizzaNetEntities.edmx</DependentUpon>
-      <LastGenOutput>PizzaNetEntities.Context.cs</LastGenOutput>
+      <DependentUpon>PizzaNetDatabase.edmx</DependentUpon>
+      <LastGenOutput>PizzaNetDatabase.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="PizzaNetEntities.tt">
+    <Content Include="PizzaNetDatabase.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>PizzaNetEntities.edmx</DependentUpon>
-      <LastGenOutput>PizzaNetEntities.cs</LastGenOutput>
+      <DependentUpon>PizzaNetDatabase.edmx</DependentUpon>
+      <LastGenOutput>PizzaNetDatabase.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

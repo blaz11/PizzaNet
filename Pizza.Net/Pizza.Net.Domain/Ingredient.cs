@@ -12,18 +12,18 @@ namespace Pizza.Net.Domain
     using System;
     using System.Collections.Generic;
     
-    public partial class Ingridient
+    public partial class Ingredient
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Ingridient()
+        public Ingredient()
         {
-            this.Pizza_Ingridients = new HashSet<Pizza_Ingridients>();
+            this.PizzaIngredients = new HashSet<PizzaIngredient>();
         }
     
-        public int ID_Ingrid { get; set; }
+        public int IDIngredient { get; set; }
         public string Name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Pizza_Ingridients> Pizza_Ingridients { get; set; }
+        public virtual ICollection<PizzaIngredient> PizzaIngredients { get; set; }
     }
 }

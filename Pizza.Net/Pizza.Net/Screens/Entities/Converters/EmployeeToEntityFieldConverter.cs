@@ -13,7 +13,7 @@ namespace Pizza.Net.Screens.Entities
             var employee = value as Employee;
             if (employee == null)
                 return value;
-            return employee.First_Name + " " + employee.Last_Name;
+            return employee.FirstName + " " + employee.LastName;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter,

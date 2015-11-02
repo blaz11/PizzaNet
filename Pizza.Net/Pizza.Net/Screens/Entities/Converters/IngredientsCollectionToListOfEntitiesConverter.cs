@@ -11,7 +11,7 @@ namespace Pizza.Net.Screens.Entities
         public object Convert(object value, Type targetType, object parameter,
                               System.Globalization.CultureInfo culture)
         {
-            var ingredients = value as ICollection<Ingridient>;
+            var ingredients = value as ICollection<Ingredient>;
             if (ingredients == null)
                 return value;
             var converted = new List<string>();

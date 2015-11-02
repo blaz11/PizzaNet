@@ -20,7 +20,7 @@ namespace Pizza.Net.Domain
             this.Employees = new HashSet<Employee>();
         }
     
-        public int ID_Position { get; set; }
+        public int IDPosition { get; set; }
         public string Name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

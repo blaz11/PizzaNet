@@ -12,12 +12,12 @@ namespace Pizza.Net.Domain
     using System;
     using System.Collections.Generic;
     
-    public partial class Pizza_Order
+    public partial class PizzaOrder
     {
-        public int ID_Pizza_Order { get; set; }
-        public int ID_Order { get; set; }
-        public int ID_Pizza { get; set; }
-        public int ID_Size { get; set; }
+        public int IDPizzaOrder { get; set; }
+        public int IDOrder { get; set; }
+        public int IDPizza { get; set; }
+        public int IDSize { get; set; }
     
         public virtual Order Order { get; set; }
         public virtual Pizza Pizza { get; set; }
