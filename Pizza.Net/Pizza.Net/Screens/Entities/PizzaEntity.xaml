@@ -11,8 +11,8 @@
              d:DataContext="{d:DesignInstance designTime:PizzaEntity,
                                               IsDesignTimeCreatable=True}">
     <UserControl.Resources>
-        <local:IngredientsCollectionToLookupEntityConverter 
-            x:Key="IngredientsCollectionToLookupEntityConverter" />
+        <local:IngredientsCollectionToListOfEntitiesConverter 
+            x:Key="IngredientsCollectionToListOfEntitiesConverter" />
     </UserControl.Resources>
     <Grid VerticalAlignment="Stretch">
         <Grid.ColumnDefinitions>
@@ -20,8 +20,8 @@
             <ColumnDefinition Width="300"/>
         </Grid.ColumnDefinitions>
         <local:BasicEntityField Grid.Column="0" DataContext="{Binding Name}" />
-        <local:LookupEntity Grid.Column="1"
+        <local:ListOfEntities Grid.Column="1"
                             DataContext="{Binding Ingredients, 
-                                Converter={StaticResource IngredientsCollectionToLookupEntityConverter}}"/>
+                                Converter={StaticResource IngredientsCollectionToListOfEntitiesConverter}}"/>
     </Grid>
 </UserControl>

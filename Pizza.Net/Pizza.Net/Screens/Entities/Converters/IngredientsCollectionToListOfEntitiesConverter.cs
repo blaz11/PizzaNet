@@ -1,24 +1,23 @@
-﻿using System;
+﻿using Pizza.Net.Domain;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Data;
 
 namespace Pizza.Net.Screens.Entities
 {
     [ValueConversion(typeof(object), typeof(string))]
-    public class PizzasInOrderCollectionToLookupEntityCollection : IValueConverter
+    public class IngredientsCollectionToListOfEntitiesConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter,
-                            System.Globalization.CultureInfo culture)
+                              System.Globalization.CultureInfo culture)
         {
-            var items = value as ICollection<Pizza.Net.Domain.Pizza_Order>;
+            var ingredients = value as ICollection<Ingridient>;
+            if (ingredients == null)
+                return value;
             var converted = new List<string>();
-            foreach (var item in items)
+            foreach(var ing in ingredients)
             {
-                string v = item.Pizza.Name + " " + item.Size.Name + " " + item.Pizza.Price;
-                converted.Add(v);
+                converted.Add(ing.Name);
             }
             return converted;
         }

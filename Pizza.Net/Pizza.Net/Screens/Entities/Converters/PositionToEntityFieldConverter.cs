@@ -11,6 +11,8 @@ namespace Pizza.Net.Screens.Entities
                               System.Globalization.CultureInfo culture)
         {
             var position = value as Position;
+            if (position == null)
+                return value;
             return position.Name;
         }
 

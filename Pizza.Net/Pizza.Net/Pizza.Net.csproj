@@ -68,20 +68,25 @@
     </ApplicationDefinition>
     <Compile Include="Screens\DesignTimeData\ClientsTable.cs" />
     <Compile Include="Screens\DesignTimeData\EmployeeEntity.cs" />
+    <Compile Include="Screens\DesignTimeData\EmployeesTable.cs" />
     <Compile Include="Screens\DesignTimeData\IngredientEntity.cs" />
+    <Compile Include="Screens\DesignTimeData\IngredientsTable.cs" />
     <Compile Include="Screens\DesignTimeData\OrderEntity.cs" />
+    <Compile Include="Screens\DesignTimeData\OrdersTable.cs" />
     <Compile Include="Screens\DesignTimeData\PizzaEntity.cs" />
+    <Compile Include="Screens\DesignTimeData\PizzasTable.cs" />
     <Compile Include="Screens\DesignTimeData\PositionEntity.cs" />
+    <Compile Include="Screens\DesignTimeData\PositionsTable.cs" />
     <Compile Include="Screens\DesignTimeData\SizeEntity.cs" />
+    <Compile Include="Screens\DesignTimeData\SizesTable.cs" />
     <Compile Include="Screens\Entities\ClientEntity.xaml.cs">
       <DependentUpon>ClientEntity.xaml</DependentUpon>
     </Compile>
     <Compile Include="Screens\DesignTimeData\ClientEntity.cs" />
     <Compile Include="Screens\Entities\Converters\ClientToEntityFieldConverter.cs" />
     <Compile Include="Screens\Entities\Converters\EmployeeToEntityFieldConverter.cs" />
-    <Compile Include="Screens\Entities\Converters\GetFirstFromStringListConverter.cs" />
-    <Compile Include="Screens\Entities\Converters\IngredientsCollectionToLookupEntityConverter.cs" />
-    <Compile Include="Screens\Entities\Converters\PizzasInOrdersCollectionToLookupEntityCollection.cs" />
+    <Compile Include="Screens\Entities\Converters\IngredientsCollectionToListOfEntitiesConverter.cs" />
+    <Compile Include="Screens\Entities\Converters\PizzasInOrderCollectionToListOfEntitiesCollection.cs" />
     <Compile Include="Screens\Entities\Converters\PositionToEntityFieldConverter.cs" />
     <Compile Include="Screens\Entities\EmployeeEntity.xaml.cs">
       <DependentUpon>EmployeeEntity.xaml</DependentUpon>
@@ -92,8 +97,8 @@
     <Compile Include="Screens\Entities\IngredientEntity.xaml.cs">
       <DependentUpon>IngredientEntity.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Screens\Entities\LookupEntity.xaml.cs">
-      <DependentUpon>LookupEntity.xaml</DependentUpon>
+    <Compile Include="Screens\Entities\ListOfEntities.xaml.cs">
+      <DependentUpon>ListOfEntities.xaml</DependentUpon>
     </Compile>
     <Compile Include="Screens\Entities\OrderEntity.xaml.cs">
       <DependentUpon>OrderEntity.xaml</DependentUpon>
@@ -110,7 +115,31 @@
     <Compile Include="Screens\Tables\ClientsTable.xaml.cs">
       <DependentUpon>ClientsTable.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Screens\Tables\EmployeesTable.xaml.cs">
+      <DependentUpon>EmployeesTable.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\Tables\IngredientsTable.xaml.cs">
+      <DependentUpon>IngredientsTable.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\Tables\OrdersTable.xaml.cs">
+      <DependentUpon>OrdersTable.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\Tables\PizzasTable.xaml.cs">
+      <DependentUpon>PizzasTable.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\Tables\PositionsTable.xaml.cs">
+      <DependentUpon>PositionsTable.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\Tables\SizesTable.xaml.cs">
+      <DependentUpon>SizesTable.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Screens\Tables\TableLegends\ClientsTableLegend.cs" />
+    <Compile Include="Screens\Tables\TableLegends\EmployeesTableLegend.cs" />
+    <Compile Include="Screens\Tables\TableLegends\IngredientsTableLegend.cs" />
+    <Compile Include="Screens\Tables\TableLegends\OrdersTableLegend.cs" />
+    <Compile Include="Screens\Tables\TableLegends\PizzasTableLegend.cs" />
+    <Compile Include="Screens\Tables\TableLegends\PositionsTableLegend.cs" />
+    <Compile Include="Screens\Tables\TableLegends\SizesTableLegend.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -143,7 +172,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Screens\Entities\LookupEntity.xaml">
+    <Page Include="Screens\Entities\ListOfEntities.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -164,6 +193,34 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Screens\Tables\ClientsTable.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Screens\Tables\EmployeesTable.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Screens\Tables\IngredientsTable.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Screens\Tables\OrdersTable.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Screens\Tables\PizzasTable.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Screens\Tables\PositionsTable.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Screens\Tables\SizesTable.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Screens\Tables\Styles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

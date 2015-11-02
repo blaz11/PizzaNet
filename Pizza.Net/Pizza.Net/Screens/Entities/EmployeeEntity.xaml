@@ -13,7 +13,7 @@
     <UserControl.Resources>
         <local:PositionToEntityFieldConverter x:Key="PositionToEntityFieldConverter" />
     </UserControl.Resources>
-    <Grid VerticalAlignment="Stretch" Height="25">
+    <Grid VerticalAlignment="Stretch">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="100"/>
             <ColumnDefinition Width="100"/>

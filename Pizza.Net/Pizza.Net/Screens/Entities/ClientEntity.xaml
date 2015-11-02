@@ -10,7 +10,7 @@
              d:DesignWidth="780"
              d:DataContext="{d:DesignInstance designTime:ClientEntity,
                                               IsDesignTimeCreatable=True}">
-    <Grid VerticalAlignment="Stretch" Height="25">
+    <Grid VerticalAlignment="Stretch">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="100"/>
             <ColumnDefinition Width="100"/>

@@ -11,7 +11,7 @@
              d:DataContext="{d:DesignInstance designTime:IngredientEntity,
                                               IsDesignTimeCreatable=True}">
     <Grid>
-        <Grid VerticalAlignment="Stretch" Height="25">
+        <Grid VerticalAlignment="Stretch">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="100"/>
             </Grid.ColumnDefinitions>

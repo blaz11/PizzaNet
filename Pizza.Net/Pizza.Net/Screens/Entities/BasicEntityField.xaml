@@ -21,7 +21,7 @@
                HorizontalAlignment="Stretch"
                VerticalAlignment="Stretch"/>
     <Border BorderBrush="Black"
-            BorderThickness="1,1,1,1">
+            BorderThickness="1">
       <Canvas x:Name="MarqueeCanvas"
               Grid.Column="0"
               ClipToBounds="True">
