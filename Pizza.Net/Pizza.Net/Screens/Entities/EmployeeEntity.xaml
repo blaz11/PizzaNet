@@ -1,0 +1,30 @@
+﻿<UserControl x:Class="Pizza.Net.Screens.Entities.EmployeeEntity"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Pizza.Net.Screens.Entities"
+             xmlns:designTime="clr-namespace:Pizza.Net.Screens.DesignTimeData"
+             mc:Ignorable="d" 
+             d:DesignHeight="25"
+             d:DesignWidth="400"     
+             d:DataContext="{d:DesignInstance designTime:EmployeeEntity,
+                                              IsDesignTimeCreatable=True}">
+    <UserControl.Resources>
+        <local:PositionToEntityFieldConverter x:Key="PositionToEntityFieldConverter" />
+    </UserControl.Resources>
+    <Grid VerticalAlignment="Stretch" Height="25">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="100"/>
+        </Grid.ColumnDefinitions>
+        <local:BasicEntityField Grid.Column="0" DataContext="{Binding Username}"/>
+        <local:BasicEntityField Grid.Column="1" DataContext="{Binding FirstName}"/>
+        <local:BasicEntityField Grid.Column="2" DataContext="{Binding LastName}"/>
+        <local:BasicEntityField Grid.Column="3" 
+                           DataContext="{Binding Position, 
+                                                 Converter={StaticResource PositionToEntityFieldConverter }}"/>
+    </Grid>
+</UserControl>

@@ -8,12 +8,12 @@ using System.Windows.Media.Animation;
 
 namespace Pizza.Net.Screens.Entities
 {
-    public partial class EntityField : UserControl
+    public partial class BasicEntityField : UserControl
     {
         private DoubleAnimation _marqueeAnimation;
         private bool _animating;
 
-        public EntityField()
+        public BasicEntityField()
         {
             InitializeComponent();
         }

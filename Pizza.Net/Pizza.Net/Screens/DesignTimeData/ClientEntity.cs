@@ -2,10 +2,6 @@
 {
     public class ClientEntity
     {
-        public ClientEntity()
-        {
-        }
-
         public string FirstName
         {
             get

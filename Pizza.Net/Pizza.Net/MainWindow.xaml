@@ -4,14 +4,15 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Pizza.Net"
+        xmlns:tmpe="clr-namespace:Pizza.Net.Screens.Entities"
         xmlns:tmp="clr-namespace:Pizza.Net.Screens.Tables"
         xmlns:tmpdata="clr-namespace:Pizza.Net.Screens.DesignTimeData"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="800">
     <Window.Resources>
-        <tmpdata:ClientsTable x:Key="Data" />
+        <tmpdata:OrderEntity x:Key="Data" />
     </Window.Resources>
     <StackPanel>
-        <tmp:ClientTable DataContext="{StaticResource Data}" />
+        <tmpe:OrderEntity DataContext="{StaticResource Data}" ClipToBounds="False"/>
     </StackPanel>
 </Window>

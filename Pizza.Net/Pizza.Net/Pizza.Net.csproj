@@ -46,6 +46,8 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -65,12 +67,45 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Screens\DesignTimeData\ClientsTable.cs" />
+    <Compile Include="Screens\DesignTimeData\EmployeeEntity.cs" />
+    <Compile Include="Screens\DesignTimeData\IngredientEntity.cs" />
+    <Compile Include="Screens\DesignTimeData\OrderEntity.cs" />
+    <Compile Include="Screens\DesignTimeData\PizzaEntity.cs" />
+    <Compile Include="Screens\DesignTimeData\PositionEntity.cs" />
+    <Compile Include="Screens\DesignTimeData\SizeEntity.cs" />
     <Compile Include="Screens\Entities\ClientEntity.xaml.cs">
       <DependentUpon>ClientEntity.xaml</DependentUpon>
     </Compile>
     <Compile Include="Screens\DesignTimeData\ClientEntity.cs" />
-    <Compile Include="Screens\Entities\EntityField.xaml.cs">
-      <DependentUpon>EntityField.xaml</DependentUpon>
+    <Compile Include="Screens\Entities\Converters\ClientToEntityFieldConverter.cs" />
+    <Compile Include="Screens\Entities\Converters\EmployeeToEntityFieldConverter.cs" />
+    <Compile Include="Screens\Entities\Converters\GetFirstFromStringListConverter.cs" />
+    <Compile Include="Screens\Entities\Converters\IngredientsCollectionToLookupEntityConverter.cs" />
+    <Compile Include="Screens\Entities\Converters\PizzasInOrdersCollectionToLookupEntityCollection.cs" />
+    <Compile Include="Screens\Entities\Converters\PositionToEntityFieldConverter.cs" />
+    <Compile Include="Screens\Entities\EmployeeEntity.xaml.cs">
+      <DependentUpon>EmployeeEntity.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\Entities\BasicEntityField.xaml.cs">
+      <DependentUpon>BasicEntityField.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\Entities\IngredientEntity.xaml.cs">
+      <DependentUpon>IngredientEntity.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\Entities\LookupEntity.xaml.cs">
+      <DependentUpon>LookupEntity.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\Entities\OrderEntity.xaml.cs">
+      <DependentUpon>OrderEntity.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\Entities\PizzaEntity.xaml.cs">
+      <DependentUpon>PizzaEntity.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\Entities\PositionEntity.xaml.cs">
+      <DependentUpon>PositionEntity.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\Entities\SizeEntity.xaml.cs">
+      <DependentUpon>SizeEntity.xaml</DependentUpon>
     </Compile>
     <Compile Include="Screens\Tables\ClientsTable.xaml.cs">
       <DependentUpon>ClientsTable.xaml</DependentUpon>
@@ -92,7 +127,39 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Screens\Entities\EntityField.xaml">
+    <Page Include="Screens\Entities\Styles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Screens\Entities\EmployeeEntity.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Screens\Entities\BasicEntityField.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Screens\Entities\IngredientEntity.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Screens\Entities\LookupEntity.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Screens\Entities\OrderEntity.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Screens\Entities\PizzaEntity.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Screens\Entities\PositionEntity.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Screens\Entities\SizeEntity.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

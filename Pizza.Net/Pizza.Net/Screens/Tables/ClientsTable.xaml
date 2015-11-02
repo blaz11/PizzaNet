@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Pizza.Net.Screens.Tables"
-             xmlns:entities="clr-namespace:Pizza.Net.Screens.Entites"
+             xmlns:entities="clr-namespace:Pizza.Net.Screens.Entities"
              xmlns:legends="clr-namespace:Pizza.Net.Screens.Tables.TableLegends"
              xmlns:designTime="clr-namespace:Pizza.Net.Screens.DesignTimeData"
              mc:Ignorable="d" 
@@ -15,7 +15,7 @@
     <UserControl.Resources>
         <legends:ClientsTableLegend x:Key="TableLegend" />
     </UserControl.Resources>
-    <Grid Width="800">
+    <Grid Width="810">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
@@ -31,7 +31,7 @@
                   Margin="0">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <entities:ClientEntity DataContext="{Binding}"/>
+                    <entities:ClientEntity />
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>

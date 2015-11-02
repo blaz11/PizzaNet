@@ -2,9 +2,9 @@
 
 namespace Pizza.Net.Screens.Entities
 {
-    public partial class ClientEntity : UserControl
+    public partial class PizzaEntity : UserControl
     {
-        public ClientEntity()
+        public PizzaEntity()
         {
             InitializeComponent();
         }
