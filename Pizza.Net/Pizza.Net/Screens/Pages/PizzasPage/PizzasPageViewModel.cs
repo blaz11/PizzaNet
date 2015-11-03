@@ -40,8 +40,8 @@ namespace Pizza.Net.Screens.Pages
 
         private HashSet<Ingredient> _selectedIngredients = new HashSet<Ingredient>();
         public IPizzasTableViewModel PizzasTableViewModel { get; }
-        private IIngredientsTableViewModel SelectedIngredientsViewModel { get; }
-        private IIngredientsTableViewModel IngredientsToSelectViewModel { get; }
+        public IIngredientsTableViewModel SelectedIngredientsViewModel { get; }
+        public IIngredientsTableViewModel IngredientsToSelectViewModel { get; }
 
         private ICommand _addToSelectedCommand;
         public ICommand AddToSelectedCommand

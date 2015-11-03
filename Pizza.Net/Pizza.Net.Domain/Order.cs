@@ -22,12 +22,10 @@ namespace Pizza.Net.Domain
     
         public int IDOrder { get; set; }
         public int IDClient { get; set; }
-        public int IDEmployee { get; set; }
         public System.DateTime StartOrderDate { get; set; }
         public System.DateTime FinishOrderDate { get; set; }
     
         public virtual Client Client { get; set; }
-        public virtual Employee Employee { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PizzaOrder> PizzaOrders { get; set; }
     }

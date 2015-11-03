@@ -13,6 +13,14 @@ namespace Pizza.Net.Screens.DesignTimeData
             }
         }
 
+        public string Price
+        {
+            get
+            {
+                return "54.0";
+            }
+        }
+
         public ICollection<Ingredient> Ingredients
         {
             get

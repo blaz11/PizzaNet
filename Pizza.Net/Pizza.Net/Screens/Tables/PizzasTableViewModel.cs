@@ -4,24 +4,24 @@ namespace Pizza.Net.Screens.Tables
 {
     interface IPizzasTableViewModel
     {
-        ObservableCollection<Domain.Pizza> Pizza { get; set; }
+        ObservableCollection<Domain.Pizza> Pizzas { get; set; }
         Domain.Pizza SelectedPizza { get; set; }
     }
 
     class PizzasTableViewModel : ObservableObject, IPizzasTableViewModel
     {
-        private ObservableCollection<Pizza.Net.Domain.Pizza> _pizza = new ObservableCollection<Domain.Pizza>();
-        public ObservableCollection<Pizza.Net.Domain.Pizza> Pizza
+        private ObservableCollection<Pizza.Net.Domain.Pizza> _pizzas = new ObservableCollection<Domain.Pizza>();
+        public ObservableCollection<Pizza.Net.Domain.Pizza> Pizzas
         {
             get
             {
-                return _pizza;
+                return _pizzas;
             }
             set
             {
-                if (value != _pizza)
+                if (value != _pizzas)
                 {
-                    _pizza = value;
+                    _pizzas = value;
                     OnPropertyChanged();
                 }
             }

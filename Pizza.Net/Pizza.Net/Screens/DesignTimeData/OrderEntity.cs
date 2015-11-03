@@ -18,18 +18,6 @@ namespace Pizza.Net.Screens.DesignTimeData
             }
         }
 
-        public Employee Employee
-        {
-            get
-            {
-                return new Employee()
-                {
-                    FirstName = "Maciej",
-                    LastName = "Darekszewicz"
-                };
-            }
-        }
-
         public DateTime StartDate
         {
             get

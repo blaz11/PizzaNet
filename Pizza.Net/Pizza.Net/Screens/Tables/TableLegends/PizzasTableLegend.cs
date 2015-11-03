@@ -12,6 +12,14 @@ namespace Pizza.Net.Screens.Tables.TableLegends
             }
         }
 
+        public string Price
+        {
+            get
+            {
+                return "Price";
+            }
+        }
+
         public ICollection<string> Ingredients
         {
             get

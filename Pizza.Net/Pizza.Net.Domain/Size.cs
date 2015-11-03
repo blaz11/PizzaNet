@@ -23,6 +23,7 @@ namespace Pizza.Net.Domain
         public int IDSize { get; set; }
         public string Name { get; set; }
         public short RadiusInCm { get; set; }
+        public short BasePriceMultiplier { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PizzaOrder> PizzaOrders { get; set; }

@@ -21,7 +21,7 @@
                     HorizontalAlignment="Center"
                     VerticalAlignment="Bottom">
             <Button Content="Previous step"
-                    Command="{Binding PreviousStepCommand}"
+                    Command="{Binding PreviousCommand}"
                     FontSize="20"
                     IsEnabled="{Binding IsPreviousStepButtonEnabled}"
                     Margin="10,0,10,0"

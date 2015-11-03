@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Pizza.Net.Screens.Entities
+namespace Pizza.Net.Screens.Pages
 {
     /// <summary>
-    /// Interaction logic for PositionEntity.xaml
+    /// Interaction logic for OrderSubmit.xaml
     /// </summary>
-    public partial class PositionEntity : UserControl
+    public partial class OrderSubmit : UserControl
     {
-        public PositionEntity()
+        public OrderSubmit()
         {
             InitializeComponent();
         }

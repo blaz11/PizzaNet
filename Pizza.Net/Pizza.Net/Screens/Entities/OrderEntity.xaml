@@ -12,13 +12,11 @@
                                               IsDesignTimeCreatable=True}">
     <UserControl.Resources>
         <local:ClientToEntityFieldConverter x:Key="ClientToEntityFieldConverter" />
-        <local:EmployeeToEntityFieldConverter x:Key="EmployeeToEntityFieldConverter" />
         <local:PizzasInOrderCollectionToListOfEntitiesCollection 
             x:Key="PizzasInOrderCollectionToListOfEntitiesCollection" />
     </UserControl.Resources>
     <Grid VerticalAlignment="Stretch">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="200"/>
             <ColumnDefinition Width="200"/>
             <ColumnDefinition Width="300"/>
             <ColumnDefinition Width="100"/>
@@ -27,13 +25,10 @@
         <local:BasicEntityField Grid.Column="0" 
                            DataContext="{Binding Client, 
                                Converter={StaticResource ClientToEntityFieldConverter }}"/>
-        <local:BasicEntityField Grid.Column="1" 
-                           DataContext="{Binding Employee, 
-                               Converter={StaticResource EmployeeToEntityFieldConverter }}"/>
-        <local:ListOfEntities Grid.Column="2" 
+        <local:ListOfEntities Grid.Column="1" 
                             DataContext="{Binding Pizzas, 
                                 Converter={StaticResource PizzasInOrderCollectionToListOfEntitiesCollection}}"/>
-        <local:BasicEntityField Grid.Column="3" DataContext="{Binding StartDate}"/>
-        <local:BasicEntityField Grid.Column="4" DataContext="{Binding FinishDate}"/>
+        <local:BasicEntityField Grid.Column="2" DataContext="{Binding StartDate}"/>
+        <local:BasicEntityField Grid.Column="3" DataContext="{Binding FinishDate}"/>
     </Grid>
 </UserControl>

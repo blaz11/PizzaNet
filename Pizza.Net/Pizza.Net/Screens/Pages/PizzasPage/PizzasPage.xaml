@@ -55,10 +55,18 @@
                 </StackPanel>
                 <Button Content="+"
                         Command="{Binding AddToSelectedCommand}"
-                        Style="{StaticResource PageButtonStyle}"/>
+                        Style="{StaticResource PageButtonStyle}"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Height="30"
+                        Width="30"/>
                 <Button Content="-"
                         Command="{Binding RemoveFromSelectedCommand}"
-                        Style="{StaticResource PageButtonStyle}"/>
+                        Style="{StaticResource PageButtonStyle}"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Height="30"
+                        Width="30"/>
                 <StackPanel>
                     <TextBlock Text="Selected Ingredients:"
                            Style="{StaticResource SearchLabelTextBlockStyle}"/>

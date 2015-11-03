@@ -11,7 +11,7 @@ namespace Pizza.Net.Screens.Pages
 
             PageViewModels.Add(clientsPageViewModel);
             _nextStepButtonContents.Add("Add client");
-            //PageViewModels.Add(new PizzasSelection());
+            PageViewModels.Add(new PizzasPageViewModel(null));
             _nextStepButtonContents.Add("Add pizzas");
             //PageViewModels.Add(new OverviewAndFinishOrder());
             _nextStepButtonContents.Add("Submit Order");

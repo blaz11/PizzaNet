@@ -25,15 +25,12 @@ namespace Pizza.Net.Domain
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Account> Accounts { get; set; }
         public virtual DbSet<Client> Clients { get; set; }
-        public virtual DbSet<Employee> Employees { get; set; }
         public virtual DbSet<Ingredient> Ingredients { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<PizzaIngredient> PizzaIngredients { get; set; }
         public virtual DbSet<PizzaOrder> PizzaOrders { get; set; }
         public virtual DbSet<Pizza> Pizzas { get; set; }
-        public virtual DbSet<Position> Positions { get; set; }
         public virtual DbSet<Size> Sizes { get; set; }
     }
 }
