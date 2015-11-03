@@ -7,7 +7,7 @@
              xmlns:designTime="clr-namespace:Pizza.Net.Screens.DesignTimeData"
              mc:Ignorable="d" 
              d:DesignHeight="25"
-             d:DesignWidth="150"     
+             d:DesignWidth="200"     
              d:DataContext="{d:DesignInstance designTime:SizeEntity,
                                               IsDesignTimeCreatable=True}">
     <Grid>
@@ -15,9 +15,11 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="100"/>
                 <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="50"/>
             </Grid.ColumnDefinitions>
             <local:BasicEntityField Grid.Column="0" DataContext="{Binding Name}"/>
             <local:BasicEntityField Grid.Column="1" DataContext="{Binding RadiusInCm}"/>
+            <local:BasicEntityField Grid.Column="2" DataContext="{Binding PriceMultiplier}"/>
         </Grid>
     </Grid>
 </UserControl>

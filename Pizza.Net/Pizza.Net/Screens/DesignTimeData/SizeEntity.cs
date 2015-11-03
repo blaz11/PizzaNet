@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Pizza.Net.Screens.DesignTimeData
+﻿namespace Pizza.Net.Screens.DesignTimeData
 {
     class SizeEntity
     {
@@ -21,6 +15,14 @@ namespace Pizza.Net.Screens.DesignTimeData
             get
             {
                 return 20.ToString();
+            }
+        }
+
+        public int PriceMultiplier
+        {
+            get
+            {
+                return 2;
             }
         }
     }

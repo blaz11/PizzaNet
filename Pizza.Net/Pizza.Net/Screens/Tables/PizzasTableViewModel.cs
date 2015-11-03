@@ -27,8 +27,8 @@ namespace Pizza.Net.Screens.Tables
             }
         }
 
-        private Pizza.Net.Domain.Pizza _selectedPizza;
-        public Pizza.Net.Domain.Pizza SelectedPizza
+        private Domain.Pizza _selectedPizza;
+        public Domain.Pizza SelectedPizza
         {
             get
             {

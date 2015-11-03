@@ -49,8 +49,9 @@ namespace Pizza.Net.Screens
 
             // Add available pages
             PageViewModels.Add(clientsPageViewModel);
-            PageViewModels.Add(new OrderCreatorViewModel(ordersCreatorModel, clientsPageViewModel));
+            PageViewModels.Add(new OrderCreatorViewModel(ordersCreatorModel, clientsPageViewModel, pizzasPageViewModel));
             PageViewModels.Add(pizzasPageViewModel);
+            PageViewModels.Add(new OrderFinalizatorViewModel());
 
             // Set starting page
             CurrentPageViewModel = PageViewModels[0];

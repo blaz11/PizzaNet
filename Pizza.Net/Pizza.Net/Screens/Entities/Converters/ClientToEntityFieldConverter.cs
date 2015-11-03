@@ -4,7 +4,6 @@ using System.Windows.Data;
 
 namespace Pizza.Net.Screens.Entities
 {
-    [ValueConversion(typeof(object), typeof(string))]
     public class ClientToEntityFieldConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter,

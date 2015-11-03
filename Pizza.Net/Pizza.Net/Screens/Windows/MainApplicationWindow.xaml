@@ -17,6 +17,9 @@
         <DataTemplate DataType="{x:Type pages:PizzasPageViewModel}">
             <pages:PizzasPage />
         </DataTemplate>
+        <DataTemplate DataType="{x:Type pages:OrderFinalizatorViewModel}">
+            <pages:OrderFinalizator />
+        </DataTemplate>
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>

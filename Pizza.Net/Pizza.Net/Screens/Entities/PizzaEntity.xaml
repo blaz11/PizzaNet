@@ -22,7 +22,7 @@
         </Grid.ColumnDefinitions>
         <local:BasicEntityField Grid.Column="0" DataContext="{Binding Name}" />
         <local:ListOfEntities Grid.Column="1"
-                            DataContext="{Binding Ingredients, 
+                            DataContext="{Binding PizzaIngredients, 
                                 Converter={StaticResource IngredientsCollectionToListOfEntitiesConverter}}"/>
         <local:BasicEntityField Grid.Column="3" DataContext="{Binding Price}" />
     </Grid>

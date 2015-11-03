@@ -20,7 +20,7 @@ namespace Pizza.Net.Screens.Tables.TableLegends
             }
         }
 
-        public ICollection<string> Ingredients
+        public ICollection<string> PizzaIngredients
         {
             get
             {

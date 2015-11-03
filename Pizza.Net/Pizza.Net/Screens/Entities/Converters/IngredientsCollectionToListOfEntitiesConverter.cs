@@ -5,19 +5,18 @@ using System.Windows.Data;
 
 namespace Pizza.Net.Screens.Entities
 {
-    [ValueConversion(typeof(object), typeof(string))]
     public class IngredientsCollectionToListOfEntitiesConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter,
                               System.Globalization.CultureInfo culture)
         {
-            var ingredients = value as ICollection<Ingredient>;
+            var ingredients = value as ICollection<PizzaIngredient>;
             if (ingredients == null)
                 return value;
             var converted = new List<string>();
             foreach(var ing in ingredients)
             {
-                converted.Add(ing.Name);
+                converted.Add(ing.Ingredient.Name);
             }
             return converted;
         }

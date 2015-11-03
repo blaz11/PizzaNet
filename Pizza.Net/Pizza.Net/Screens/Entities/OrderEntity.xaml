@@ -26,8 +26,8 @@
                            DataContext="{Binding Client, 
                                Converter={StaticResource ClientToEntityFieldConverter }}"/>
         <local:ListOfEntities Grid.Column="1" 
-                            DataContext="{Binding Pizzas, 
-                                Converter={StaticResource PizzasInOrderCollectionToListOfEntitiesCollection}}"/>
+                           DataContext="{Binding Pizzas, 
+                              Converter={StaticResource PizzasInOrderCollectionToListOfEntitiesCollection}}"/>
         <local:BasicEntityField Grid.Column="2" DataContext="{Binding StartDate}"/>
         <local:BasicEntityField Grid.Column="3" DataContext="{Binding FinishDate}"/>
     </Grid>

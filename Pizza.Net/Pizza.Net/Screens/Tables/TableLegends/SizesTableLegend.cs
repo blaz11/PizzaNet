@@ -17,5 +17,13 @@
                 return "R(cm)";
             }
         }
+
+        public string PriceMultiplier
+        {
+            get
+            {
+                return "Muliplier";
+            }
+        }
     }
 }

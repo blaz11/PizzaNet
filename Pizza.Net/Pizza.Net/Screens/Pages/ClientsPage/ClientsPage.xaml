@@ -25,7 +25,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <TextBlock Text="Search / Add"
+        <TextBlock Text="Clients"
                    Grid.Row="0"
                    Style="{StaticResource PageLabelTextBlockStyle}"/>
         <StackPanel Grid.Row="1" Orientation="Horizontal"

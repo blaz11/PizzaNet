@@ -1,19 +1,21 @@
-﻿using System.Collections.Generic;
+﻿using Pizza.Net.Screens.Tables;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Windows.Input;
 
 namespace Pizza.Net.Screens.Pages
 {
     class OrderCreatorViewModel : ChangingPagesBaseViewModel, IPageViewModel
     {
-        public OrderCreatorViewModel(IOrderCreatorModel orderCreatorModel, IClientsPageViewModel clientsPageViewModel)
+        public OrderCreatorViewModel(IOrderCreatorModel orderCreatorModel, IClientsPageViewModel clientsPageViewModel, IPizzasPageViewModel pizzasPageViewModel)
         {
             _orderCreatorModel = orderCreatorModel;
 
             PageViewModels.Add(clientsPageViewModel);
             _nextStepButtonContents.Add("Add client");
-            PageViewModels.Add(new PizzasPageViewModel(null));
+            PageViewModels.Add(pizzasPageViewModel);
             _nextStepButtonContents.Add("Add pizzas");
-            //PageViewModels.Add(new OverviewAndFinishOrder());
+            PageViewModels.Add(new OrderSubmitViewModel());
             _nextStepButtonContents.Add("Submit Order");
 
             AdvanceToNextStep();
@@ -106,13 +108,13 @@ namespace Pizza.Net.Screens.Pages
         {
             get
             {
-                return "Order Creator";
+                return "Create order";
             }
         }
 
         private void AdvanceToNextStep()
         {
-            switch(_currentStepIndex)
+            switch (_currentStepIndex)
             {
                 case 0:
                     break;
@@ -123,10 +125,14 @@ namespace Pizza.Net.Screens.Pages
                     _orderCreatorModel.AddClient(client);
                     break;
                 case 2:
-                    ICollection<Pizza.Net.Domain.Pizza> pizzas = null;
+                    //client = (CurrentPageViewModel as ClientsPageViewModel).SelectedClient;
+                    client = null;
+                    ObservableCollection<Domain.Pizza> pizzas = null;
                     if (pizzas == null)
                         break;
                     _orderCreatorModel.AddPizza(pizzas);
+                    (PageViewModels[2] as OrderSubmitViewModel).Client = client;
+                    (PageViewModels[2] as OrderSubmitViewModel).Pizzas = pizzas;
                     break;
                 case 3:
                     _orderCreatorModel.SubmitOrder();

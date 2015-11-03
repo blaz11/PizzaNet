@@ -9,7 +9,7 @@
              xmlns:designTime="clr-namespace:Pizza.Net.Screens.DesignTimeData"
              mc:Ignorable="d" 
              d:DesignHeight="400"
-             d:DesignWidth="925"
+             d:DesignWidth="725"
              d:DataContext="{d:DesignInstance designTime:OrdersTable,
                                               IsDesignTimeCreatable=True}">
     <UserControl.Resources>
@@ -20,7 +20,7 @@
             <legends:OrdersTableLegend x:Key="TableLegend" />
         </ResourceDictionary>
     </UserControl.Resources>
-    <Grid Width="925">
+    <Grid Width="725">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />

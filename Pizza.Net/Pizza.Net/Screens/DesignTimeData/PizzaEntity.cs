@@ -17,19 +17,17 @@ namespace Pizza.Net.Screens.DesignTimeData
         {
             get
             {
-                return "54.0";
+                return "54";
             }
         }
 
-        public ICollection<Ingredient> Ingredients
+        public ICollection<PizzaIngredient> PizzaIngredients
         {
             get
             {
-                var col = new List<Ingredient>();
-                var ing = new Ingredient()
-                {
-                    Name = "Salami",
-                };
+                var col = new List<PizzaIngredient>();
+                var ing = new PizzaIngredient();
+                ing.Ingredient.Name = "Salami";
                 for (int i = 0; i < 3; ++i)
                     col.Add(ing);
                 return col;

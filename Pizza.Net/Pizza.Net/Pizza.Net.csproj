@@ -102,6 +102,14 @@
     <Compile Include="Screens\Entities\SizeEntity.xaml.cs">
       <DependentUpon>SizeEntity.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Screens\Pages\OrderFinalizator\OrderFinalizator.xaml.cs">
+      <DependentUpon>OrderFinalizator.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\Pages\OrderFinalizator\OrderFinalizatorViewModel.cs" />
+    <Compile Include="Screens\Pages\OrderSubmit\OrderSubmitViewModel.cs" />
+    <Compile Include="Screens\Pages\OrderSubmit\OrderSubmit.xaml.cs">
+      <DependentUpon>OrderSubmit.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Screens\Tables\OrdersTableViewModel.cs" />
     <Compile Include="Screens\Windows\MainApplicationWindow.xaml.cs">
       <DependentUpon>MainApplicationWindow.xaml</DependentUpon>
@@ -189,6 +197,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Screens\Entities\SizeEntity.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Screens\Pages\OrderFinalizator\OrderFinalizator.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Screens\Pages\OrderSubmit\OrderSubmit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

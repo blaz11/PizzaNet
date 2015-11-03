@@ -11,6 +11,43 @@ namespace Pizza.Net.Screens.Pages
         {
             PizzasTableViewModel = _pizzasTableViewModel;
             //Janek wszystkie ingredients z bazy danych dodaj do IngredientsToSelectViewModel i przy clearze zresetuj je.
+            SelectedIngredientsViewModel = new IngredientsTableViewModel();
+            IngredientsToSelectViewModel = new IngredientsTableViewModel();
+            Ingredient i1 = new Ingredient();
+            i1.Name = "Cheese";
+            SelectedIngredientsViewModel.Ingredients.Add(i1);
+            i1 = new Ingredient();
+            i1.Name = "Ham";
+            SelectedIngredientsViewModel.Ingredients.Add(i1);
+            i1 = new Ingredient();
+            i1.Name = "Pineapple";
+            IngredientsToSelectViewModel.Ingredients.Add(i1);
+            i1 = new Ingredient();
+            i1.Name = "Salami";
+            IngredientsToSelectViewModel.Ingredients.Add(i1);
+            i1 = new Ingredient();
+            i1.Name = "Grilled chicken";
+            IngredientsToSelectViewModel.Ingredients.Add(i1);
+            i1 = new Ingredient();
+            i1.Name = "Tuna";
+            IngredientsToSelectViewModel.Ingredients.Add(i1);
+            i1 = new Ingredient();
+            i1.Name = "Tomato";
+            IngredientsToSelectViewModel.Ingredients.Add(i1);
+            Pizza.Net.Domain.Pizza p = new Domain.Pizza();
+            p.Name = "Cheese pizza";
+            p.Price = 23;
+            i1 = new Ingredient();
+            i1.Name = "Cheese";
+            var s = new PizzaIngredient();
+            s.Ingredient = i1;
+            p.PizzaIngredients.Add(s);
+            i1 = new Ingredient();
+            i1.Name = "Salami";
+            s = new PizzaIngredient();
+            s.Ingredient = i1;
+            p.PizzaIngredients.Add(s);
+            PizzasTableViewModel.Pizzas.Add(p);
         }
 
         public string PageName
@@ -74,15 +111,21 @@ namespace Pizza.Net.Screens.Pages
         private void AddToSelected()
         {
             var item = IngredientsToSelectViewModel.SelectedIngredient;
+            if (item == null)
+                return;
             _selectedIngredients.Add(item);
             IngredientsToSelectViewModel.Ingredients.Remove(item);
+            SelectedIngredientsViewModel.Ingredients.Add(item);
         }
 
         private void RemoveFromSelected()
         {
             var item = SelectedIngredientsViewModel.SelectedIngredient;
+            if (item == null)
+                return;
             _selectedIngredients.Remove(item);
             IngredientsToSelectViewModel.Ingredients.Add(item);
+            SelectedIngredientsViewModel.Ingredients.Remove(item);
         }
 
         public override void Search()
