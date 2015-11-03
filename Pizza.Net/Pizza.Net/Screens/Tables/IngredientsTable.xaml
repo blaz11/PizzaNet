@@ -32,7 +32,8 @@
                                  Background="{StaticResource EntitiesTableLegendBackground}"/>
         <ListView Grid.Row="1" 
                   ItemsSource="{Binding Ingredients}"
-                  Style="{StaticResource EntitiesListViewStyle}">
+                  Style="{StaticResource EntitiesListViewStyle}"
+                  SelectedItem="{Binding SelectedIngredient}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <entities:IngredientEntity />

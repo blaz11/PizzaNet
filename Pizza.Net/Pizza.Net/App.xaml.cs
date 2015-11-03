@@ -1,17 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Pizza.Net.Screens;
 using System.Windows;
 
 namespace Pizza.Net
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
     public partial class App : Application
     {
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+
+            var app = new MainApplicationWindow();
+            var context = new MainApplicationWindowViewModel();
+            app.DataContext = context;
+            app.Title = "Pizza.Net";
+            app.Show();
+        }
     }
 }

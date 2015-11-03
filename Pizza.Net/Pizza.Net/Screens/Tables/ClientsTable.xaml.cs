@@ -2,9 +2,9 @@
 
 namespace Pizza.Net.Screens.Tables
 {
-    public partial class ClientTable : UserControl
+    public partial class ClientsTable : UserControl
     {
-        public ClientTable()
+        public ClientsTable()
         {
             InitializeComponent();
         }

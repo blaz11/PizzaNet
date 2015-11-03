@@ -1,0 +1,13 @@
+﻿<Window x:Class="Pizza.Net.Screens.OrdersHistory"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Pizza.Net.Screens"
+        xmlns:tables="clr-namespace:Pizza.Net.Screens.Tables"
+        mc:Ignorable="d"
+        Title="OrdersHistory" Height="500" Width="900">
+    <StackPanel>
+        <tables:OrdersTable DataContext="{Binding OrdersTableViewModel}"/>
+    </StackPanel>
+</Window>
