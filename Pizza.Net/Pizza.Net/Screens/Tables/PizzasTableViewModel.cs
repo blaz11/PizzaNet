@@ -1,18 +1,17 @@
-﻿using Pizza.Net.Screens.Entities;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 
 namespace Pizza.Net.Screens.Tables
 {
     interface IPizzasTableViewModel
     {
-        ObservableCollection<PizzaEntityViewModel> Pizzas { get; set; }
-        PizzaEntityViewModel SelectedPizza { get; set; }
+        ObservableCollection<PizzaViewModel> Pizzas { get; set; }
+        PizzaViewModel SelectedPizza { get; set; }
     }
 
     class PizzasTableViewModel : ObservableObject, IPizzasTableViewModel
     {
-        private ObservableCollection<PizzaEntityViewModel> _pizzas = new ObservableCollection<PizzaEntityViewModel>();
-        public ObservableCollection<PizzaEntityViewModel> Pizzas
+        private ObservableCollection<PizzaViewModel> _pizzas = new ObservableCollection<PizzaViewModel>();
+        public ObservableCollection<PizzaViewModel> Pizzas
         {
             get
             {
@@ -28,8 +27,8 @@ namespace Pizza.Net.Screens.Tables
             }
         }
 
-        private PizzaEntityViewModel _selectedPizza;
-        public PizzaEntityViewModel SelectedPizza
+        private PizzaViewModel _selectedPizza;
+        public PizzaViewModel SelectedPizza
         {
             get
             {

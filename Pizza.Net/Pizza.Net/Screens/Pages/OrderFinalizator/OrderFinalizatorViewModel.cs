@@ -25,7 +25,7 @@ namespace Pizza.Net.Screens.Pages
             }
         }
 
-        public IOrdersTableViewModel UnfinishedOrders { get; }
+        public IOrdersTableViewModel UnfinishedOrders { get; private set; }
 
         private ICommand _finalizeCommand;
         public ICommand FinalizeCommand

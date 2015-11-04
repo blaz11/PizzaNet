@@ -1,22 +1,21 @@
-﻿using Pizza.Net.Screens.Entities;
-using Pizza.Net.Screens.Tables;
+﻿using Pizza.Net.Screens.Tables;
 using System.Collections.ObjectModel;
 
 namespace Pizza.Net.Screens
 {
     interface IOrdersHistoryViewModel
     {
-        IOrdersTableViewModel OrdersTableViewModel { get; }
+        IOrdersTableViewModel OrdersTableViewModel { get; set; }
     }
 
     class OrdersHistoryViewModel : IOrdersHistoryViewModel
     {
-        public OrdersHistoryViewModel(IOrdersTableViewModel ordersTableViewModel, ObservableCollection<OrderEntityViewModel> orders)
+        public OrdersHistoryViewModel(IOrdersTableViewModel ordersTableViewModel, ObservableCollection<OrderViewModel> orders)
         {
             OrdersTableViewModel = ordersTableViewModel;
             OrdersTableViewModel.Orders = orders;
         }
 
-        public IOrdersTableViewModel OrdersTableViewModel { get; }
+        public IOrdersTableViewModel OrdersTableViewModel { get; set; }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Pizza.Net.Screens.Pages
 {
-    class BasePageViewModel : ObservableObject
+    class BaseTableInteractionViewModel : ObservableObject
     {
         public string AddButtonContent
         {
@@ -10,7 +10,7 @@ namespace Pizza.Net.Screens.Pages
             {
                 if (!_searchMode)
                     return "Confirm";
-                return "Add";
+                return "Add new";
             }
         }
 
@@ -20,7 +20,7 @@ namespace Pizza.Net.Screens.Pages
             {
                 if (!_searchMode)
                     return "Cancel";
-                return "Edit";
+                return "Edit selected";
             }
         }
 

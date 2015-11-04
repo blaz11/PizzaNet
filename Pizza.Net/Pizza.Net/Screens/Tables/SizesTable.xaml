@@ -4,40 +4,24 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Pizza.Net.Screens.Tables"
-             xmlns:entities="clr-namespace:Pizza.Net.Screens.Entities"
-             xmlns:legends="clr-namespace:Pizza.Net.Screens.Tables.TableLegends"
              xmlns:designTime="clr-namespace:Pizza.Net.Screens.DesignTimeData"
              mc:Ignorable="d" 
              d:DesignHeight="400"
-             d:DesignWidth="175"
+             d:DesignWidth="185"
              d:DataContext="{d:DesignInstance designTime:SizesTable,
                                               IsDesignTimeCreatable=True}">
-    <UserControl.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Styles.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
-            <legends:SizesTableLegend x:Key="TableLegend" />
-        </ResourceDictionary>
-    </UserControl.Resources>
-    <Grid Width="175">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <entities:SizeEntity Grid.Row="0"
-                             DataContext="{StaticResource TableLegend}"
-                             HorizontalAlignment="Left"
-                             Margin="3,0,0,0"
-                             Background="{StaticResource EntitiesTableLegendBackground}"/>
-        <ListView Grid.Row="1" 
-                  ItemsSource="{Binding Sizes}"
-                  Style="{StaticResource EntitiesListViewStyle}">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <entities:SizeEntity />
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-    </Grid>
+    <DataGrid ItemsSource="{Binding Sizes}"
+              AutoGenerateColumns="False"
+              SelectedItem="{Binding SelectedSize}"
+              MaxWidth="185"
+              IsReadOnly="True">
+        <DataGrid.Columns>
+            <DataGridTextColumn Binding="{Binding Name}" 
+                                Header="Name" />
+            <DataGridTextColumn Binding="{Binding RadiusInCm}" 
+                                Header="R(cm)" />
+            <DataGridTextColumn Binding="{Binding PriceMultiplier}" 
+                                Header="Price Multiplier" />
+        </DataGrid.Columns>
+    </DataGrid>
 </UserControl>

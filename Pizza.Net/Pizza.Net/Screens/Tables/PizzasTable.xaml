@@ -4,40 +4,29 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Pizza.Net.Screens.Tables"
-             xmlns:entities="clr-namespace:Pizza.Net.Screens.Entities"
-             xmlns:legends="clr-namespace:Pizza.Net.Screens.Tables.TableLegends"
              xmlns:designTime="clr-namespace:Pizza.Net.Screens.DesignTimeData"
              mc:Ignorable="d" 
              d:DesignHeight="400"
-             d:DesignWidth="475"
+             d:DesignWidth="200"
              d:DataContext="{d:DesignInstance designTime:PizzasTable,
                                               IsDesignTimeCreatable=True}">
-    <UserControl.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Styles.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
-            <legends:PizzasTableLegend x:Key="TableLegend" />
-        </ResourceDictionary>
-    </UserControl.Resources>
-    <Grid Width="475">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <entities:PizzaEntity Grid.Row="0"
-                              DataContext="{StaticResource TableLegend}"
-                              HorizontalAlignment="Left"
-                              Margin="3,0,0,0"
-                              Background="{StaticResource EntitiesTableLegendBackground}"/>
-        <ListView Grid.Row="1" 
-                  ItemsSource="{Binding Pizzas}"
-                  Style="{StaticResource EntitiesListViewStyle}">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <entities:PizzaEntity DataContext="{Binding}"/>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-    </Grid>
+    <DataGrid ItemsSource="{Binding Pizzas}"
+              AutoGenerateColumns="False"
+              SelectedItem="{Binding SelectedPizza}"
+              MaxWidth="200"
+              IsReadOnly="True">
+        <DataGrid.Columns>
+            <DataGridTextColumn Binding="{Binding Name}" 
+                                Header="Name" />
+            <DataGridTemplateColumn Header="Ingredients">
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <ItemsControl ItemsSource="{Binding Ingredients}"/>
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+            <DataGridTextColumn Binding="{Binding Price}" 
+                                Header="Price" />
+        </DataGrid.Columns>
+    </DataGrid>
 </UserControl>

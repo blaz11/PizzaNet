@@ -20,8 +20,11 @@
         <DataTemplate DataType="{x:Type pages:OrderFinalizatorViewModel}">
             <pages:OrderFinalizator />
         </DataTemplate>
+        <DataTemplate DataType="{x:Type pages:OrdersPageViewModel}">
+            <pages:OrdersPage />
+        </DataTemplate>
     </Window.Resources>
-    <Grid>
+    <Grid Background="Green">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />

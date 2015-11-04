@@ -12,9 +12,6 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/Screens/Pages/Styles.xaml" />
             </ResourceDictionary.MergedDictionaries>
-            <DataTemplate DataType="{x:Type tables:ClientsTableViewModel}">
-                <tables:ClientsTable />
-            </DataTemplate>
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
@@ -101,10 +98,10 @@
                     Command="{Binding ShowHistoryCommand}"
                     Style="{StaticResource PageButtonStyle}"/>
         </StackPanel>
-        <ContentControl Grid.Row="4"
-                        Content="{Binding ClientsTableViewModel}"
-                        VerticalAlignment="Top"
-                        HorizontalAlignment="Center"
-                        Margin="20"/>
+        <tables:ClientsTable Grid.Row="4"
+                            DataContext="{Binding ClientsTableViewModel}"
+                            VerticalAlignment="Top"
+                            HorizontalAlignment="Center"
+                            Margin="20"/>
     </Grid>
 </UserControl>

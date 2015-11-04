@@ -6,13 +6,13 @@ namespace Pizza.Net.Screens.DesignTimeData
     {
         public IngredientsTable()
         {
-            Ingredients = new ObservableCollection<IngredientEntity>();
+            Ingredients = new ObservableCollection<IngredientItem>();
             for (int i = 0; i < 15; i++)
             {
-                Ingredients.Add(new IngredientEntity());
+                Ingredients.Add(new IngredientItem());
             }
         }
 
-        public ObservableCollection<IngredientEntity> Ingredients { get; set; }
+        public ObservableCollection<IngredientItem> Ingredients { get; set; }
     }
 }

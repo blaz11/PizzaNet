@@ -7,7 +7,7 @@ namespace Pizza.Net.Screens.Pages
 {
     class OrderCreatorViewModel : ChangingPagesBaseViewModel, IPageViewModel
     {
-        public OrderCreatorViewModel(IOrderCreatorModel orderCreatorModel, IClientsPageViewModel clientsPageViewModel, IPizzasPageViewModel pizzasPageViewModel)
+        public OrderCreatorViewModel(IOrderCreatorModel orderCreatorModel, IClientsPageViewModel clientsPageViewModel, IPizzasInOrderCreatorViewModel pizzasPageViewModel)
         {
             _orderCreatorModel = orderCreatorModel;
 
@@ -152,6 +152,8 @@ namespace Pizza.Net.Screens.Pages
 
         private void GoToPreviousStep()
         {
+            if (_currentStepIndex == 1)
+                return;
             _currentStepIndex--;
             CurrentPageViewModel = PageViewModels[_currentStepIndex - 1];
             NextStepButtonContent = _nextStepButtonContents[_currentStepIndex - 1];

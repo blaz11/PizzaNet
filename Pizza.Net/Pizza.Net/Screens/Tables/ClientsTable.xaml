@@ -4,41 +4,34 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Pizza.Net.Screens.Tables"
-             xmlns:entities="clr-namespace:Pizza.Net.Screens.Entities"
-             xmlns:legends="clr-namespace:Pizza.Net.Screens.Tables.TableLegends"
              xmlns:designTime="clr-namespace:Pizza.Net.Screens.DesignTimeData"
              mc:Ignorable="d" 
              d:DesignHeight="400"
-             d:DesignWidth="800"
+             d:DesignWidth="675"
              d:DataContext="{d:DesignInstance designTime:ClientsTable,
                                              IsDesignTimeCreatable=True}">
-    <UserControl.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Styles.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
-        <legends:ClientsTableLegend x:Key="TableLegend" />
-        </ResourceDictionary>
-    </UserControl.Resources>
-    <Grid Width="825">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <entities:ClientEntity  Grid.Row="0"
-                                DataContext="{StaticResource TableLegend}"
-                                HorizontalAlignment="Left"
-                                Margin="3,0,0,0"
-                                Background="{StaticResource EntitiesTableLegendBackground}"/>
-        <ListView Grid.Row="1" 
-                  ItemsSource="{Binding Clients}"
-                  Style="{StaticResource EntitiesListViewStyle}"
-                  SelectedItem="{Binding SelectedClient}">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <entities:ClientEntity />
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-    </Grid>
+    <DataGrid ItemsSource="{Binding Clients}"
+              AutoGenerateColumns="False"
+              SelectedItem="{Binding SelectedClient}"
+              MaxWidth="675"
+              IsReadOnly="True">
+        <DataGrid.Columns>
+            <DataGridTextColumn Binding="{Binding FirstName}" 
+                                Header="First Name" />
+            <DataGridTextColumn Binding="{Binding LastName}" 
+                                Header="Last Name" />
+            <DataGridTextColumn Binding="{Binding PhoneNumber}" 
+                                Header="Phone Number" />
+            <DataGridTextColumn Binding="{Binding City}" 
+                                Header="City" />
+            <DataGridTextColumn Binding="{Binding Street}" 
+                                Header="Street" />
+            <DataGridTextColumn Binding="{Binding ZipCode}" 
+                                Header="Zip Code" />
+            <DataGridTextColumn Binding="{Binding PremiseNumber}" 
+                                Header="Premise Number" />
+            <DataGridTextColumn Binding="{Binding FlatNumber}" 
+                                Header="Flat Number" />
+        </DataGrid.Columns>
+    </DataGrid>
 </UserControl>

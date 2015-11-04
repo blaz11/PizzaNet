@@ -11,8 +11,8 @@
         <DataTemplate DataType="{x:Type local:ClientsPageViewModel}">
             <local:ClientsPage />
         </DataTemplate>
-        <DataTemplate DataType="{x:Type local:PizzasPageViewModel}">
-            <local:PizzasPage />
+        <DataTemplate DataType="{x:Type local:PizzasInOrderCreatorViewModel}">
+            <local:PizzasInOrderCreator />
         </DataTemplate>
         <DataTemplate DataType="{x:Type local:OrderSubmitViewModel}">
             <local:OrderSubmit />

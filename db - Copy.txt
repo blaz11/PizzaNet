@@ -1,0 +1,66 @@
+CREATE TABLE [dbo].[Clients] (
+    [IDClient]      INT          IDENTITY (1, 1) NOT NULL,
+    [LastName]      VARCHAR (30) NOT NULL,
+    [FirstName]     VARCHAR (30) NOT NULL,
+    [PhoneNumber]   VARCHAR (30) NOT NULL,
+    [City]          VARCHAR (30) NOT NULL,
+    [Street]        VARCHAR (30) NOT NULL,
+    [ZipCode]       VARCHAR (30) NULL,
+    [PremiseNumber] VARCHAR (20) NOT NULL,
+    [FlatNumber]    VARCHAR (20) NULL,
+    PRIMARY KEY CLUSTERED ([IDClient] ASC)
+);
+
+CREATE TABLE [dbo].[Orders] (
+    [IDOrder]         INT  IDENTITY (1, 1) NOT NULL,
+    [IDClient]        INT  NOT NULL,
+    [StartOrderDate]  DATE NOT NULL,
+    [FinishOrderDate] DATE NOT NULL,
+    PRIMARY KEY CLUSTERED ([IDOrder] ASC),
+    FOREIGN KEY ([IDClient]) REFERENCES [dbo].[Clients] ([IDClient]),
+);
+
+CREATE TABLE [dbo].[Sizes] (
+    [IDSize]     INT          IDENTITY (1, 1) NOT NULL,
+    [Name]       VARCHAR (20) NOT NULL,
+    [RadiusInCm] SMALLINT     NOT NULL,
+	[BasePriceMultiplier] SMALLINT NOT NULL,
+    PRIMARY KEY CLUSTERED ([IDSize] ASC),
+    UNIQUE NONCLUSTERED ([Name] ASC)
+);
+
+
+CREATE TABLE [dbo].[Ingredients] (
+    [IDIngredient] INT          IDENTITY (1, 1) NOT NULL,
+    [Name]         VARCHAR (20) NOT NULL,
+    PRIMARY KEY CLUSTERED ([IDIngredient] ASC),
+    UNIQUE NONCLUSTERED ([Name] ASC)
+);
+
+CREATE TABLE [dbo].[Pizzas] (
+    [IDPizza] INT          IDENTITY (1, 1) NOT NULL,
+    [Name]    VARCHAR (20) NOT NULL,
+    [Price]   SMALLMONEY   NOT NULL,
+    PRIMARY KEY CLUSTERED ([IDPizza] ASC),
+    UNIQUE NONCLUSTERED ([Name] ASC)
+);
+
+CREATE TABLE [dbo].[PizzaIngredients] (
+    [IDPizzaIngredient] INT IDENTITY (1, 1) NOT NULL,
+    [IDPizza]           INT NOT NULL,
+    [IDIngredient]      INT NOT NULL,
+    PRIMARY KEY CLUSTERED ([IDPizzaIngredient] ASC),
+    FOREIGN KEY ([IDIngredient]) REFERENCES [dbo].[Ingredients] ([IDIngredient]),
+    FOREIGN KEY ([IDPizza]) REFERENCES [dbo].[Pizzas] ([IDPizza])
+);
+
+CREATE TABLE [dbo].[PizzaOrders] (
+    [IDPizzaOrder] INT IDENTITY (1, 1) NOT NULL,
+    [IDOrder]      INT NOT NULL,
+    [IDPizza]      INT NOT NULL,
+    [IDSize]       INT NOT NULL,
+    PRIMARY KEY CLUSTERED ([IDPizzaOrder] ASC),
+    FOREIGN KEY ([IDOrder]) REFERENCES [dbo].[Orders] ([IDOrder]),
+    FOREIGN KEY ([IDSize]) REFERENCES [dbo].[Sizes] ([IDSize]),
+    FOREIGN KEY ([IDPizza]) REFERENCES [dbo].[Pizzas] ([IDPizza])
+);

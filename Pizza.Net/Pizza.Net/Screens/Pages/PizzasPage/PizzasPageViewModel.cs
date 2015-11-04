@@ -5,7 +5,7 @@ using System.Windows.Input;
 
 namespace Pizza.Net.Screens.Pages
 {
-    class PizzasPageViewModel : BasePageViewModel, IPizzasPageViewModel
+    class PizzasPageViewModel : BaseTableInteractionViewModel, IPizzasPageViewModel
     {
         public PizzasPageViewModel(IPizzasTableViewModel _pizzasTableViewModel)
         {
@@ -47,7 +47,7 @@ namespace Pizza.Net.Screens.Pages
             s = new PizzaIngredient();
             s.Ingredient = i1;
             p.PizzaIngredients.Add(s);
-            PizzasTableViewModel.Pizzas.Add(new Entities.PizzaEntityViewModel(p));
+            PizzasTableViewModel.Pizzas.Add(new PizzaViewModel(p));
         }
 
         public string PageName
@@ -92,10 +92,9 @@ namespace Pizza.Net.Screens.Pages
             }
         }
 
-        private HashSet<Ingredient> _selectedIngredients = new HashSet<Ingredient>();
-        public IPizzasTableViewModel PizzasTableViewModel { get; }
-        public IIngredientsTableViewModel SelectedIngredientsViewModel { get; }
-        public IIngredientsTableViewModel IngredientsToSelectViewModel { get; }
+        public IPizzasTableViewModel PizzasTableViewModel { get; private set; }
+        public IIngredientsTableViewModel SelectedIngredientsViewModel { get; private set; }
+        public IIngredientsTableViewModel IngredientsToSelectViewModel { get; private set; }
 
         private ICommand _addToSelectedCommand;
         public ICommand AddToSelectedCommand
@@ -130,7 +129,6 @@ namespace Pizza.Net.Screens.Pages
             var item = IngredientsToSelectViewModel.SelectedIngredient;
             if (item == null)
                 return;
-            _selectedIngredients.Add(item);
             IngredientsToSelectViewModel.Ingredients.Remove(item);
             SelectedIngredientsViewModel.Ingredients.Add(item);
         }
@@ -140,7 +138,6 @@ namespace Pizza.Net.Screens.Pages
             var item = SelectedIngredientsViewModel.SelectedIngredient;
             if (item == null)
                 return;
-            _selectedIngredients.Remove(item);
             IngredientsToSelectViewModel.Ingredients.Add(item);
             SelectedIngredientsViewModel.Ingredients.Remove(item);
         }

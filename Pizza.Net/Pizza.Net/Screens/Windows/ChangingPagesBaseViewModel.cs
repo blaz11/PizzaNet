@@ -5,7 +5,12 @@ namespace Pizza.Net.Screens
 {
     class ChangingPagesBaseViewModel : ObservableObject
     {
-        public List<IPageViewModel> PageViewModels { get; } = new List<IPageViewModel>();
+        public ChangingPagesBaseViewModel()
+        {
+            PageViewModels = new List<IPageViewModel>();
+        }
+
+        public List<IPageViewModel> PageViewModels { get; private set; }
 
         private IPageViewModel _currentPageViewModel;
         public IPageViewModel CurrentPageViewModel

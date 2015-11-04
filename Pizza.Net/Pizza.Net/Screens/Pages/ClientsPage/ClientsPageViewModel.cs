@@ -1,12 +1,11 @@
 ﻿using Pizza.Net.Domain;
-using Pizza.Net.Screens.Entities;
 using Pizza.Net.Screens.Tables;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
 namespace Pizza.Net.Screens.Pages
 {
-    class ClientsPageViewModel : BasePageViewModel, IClientsPageViewModel
+    class ClientsPageViewModel : BaseTableInteractionViewModel, IClientsPageViewModel
     {
         public ClientsPageViewModel(IClientsTableViewModel clientsTableViewModel, IClientsPageModel clientsPageModel, IOrdersTableViewModel ordersTableViewModel)
         {
@@ -173,7 +172,7 @@ namespace Pizza.Net.Screens.Pages
             }
         }
 
-        public IClientsTableViewModel ClientsTableViewModel { get; }
+        public IClientsTableViewModel ClientsTableViewModel { get; private set; }
         private IClientsPageModel _clientsPageModel;
         private IOrdersTableViewModel _ordersTableViewModel;
 
@@ -192,11 +191,12 @@ namespace Pizza.Net.Screens.Pages
                 var client = ClientsTableViewModel.SelectedClient;
                 //Janek
                 var orders = new ObservableCollection<Order>();
+
                 var app = new OrdersHistory();
-                var orderEntities = new ObservableCollection<OrderEntityViewModel>();
+                var orderEntities = new ObservableCollection<OrderViewModel>();
                 foreach(var order in orders)
                 {
-                    orderEntities.Add(new OrderEntityViewModel(order));
+                    orderEntities.Add(new OrderViewModel(order));
                 }
                 var context = new OrdersHistoryViewModel(_ordersTableViewModel, orderEntities);
                 app.DataContext = context;

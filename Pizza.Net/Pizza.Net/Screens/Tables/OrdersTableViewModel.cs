@@ -1,19 +1,17 @@
-﻿using Pizza.Net.Domain;
-using Pizza.Net.Screens.Entities;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 
 namespace Pizza.Net.Screens.Tables
 {
     interface IOrdersTableViewModel
     {
-        ObservableCollection<OrderEntityViewModel> Orders { get; set; }
-        OrderEntityViewModel SelectedOrder { get; set; }
+        ObservableCollection<OrderViewModel> Orders { get; set; }
+        OrderViewModel SelectedOrder { get; set; }
     }
 
     class OrdersTableViewModel : ObservableObject, IOrdersTableViewModel
     {
-        private ObservableCollection<OrderEntityViewModel> _order = new ObservableCollection<OrderEntityViewModel>();
-        public ObservableCollection<OrderEntityViewModel> Orders
+        private ObservableCollection<OrderViewModel> _order = new ObservableCollection<OrderViewModel>();
+        public ObservableCollection<OrderViewModel> Orders
         {
             get
             {
@@ -29,8 +27,8 @@ namespace Pizza.Net.Screens.Tables
             }
         }
 
-        private OrderEntityViewModel _selectedOrder;
-        public OrderEntityViewModel SelectedOrder
+        private OrderViewModel _selectedOrder;
+        public OrderViewModel SelectedOrder
         {
             get
             {
