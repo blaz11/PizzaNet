@@ -81,9 +81,6 @@
       <DependentUpon>ClientEntity.xaml</DependentUpon>
     </Compile>
     <Compile Include="Screens\DesignTimeData\ClientEntity.cs" />
-    <Compile Include="Screens\Entities\Converters\ClientToEntityFieldConverter.cs" />
-    <Compile Include="Screens\Entities\Converters\IngredientsCollectionToListOfEntitiesConverter.cs" />
-    <Compile Include="Screens\Entities\Converters\PizzasInOrderCollectionToListOfEntitiesCollection.cs" />
     <Compile Include="Screens\Entities\BasicEntityField.xaml.cs">
       <DependentUpon>BasicEntityField.xaml</DependentUpon>
     </Compile>
@@ -96,9 +93,11 @@
     <Compile Include="Screens\Entities\OrderEntity.xaml.cs">
       <DependentUpon>OrderEntity.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Screens\Entities\OrderEntityViewModel.cs" />
     <Compile Include="Screens\Entities\PizzaEntity.xaml.cs">
       <DependentUpon>PizzaEntity.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Screens\Entities\PizzaEntityViewModel.cs" />
     <Compile Include="Screens\Entities\SizeEntity.xaml.cs">
       <DependentUpon>SizeEntity.xaml</DependentUpon>
     </Compile>

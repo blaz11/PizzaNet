@@ -37,6 +37,11 @@
             <TextBox Width="120"
                      Style="{StaticResource SearchTextBoxStyle}"
                      Text="{Binding FirstName, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBlock Text="Price:"
+                       Style="{StaticResource SearchLabelTextBlockStyle}"/>
+            <TextBox Width="80"
+                     Style="{StaticResource SearchTextBoxStyle}"
+                     Text="{Binding Price, UpdateSourceTrigger=PropertyChanged}"/>
         </StackPanel>
         <StackPanel Grid.Row="2"
                     VerticalAlignment="Center"

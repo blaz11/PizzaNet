@@ -21,7 +21,7 @@ namespace Pizza.Net.Screens.DesignTimeData
             }
         }
 
-        public ICollection<PizzaIngredient> PizzaIngredients
+        public ICollection<PizzaIngredient> Ingredients
         {
             get
             {

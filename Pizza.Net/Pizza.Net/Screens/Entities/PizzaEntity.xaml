@@ -10,10 +10,6 @@
              d:DesignWidth="450"
              d:DataContext="{d:DesignInstance designTime:PizzaEntity,
                                               IsDesignTimeCreatable=True}">
-    <UserControl.Resources>
-        <local:IngredientsCollectionToListOfEntitiesConverter 
-            x:Key="IngredientsCollectionToListOfEntitiesConverter" />
-    </UserControl.Resources>
     <Grid VerticalAlignment="Stretch">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="100"/>
@@ -22,8 +18,7 @@
         </Grid.ColumnDefinitions>
         <local:BasicEntityField Grid.Column="0" DataContext="{Binding Name}" />
         <local:ListOfEntities Grid.Column="1"
-                            DataContext="{Binding PizzaIngredients, 
-                                Converter={StaticResource IngredientsCollectionToListOfEntitiesConverter}}"/>
+                            DataContext="{Binding Ingredients}"/>
         <local:BasicEntityField Grid.Column="3" DataContext="{Binding Price}" />
     </Grid>
 </UserControl>

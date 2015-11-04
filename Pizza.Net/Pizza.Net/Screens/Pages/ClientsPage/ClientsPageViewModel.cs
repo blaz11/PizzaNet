@@ -1,4 +1,5 @@
 ﻿using Pizza.Net.Domain;
+using Pizza.Net.Screens.Entities;
 using Pizza.Net.Screens.Tables;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
@@ -190,9 +191,14 @@ namespace Pizza.Net.Screens.Pages
             {
                 var client = ClientsTableViewModel.SelectedClient;
                 //Janek
-                var collection = new ObservableCollection<Order>();
+                var orders = new ObservableCollection<Order>();
                 var app = new OrdersHistory();
-                var context = new OrdersHistoryViewModel(_ordersTableViewModel, collection);
+                var orderEntities = new ObservableCollection<OrderEntityViewModel>();
+                foreach(var order in orders)
+                {
+                    orderEntities.Add(new OrderEntityViewModel(order));
+                }
+                var context = new OrdersHistoryViewModel(_ordersTableViewModel, orderEntities);
                 app.DataContext = context;
                 app.Title = "Orders history for " + client.FirstName + " " + client.LastName;
                 app.Show();

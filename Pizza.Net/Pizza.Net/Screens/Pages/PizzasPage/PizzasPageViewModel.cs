@@ -47,7 +47,7 @@ namespace Pizza.Net.Screens.Pages
             s = new PizzaIngredient();
             s.Ingredient = i1;
             p.PizzaIngredients.Add(s);
-            PizzasTableViewModel.Pizzas.Add(p);
+            PizzasTableViewModel.Pizzas.Add(new Entities.PizzaEntityViewModel(p));
         }
 
         public string PageName
@@ -70,6 +70,23 @@ namespace Pizza.Net.Screens.Pages
                 if (value != _name)
                 {
                     _name = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private uint? _price;
+        public uint? Price
+        {
+            get
+            {
+                return _price;
+            }
+            set
+            {
+                if (value != _price)
+                {
+                    _price = value;
                     OnPropertyChanged();
                 }
             }

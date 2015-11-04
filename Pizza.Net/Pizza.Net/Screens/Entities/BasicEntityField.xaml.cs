@@ -51,7 +51,6 @@ namespace Pizza.Net.Screens.Entities
                 new Typeface(MarqueeBlock.FontFamily, MarqueeBlock.FontStyle, MarqueeBlock.FontWeight, MarqueeBlock.FontStretch),
                 MarqueeBlock.FontSize,
                 Brushes.Black);
-
             return formattedText.Width > MarqueeCanvas.ActualWidth;
         }
 
