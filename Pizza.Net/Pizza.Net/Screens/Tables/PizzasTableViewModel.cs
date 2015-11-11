@@ -16,18 +16,7 @@ namespace Pizza.Net.Screens.Tables
 
     class PizzasTableViewModel : ObservableObject, IPizzasTableViewModel
     {
-        public PizzasTableViewModel()
-        {
-            using (PizzaNetEntities pne = new PizzaNetEntities())
-            {
-                var a = pne.Pizzas.Where(p =>true);
-                //     System.Console.WriteLine(a);
-                List<Domain.Pizza> pl = new List<Domain.Pizza>();
-                Pizzas.Clear();
-                foreach (var v in a)
-                    Pizzas.Add(new PizzaViewModel(v));
-            }
-        }
+
         private ObservableCollection<PizzaViewModel> _pizzas = new ObservableCollection<PizzaViewModel>();
         public ObservableCollection<PizzaViewModel> Pizzas
         {

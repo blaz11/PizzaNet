@@ -30,6 +30,7 @@ namespace Pizza.Net.Screens.Pages
         }
 
         private List<string> _nextStepButtonContents = new List<string>();
+        
         private int _currentStepIndex = 0;
         private IOrderCreatorModel _orderCreatorModel;
 
@@ -130,21 +131,27 @@ namespace Pizza.Net.Screens.Pages
                     var client = (CurrentPageViewModel as ClientsPageViewModel).SelectedClient;
                     if (client == null)
                         break;
-                    _orderCreatorModel.AddClient(client);
+                        _orderCreatorModel.AddClient(client);
+                    (PageViewModels[2] as OrderSubmitViewModel).Client = client;
                     break;
+                    
                 case 2:
                     //client = (CurrentPageViewModel as ClientsPageViewModel).SelectedClient;
-                    client = null;
-                    ObservableCollection<Domain.Pizza> pizzas = null;
 
+             //       client = null;
+                    ObservableCollection<Domain.Pizza> pizzas = new ObservableCollection<Domain.Pizza>();
+                    
+                    foreach (var v in (CurrentPageViewModel as PizzasInOrderCreatorViewModel).SelectedPizzasViewModel.Pizzas)
+                        pizzas.Add(v.Pizza);
                     if (pizzas == null)
                         break;
-                    _orderCreatorModel.AddPizza(pizzas);
-                    (PageViewModels[2] as OrderSubmitViewModel).Client = client;
-                    (PageViewModels[2] as OrderSubmitViewModel).Pizzas = pizzas;
+                    //    _orderCreatorModel.AddPizza(pizzas);
+                    (PageViewModels[2] as OrderSubmitViewModel).Sizee = (CurrentPageViewModel as PizzasInOrderCreatorViewModel).sizes;
+                     (PageViewModels[2] as OrderSubmitViewModel).Pizzas = pizzas;
                     break;
                 case 3:
-                    _orderCreatorModel.SubmitOrder();
+             //       _orderCreatorModel.SubmitOrder();
+                    (PageViewModels[2] as OrderSubmitViewModel).Submit();
                     Reset();
                     return;
             }

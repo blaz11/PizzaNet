@@ -194,8 +194,15 @@ namespace Pizza.Net.Screens.Pages
                 var client = ClientsTableViewModel.SelectedClient;
                 //Janek
                 var orders = new ObservableCollection<Order>();
-
-                var app = new OrdersHistory();
+                using (PizzaNetEntities pne = new PizzaNetEntities())
+                {
+                    var a = pne.Orders.Where(p => p.Client.IDClient == client.IDClient);
+                    foreach (var v in a)
+                        orders.Add(v);
+                }
+                if (orders.Count < 1)
+                    return;
+                    var app = new OrdersHistory();
                 var orderEntities = new ObservableCollection<OrderViewModel>();
                 foreach(var order in orders)
                 {

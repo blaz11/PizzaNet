@@ -184,7 +184,7 @@ namespace Pizza.Net.Screens.Pages
 
         public override void Clear()
         {
-            Name = null;
+            Name = "";
             Price = 0;
                 foreach (var v in SelectedIngredientsViewModel.Ingredients)
                 {
@@ -260,6 +260,7 @@ namespace Pizza.Net.Screens.Pages
                 }
                 SearchMode = true;
             }
+            Clear();
         }
 
         public override void Edit()

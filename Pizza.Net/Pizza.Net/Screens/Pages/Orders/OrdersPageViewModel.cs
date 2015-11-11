@@ -1,6 +1,10 @@
 ﻿using Pizza.Net.Screens.Tables;
 using System;
 using System.Windows.Input;
+using Pizza.Net.Domain;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Data.Entity;
 
 namespace Pizza.Net.Screens.Pages
 {
@@ -213,6 +217,7 @@ namespace Pizza.Net.Screens.Pages
         private void Search()
         {
             //Janek
+  
         }
 
         private void Clear()

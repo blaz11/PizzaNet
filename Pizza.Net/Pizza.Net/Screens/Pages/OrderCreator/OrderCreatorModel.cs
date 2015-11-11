@@ -17,17 +17,19 @@ namespace Pizza.Net.Screens.Pages
 
         public void AddClient(Client client)
         {
-            client = _client;
+            _client= client ;
         }
 
         public void AddPizza(ICollection<Pizza.Net.Domain.Pizza> pizzas)
         {
-            pizzas = _pizzas;
+             _pizzas= pizzas;
         }
 
         public void SubmitOrder()
         {
             //Janek
+            System.Console.WriteLine(    _pizzas);
+            System.Console.WriteLine();
         }
     }
 }

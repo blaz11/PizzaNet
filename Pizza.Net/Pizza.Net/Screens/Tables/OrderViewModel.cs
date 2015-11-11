@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace Pizza.Net.Screens.Tables
 {
@@ -9,9 +10,22 @@ namespace Pizza.Net.Screens.Tables
     {
         public OrderViewModel(Order order)
         {
-            Client = order.Client.FirstName + " " + order.Client.LastName;
-            Pizzas = ConvertFromPizzaOrderCollectionToStringCollection(order.PizzaOrders);
-            OrderValue = CalculateTotalOrderValue(order.PizzaOrders);
+            Pizzas = new ObservableCollection<string>();
+            using (PizzaNetEntities pne = new PizzaNetEntities())
+            {
+                var c= pne.Clients.Find(order.IDClient);
+                Client = c.FirstName + " " + c.LastName;
+
+                var pi = pne.PizzaOrders.Where(p => p.IDOrder == order.IDOrder);
+                foreach(var v in pi)
+                {
+                    Pizzas.Add(pne.Pizzas.Find(v.IDPizza).Name);
+                }
+            }
+
+         //   Client = order.Client.FirstName + " " + order.Client.LastName;
+     //       Pizzas = ConvertFromPizzaOrderCollectionToStringCollection(order.PizzaOrders);
+            //OrderValue = CalculateTotalOrderValue(order.PizzaOrders);
             StartDate = order.StartOrderDate;
             FinishDate = order.FinishOrderDate;
             Order = order;

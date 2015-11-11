@@ -19,7 +19,7 @@
                    HorizontalAlignment="Center"
                    VerticalAlignment="Center"
                    FontSize="18"/>
-        <tables:PizzasTable DataContext="{Binding SelectedPizzasTableViewModel}" />
+        <tables:PizzasTable DataContext="{Binding SelectedPizzasViewModel}" />
         <TextBlock Text="Select pizzas"
                    HorizontalAlignment="Center"
                    VerticalAlignment="Center"
@@ -27,7 +27,7 @@
         <StackPanel Orientation="Horizontal"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Center">
-            <tables:PizzasTable DataContext="{Binding SearchPizzasTableViewModel}" 
+            <tables:PizzasTable DataContext="{Binding SearchPizzasViewModel}" 
                               Margin="20"/>
             <tables:SizesTable DataContext="{Binding SizesTableViewModel}"
                                Margin="20"/> 
@@ -37,7 +37,7 @@
                     HorizontalAlignment="Center">
             <Button Content="Add pizza to order"
                     Style="{StaticResource PageButtonStyle}"
-                    Command="{Binding AddPizzaCommand}"/>
+                    Command="{Binding AddPizzaCommands}"/>
             <Button Content="Remove pizza from order"
                      Style="{StaticResource PageButtonStyle}"
                      Command="{Binding RemovePizzaCommand}"/>
