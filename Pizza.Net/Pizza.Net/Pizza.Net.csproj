@@ -46,6 +46,8 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -64,18 +66,151 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
+    <Compile Include="Helpers\RelayCommand.cs" />
+    <Compile Include="Helpers\ObservableObject.cs" />
+    <Compile Include="Screens\DesignTimeData\ClientsTable.cs" />
+    <Compile Include="Screens\DesignTimeData\IngredientItem.cs" />
+    <Compile Include="Screens\DesignTimeData\IngredientsTable.cs" />
+    <Compile Include="Screens\DesignTimeData\OrderItem.cs" />
+    <Compile Include="Screens\DesignTimeData\OrdersTable.cs" />
+    <Compile Include="Screens\DesignTimeData\PizzaItem.cs" />
+    <Compile Include="Screens\DesignTimeData\PizzasTable.cs" />
+    <Compile Include="Screens\DesignTimeData\SizeItem.cs" />
+    <Compile Include="Screens\DesignTimeData\SizesTable.cs" />
+    <Compile Include="Screens\DesignTimeData\ClientItem.cs" />
+    <Compile Include="Screens\Pages\Orders\OrdersPage.xaml.cs">
+      <DependentUpon>OrdersPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\Pages\Orders\OrdersPageViewModel.cs" />
+    <Compile Include="Screens\Pages\PizzasInOrderCreator\PizzasInOrderCreatorViewModel.cs" />
+    <Compile Include="Screens\Pages\PizzasInOrderCreator\PizzasInOrderCreator.xaml.cs">
+      <DependentUpon>PizzasInOrderCreator.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\Tables\OrderViewModel.cs" />
+    <Compile Include="Screens\Tables\PizzaViewModel.cs" />
+    <Compile Include="Screens\Pages\OrderFinalizator\OrderFinalizator.xaml.cs">
+      <DependentUpon>OrderFinalizator.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\Pages\OrderFinalizator\OrderFinalizatorViewModel.cs" />
+    <Compile Include="Screens\Pages\OrderCreator\OrderSubmit\OrderSubmitViewModel.cs" />
+    <Compile Include="Screens\Pages\OrderCreator\OrderSubmit\OrderSubmit.xaml.cs">
+      <DependentUpon>OrderSubmit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\Tables\OrdersTableViewModel.cs" />
+    <Compile Include="Screens\Tables\SizesTableViewModel.cs" />
+    <Compile Include="Screens\Windows\MainApplicationWindow.xaml.cs">
+      <DependentUpon>MainApplicationWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\Windows\MainApplicationWindowViewModel.cs" />
+    <Compile Include="Screens\Pages\BasePageViewModel.cs" />
+    <Compile Include="Screens\Pages\ClientsPage\ClientsPage.xaml.cs">
+      <DependentUpon>ClientsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\Pages\ClientsPage\ClientsPageModel.cs" />
+    <Compile Include="Screens\Pages\ClientsPage\ClientsPageViewModel.cs" />
+    <Compile Include="Screens\Pages\ClientsPage\IClientsPageViewModel.cs" />
+    <Compile Include="Screens\Pages\IPageViewModel.cs" />
+    <Compile Include="Screens\Pages\PizzasPage\IPizzasPageViewModel.cs" />
+    <Compile Include="Screens\Pages\PizzasPage\PizzasPageViewModel.cs" />
+    <Compile Include="Screens\Pages\PizzasPage\PizzasPage.xaml.cs">
+      <DependentUpon>PizzasPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\Tables\ClientsTable.xaml.cs">
+      <DependentUpon>ClientsTable.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\Tables\ClientsTableViewModel.cs" />
+    <Compile Include="Screens\Tables\IngredientsTable.xaml.cs">
+      <DependentUpon>IngredientsTable.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\Tables\IngredientsTableViewModel.cs" />
+    <Compile Include="Screens\Tables\OrdersTable.xaml.cs">
+      <DependentUpon>OrdersTable.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\Tables\PizzasTable.xaml.cs">
+      <DependentUpon>PizzasTable.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\Tables\PizzasTableViewModel.cs" />
+    <Compile Include="Screens\Tables\SizesTable.xaml.cs">
+      <DependentUpon>SizesTable.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\Pages\OrderCreator\OrderCreator.xaml.cs">
+      <DependentUpon>OrderCreator.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\Pages\OrderCreator\OrderCreatorModel.cs" />
+    <Compile Include="Screens\Pages\OrderCreator\OrderCreatorViewModel.cs" />
+    <Compile Include="Screens\Windows\ChangingPagesBaseViewModel.cs" />
+    <Compile Include="Screens\Windows\OrdersHistory.xaml.cs">
+      <DependentUpon>OrdersHistory.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\Windows\OrdersHistoryViewModel.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
+    <Page Include="Screens\Pages\OrderFinalizator\OrderFinalizator.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Screens\Pages\Orders\OrdersPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Screens\Pages\OrderCreator\OrderSubmit\OrderSubmit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Screens\Pages\PizzasInOrderCreator\PizzasInOrderCreator.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Screens\Windows\MainApplicationWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Screens\Pages\ClientsPage\ClientsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Screens\Pages\PizzasPage\PizzasPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Screens\Pages\Styles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Screens\Tables\ClientsTable.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Screens\Tables\IngredientsTable.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Screens\Tables\OrdersTable.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Screens\Tables\PizzasTable.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Screens\Tables\SizesTable.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Screens\Tables\Styles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Screens\Pages\OrderCreator\OrderCreator.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Screens\Windows\OrdersHistory.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -103,7 +238,9 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Pizza.Net.Domain\Pizza.Net.Domain.csproj">
@@ -111,6 +248,7 @@
       <Name>Pizza.Net.Domain</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

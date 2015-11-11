@@ -1,0 +1,27 @@
+﻿<UserControl x:Class="Pizza.Net.Screens.Entities.OrderEntity"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Pizza.Net.Screens.Entities"
+             xmlns:designTime="clr-namespace:Pizza.Net.Screens.DesignTimeData"
+             mc:Ignorable="d" 
+             d:DesignHeight="25"
+             d:DesignWidth="900"     
+             d:DataContext="{d:DesignInstance designTime:OrderEntity,
+                                              IsDesignTimeCreatable=True}">
+    <Grid VerticalAlignment="Stretch">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="300"/>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="70"/>
+        </Grid.ColumnDefinitions>
+        <local:BasicEntityField Grid.Column="0" DataContext="{Binding Client}"/>
+        <local:ListOfEntities Grid.Column="1" DataContext="{Binding Pizzas}"/>
+        <local:BasicEntityField Grid.Column="2" DataContext="{Binding StartDate}"/>
+        <local:BasicEntityField Grid.Column="3" DataContext="{Binding FinishDate}"/>
+        <local:BasicEntityField Grid.Column="4" DataContext="{Binding OrderValue}"/>
+    </Grid>
+</UserControl>

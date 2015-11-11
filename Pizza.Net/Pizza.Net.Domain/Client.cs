@@ -20,15 +20,15 @@ namespace Pizza.Net.Domain
             this.Orders = new HashSet<Order>();
         }
     
-        public int ID_Cli { get; set; }
-        public string Last_Name { get; set; }
-        public string First_Name { get; set; }
-        public string Phone_Nr { get; set; }
+        public int IDClient { get; set; }
+        public string LastName { get; set; }
+        public string FirstName { get; set; }
+        public string PhoneNumber { get; set; }
         public string City { get; set; }
         public string Street { get; set; }
-        public string Zip_Code { get; set; }
-        public string Premise_Nr { get; set; }
-        public string Flat_Nr { get; set; }
+        public string ZipCode { get; set; }
+        public string PremiseNumber { get; set; }
+        public string FlatNumber { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order> Orders { get; set; }

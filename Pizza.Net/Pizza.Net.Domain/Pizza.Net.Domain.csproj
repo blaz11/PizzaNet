@@ -58,16 +58,16 @@
     <Compile Include="DatabaseAccess\DbOperationContext.cs" />
     <Compile Include="DatabaseAccess\IPizzaNetDbAccess.cs" />
     <Compile Include="DatabaseAccess\PizzaNetDbAccess.cs" />
-    <Compile Include="Employee.cs">
-      <DependentUpon>PizzaNetEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Ingridient.cs">
+    <Compile Include="Ingredient.cs">
       <DependentUpon>PizzaNetEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Order.cs">
       <DependentUpon>PizzaNetEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Pizza.cs">
+      <DependentUpon>PizzaNetEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PizzaIngredient.cs">
       <DependentUpon>PizzaNetEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="PizzaNetEntities.Context.cs">
@@ -85,13 +85,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>PizzaNetEntities.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Pizza_Ingridients.cs">
-      <DependentUpon>PizzaNetEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Pizza_Order.cs">
-      <DependentUpon>PizzaNetEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Position.cs">
+    <Compile Include="PizzaOrder.cs">
       <DependentUpon>PizzaNetEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

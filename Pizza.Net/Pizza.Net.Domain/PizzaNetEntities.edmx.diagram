@@ -4,24 +4,20 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="f50643eb7af2450d9b015de31bfba9e1" Name="Diagram1">
-        <EntityTypeShape EntityType="PizzaNetDatabaseModel.Client" Width="1.5" PointX="1.5" PointY="13.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="PizzaNetDatabaseModel.Employee" Width="1.5" PointX="1.5" PointY="16.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="PizzaNetDatabaseModel.Ingridient" Width="1.5" PointX="0.75" PointY="23.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="PizzaNetDatabaseModel.Order" Width="1.5" PointX="0.75" PointY="9.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="PizzaNetDatabaseModel.Pizza" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
-        <EntityTypeShape EntityType="PizzaNetDatabaseModel.Pizza_Ingridients" Width="1.5" PointX="3" PointY="4" IsExpanded="true" />
-        <EntityTypeShape EntityType="PizzaNetDatabaseModel.Pizza_Order" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="PizzaNetDatabaseModel.Position" Width="1.5" PointX="1.5" PointY="20.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="PizzaNetDatabaseModel.Size" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
-        <AssociationConnector Association="PizzaNetDatabaseModel.FK__Orders__ID_Cli__182C9B23" ManuallyRouted="false" />
-        <AssociationConnector Association="PizzaNetDatabaseModel.FK__Employee__ID_Pos__15502E78" ManuallyRouted="false" />
-        <AssociationConnector Association="PizzaNetDatabaseModel.FK__Orders__ID_Emplo__1920BF5C" ManuallyRouted="false" />
-        <AssociationConnector Association="PizzaNetDatabaseModel.FK__Pizza_Ing__ID_In__24927208" ManuallyRouted="false" />
-        <AssociationConnector Association="PizzaNetDatabaseModel.FK__Pizza_Ord__ID_Or__286302EC" ManuallyRouted="false" />
-        <AssociationConnector Association="PizzaNetDatabaseModel.FK__Pizza_Ing__ID_Pi__25869641" ManuallyRouted="false" />
-        <AssociationConnector Association="PizzaNetDatabaseModel.FK__Pizza_Ord__ID_Pi__2A4B4B5E" ManuallyRouted="false" />
-        <AssociationConnector Association="PizzaNetDatabaseModel.FK__Pizza_Ord__ID_Si__29572725" ManuallyRouted="false" />
+      <Diagram DiagramId="b7df44f9378f40f19db3fc4fbaad24ac" Name="Diagram1">
+        <EntityTypeShape EntityType="PizzaNetDatabase.Client" Width="1.5" PointX="3.75" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PizzaNetDatabase.Ingredient" Width="1.5" PointX="8.625" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PizzaNetDatabase.Order" Width="1.5" PointX="0.5" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PizzaNetDatabase.PizzaIngredient" Width="1.5" PointX="6.375" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PizzaNetDatabase.PizzaOrder" Width="1.5" PointX="3.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PizzaNetDatabase.Pizza" Width="1.5" PointX="0.5" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PizzaNetDatabase.Size" Width="1.5" PointX="6.375" PointY="2.625" IsExpanded="true" />
+        <AssociationConnector Association="PizzaNetDatabase.FK__Orders__IDClient__1273C1CD" ManuallyRouted="false" />
+        <AssociationConnector Association="PizzaNetDatabase.FK__PizzaIngr__IDIng__1DE57479" ManuallyRouted="false" />
+        <AssociationConnector Association="PizzaNetDatabase.FK__PizzaOrde__IDOrd__21B6055D" ManuallyRouted="false" />
+        <AssociationConnector Association="PizzaNetDatabase.FK__PizzaIngr__IDPiz__1ED998B2" ManuallyRouted="false" />
+        <AssociationConnector Association="PizzaNetDatabase.FK__PizzaOrde__IDPiz__239E4DCF" ManuallyRouted="false" />
+        <AssociationConnector Association="PizzaNetDatabase.FK__PizzaOrde__IDSiz__22AA2996" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
