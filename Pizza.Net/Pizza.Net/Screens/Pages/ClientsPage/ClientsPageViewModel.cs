@@ -84,7 +84,7 @@ namespace Pizza.Net.Screens.Pages
             }
         }
 
-        private string _firstName;
+
         public string FirstName
         {
             get
@@ -101,7 +101,7 @@ namespace Pizza.Net.Screens.Pages
             }
         }
 
-        private string _lastName;
+
         public string LastName
         {
             get
@@ -118,7 +118,7 @@ namespace Pizza.Net.Screens.Pages
             }
         }
 
-        private string _city;
+
         public string City
         {
             get
@@ -135,7 +135,6 @@ namespace Pizza.Net.Screens.Pages
             }
         }
 
-        private string _zipCode;
         public string ZipCode
         {
             get
@@ -152,7 +151,6 @@ namespace Pizza.Net.Screens.Pages
             }
         }
 
-        private string _street;
         public string Street
         {
             get
@@ -169,7 +167,6 @@ namespace Pizza.Net.Screens.Pages
             }
         }
 
-        private string _phoneNumber;
         public string PhoneNumber
         {
             get
@@ -186,7 +183,7 @@ namespace Pizza.Net.Screens.Pages
             }
         }
 
-        private string _premiseNumber;
+
         public string PremiseNumber
         {
             get
@@ -203,7 +200,6 @@ namespace Pizza.Net.Screens.Pages
             }
         }
 
-        private string _flatNumber;
         public string FlatNumber
         {
             get
@@ -290,44 +286,15 @@ namespace Pizza.Net.Screens.Pages
         {
             if (SearchMode)
             {
-                using (PizzaNetEntities pne = new PizzaNetEntities())
-                {
-                    Client cl = new Client();
-                    cl.City = _city;
-                    cl.FirstName = _firstName;
-                    cl.FlatNumber = _flatNumber;
-                    cl.LastName = _lastName;
-                    cl.PhoneNumber = _phoneNumber;
-                    cl.PremiseNumber = _premiseNumber;
-                    cl.Street = _street;
-                    cl.ZipCode = _zipCode;
-                    pne.Clients.Add(cl);
-                    pne.SaveChanges();
+                currentClient.Add();
 
-                }
 
             }
             else
             {
-                using (PizzaNetEntities pne = new PizzaNetEntities())
-                {
-                    int id = ClientsTableViewModel.SelectedClient.IDClient;
-                    var original = pne.Clients.Find(id);
-
-                    if (original != null)
-                    {
-                        original.City = City;
-                        original.FirstName = FirstName;
-                        original.FlatNumber = FlatNumber;
-                        original.LastName = LastName;
-                        original.PhoneNumber = PhoneNumber;
-                        original.PremiseNumber = PremiseNumber;
-                        original.Street = Street;
-                        original.ZipCode = ZipCode;
-                        pne.SaveChanges();
-                    }
-                    SearchMode = true;
-                }
+                int id = ClientsTableViewModel.SelectedClient.IDClient;
+                currentClient.Edit(id);
+                SearchMode = true;
             }
             Clear();
         }

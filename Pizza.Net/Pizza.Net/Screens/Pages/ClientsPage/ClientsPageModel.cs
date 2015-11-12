@@ -14,6 +14,7 @@ namespace Pizza.Net.Screens.Pages
     {
         ClientsTableViewModel SearchClients();
         ObservableCollection<Order> ShowHistory(Client client);
+        void Add();
     }
 
     class ClientsPageModel : IClientsPageModel, IDataErrorInfo
@@ -47,6 +48,46 @@ namespace Pizza.Net.Screens.Pages
                 return pom;
             }
 
+        }
+        public void Add()
+        {
+            using (PizzaNetEntities pne = new PizzaNetEntities())
+            {
+                Client cl = new Client();
+                cl.City = City;
+                cl.FirstName = FirstName;
+                cl.FlatNumber = FlatNumber;
+                cl.LastName = LastName;
+                cl.PhoneNumber = PhoneNumber;
+                cl.PremiseNumber = PremiseNumber;
+                cl.Street = Street;
+                cl.ZipCode = ZipCode;
+                pne.Clients.Add(cl);
+                pne.SaveChanges();
+
+            }
+        }
+        public void Edit(int id)
+        {
+            using (PizzaNetEntities pne = new PizzaNetEntities())
+            {
+                
+                var original = pne.Clients.Find(id);
+
+                if (original != null)
+                {
+                    original.City = City;
+                    original.FirstName = FirstName;
+                    original.FlatNumber = FlatNumber;
+                    original.LastName = LastName;
+                    original.PhoneNumber = PhoneNumber;
+                    original.PremiseNumber = PremiseNumber;
+                    original.Street = Street;
+                    original.ZipCode = ZipCode;
+                    pne.SaveChanges();
+                }
+                
+            }
         }
         public ObservableCollection<Order> ShowHistory(Client client)
         {
