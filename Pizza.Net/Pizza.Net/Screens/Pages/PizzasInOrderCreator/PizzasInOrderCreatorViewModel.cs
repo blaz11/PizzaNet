@@ -1,10 +1,13 @@
-﻿using Pizza.Net.Screens.Tables;
-using System.Windows.Input;
+﻿using Pizza.Net.Domain;
+using Pizza.Net.Screens.Tables;
 using System;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Windows.Input;
 
 namespace Pizza.Net.Screens.Pages
 {
-    interface IPizzasInOrderCreatorViewModel: IPageViewModel
+    interface IPizzasInOrderCreatorViewModel : IPageViewModel
     {
         ICommand AddPizzaCommands { get; }
         ICommand RemovePizzaCommand { get; }
@@ -15,6 +18,29 @@ namespace Pizza.Net.Screens.Pages
 
     class PizzasInOrderCreatorViewModel : IPizzasInOrderCreatorViewModel
     {
+        public PizzasInOrderCreatorViewModel()
+        {
+            SearchPizzasViewModel = new PizzasTableViewModel();
+            SelectedPizzasViewModel = new PizzasTableViewModel();
+            SizesTableViewModel = new SizesTableViewModel();
+            using (PizzaNetEntities pne = new PizzaNetEntities())
+            {
+
+                var a = pne.Pizzas.Where(p => true);
+                SearchPizzasViewModel.Pizzas.Clear();
+                foreach (var v in a)
+                    SearchPizzasViewModel.Pizzas.Add(new PizzaViewModel(v));
+
+                var b = pne.Sizes.Where(p => true);
+                SizesTableViewModel.Sizes.Clear();
+                foreach (var v in b)
+                    SizesTableViewModel.Sizes.Add(v);
+
+            }
+            Console.WriteLine();
+
+        }
+        public ObservableCollection<Size> sizes = new ObservableCollection<Size>();
         public string PageName
         {
             get
@@ -35,7 +61,7 @@ namespace Pizza.Net.Screens.Pages
                 if (_removePizzaCommand == null)
                 {
                     _removePizzaCommand = new RelayCommand(
-                        param => AddPizza());
+                        param => RemovePizza());
                 }
                 return _removePizzaCommand;
             }
@@ -49,7 +75,7 @@ namespace Pizza.Net.Screens.Pages
                 if (_addPizzaCommands == null)
                 {
                     _addPizzaCommands = new RelayCommand(
-                        param => RemovePizza());
+                        param => AddPizza());
                 }
                 return _addPizzaCommands;
             }
@@ -57,12 +83,28 @@ namespace Pizza.Net.Screens.Pages
 
         private void AddPizza()
         {
+            var item = SearchPizzasViewModel.SelectedPizza;
+            if (item == null)
+                return;
+            var item2 = SizesTableViewModel.SelectedSize;
+            if (item2 == null)
+                return;
+            SearchPizzasViewModel.Pizzas.Remove(item);
+            SelectedPizzasViewModel.Pizzas.Add(item);
+            sizes.Add(item2);
+
 
         }
 
         private void RemovePizza()
         {
-
+            var item = SelectedPizzasViewModel.SelectedPizza;
+            if (item == null)
+                return;
+            sizes.RemoveAt(SelectedPizzasViewModel.Pizzas.IndexOf(item));
+            // SelectedPizzasViewModel.Pizzas.IndexOf(item);
+            SelectedPizzasViewModel.Pizzas.Remove(item);
+            SearchPizzasViewModel.Pizzas.Add(item);
         }
     }
 }

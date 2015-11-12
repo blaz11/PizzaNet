@@ -2,6 +2,7 @@
 using Pizza.Net.Screens.Tables;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
+using System.Linq;
 
 namespace Pizza.Net.Screens.Pages
 {
@@ -12,6 +13,7 @@ namespace Pizza.Net.Screens.Pages
             ClientsTableViewModel = clientsTableViewModel;
             _clientsPageModel = clientsPageModel;
             _ordersTableViewModel = ordersTableViewModel;
+            Search();
         }
 
         public string PageName
@@ -189,10 +191,16 @@ namespace Pizza.Net.Screens.Pages
             if (ClientsTableViewModel.SelectedClient != null)
             {
                 var client = ClientsTableViewModel.SelectedClient;
-                //Janek
                 var orders = new ObservableCollection<Order>();
-
-                var app = new OrdersHistory();
+                using (PizzaNetEntities pne = new PizzaNetEntities())
+                {
+                    var a = pne.Orders.Where(p => p.Client.IDClient == client.IDClient);
+                    foreach (var v in a)
+                        orders.Add(v);
+                }
+                if (orders.Count < 1)
+                    return;
+                    var app = new OrdersHistory();
                 var orderEntities = new ObservableCollection<OrderViewModel>();
                 foreach(var order in orders)
                 {
@@ -207,7 +215,22 @@ namespace Pizza.Net.Screens.Pages
 
         public override void Search()
         {
-            //Janek
+            using (PizzaNetEntities pne = new PizzaNetEntities())
+            {
+                var a = pne.Clients.Where(p =>
+                (p.City == City || City == "" || City==null)&&
+                (p.FirstName == FirstName || FirstName == "" || FirstName == null) &&
+                (p.FlatNumber == FlatNumber || FlatNumber == "" || FlatNumber == null) &&
+                (p.LastName == LastName || LastName == "" || LastName == null) &&
+                (p.PhoneNumber == PhoneNumber || PhoneNumber == "" || PhoneNumber == null) &&
+                (p.PremiseNumber == PremiseNumber || PremiseNumber == "" || PremiseNumber == null) &&
+                (p.Street == Street || Street == "" || Street == null) &&
+                (p.ZipCode == ZipCode || ZipCode == "" || ZipCode == null)
+                );
+                ClientsTableViewModel.Clients.Clear();
+                foreach (var v in a)
+                    ClientsTableViewModel.Clients.Add(v);
+            }
         }
 
         public override void Clear()
@@ -220,46 +243,87 @@ namespace Pizza.Net.Screens.Pages
             FirstName = null;
             Street = null;
             PhoneNumber = null;
+            Search();
         }
 
         public override void Add()
         {
-            //Janek
             if (SearchMode)
             {
-                //Tutaj dodajemy nowy
+                using (PizzaNetEntities pne = new PizzaNetEntities())
+                {
+                    Client cl = new Client();
+                    cl.City = _city;
+                    cl.FirstName = _firstName;
+                    cl.FlatNumber = _flatNumber;
+                    cl.LastName = _lastName;
+                    cl.PhoneNumber = _phoneNumber;
+                    cl.PremiseNumber = _premiseNumber;
+                    cl.Street = _street;
+                    cl.ZipCode = _zipCode;
+                    pne.Clients.Add(cl);
+                    pne.SaveChanges();
+
+                }
+
             }
             else
             {
-                //Tutaj edytujemy
-                SearchMode = true;
+                using (PizzaNetEntities pne = new PizzaNetEntities())
+                {
+                    int id = ClientsTableViewModel.SelectedClient.IDClient;
+                    var original = pne.Clients.Find(id);
+
+                    if (original != null)
+                    {
+                        original.City = City;
+                        original.FirstName = FirstName;
+                        original.FlatNumber = FlatNumber;
+                        original.LastName = LastName;
+                        original.PhoneNumber = PhoneNumber;
+                        original.PremiseNumber = PremiseNumber;
+                        original.Street = Street;
+                        original.ZipCode = ZipCode;
+                        pne.SaveChanges();
+                    }
+                    SearchMode = true;
+                }
             }
+            Clear();
         }
 
         public override void Edit()
         {
-            //Janek
             if (SearchMode)
             {
                 if (ClientsTableViewModel.SelectedClient != null)
                 {
                     SearchMode = false;
                     var client = ClientsTableViewModel.SelectedClient;
-                    FlatNumber = client.FlatNumber;
-                    PremiseNumber = client.PremiseNumber;
-                    City = client.City;
-                    ZipCode = client.ZipCode;
-                    LastName = client.LastName;
-                    FirstName = client.FirstName;
-                    Street = client.Street;
-                    PhoneNumber = client.PhoneNumber;
-                    //Zapisz gdzies clienta tak zebys mogl pozniej porownac
+                    SetActiveClient(client);
                 }
             }
             else
             {
                 SearchMode = true;
             }
+        }
+
+        public void SetActiveClient(Client client)
+        {
+            if (client == null)
+            {
+                Clear();
+                return;
+            }
+            FlatNumber = client.FlatNumber;
+            PremiseNumber = client.PremiseNumber;
+            City = client.City;
+            ZipCode = client.ZipCode;
+            LastName = client.LastName;
+            FirstName = client.FirstName;
+            Street = client.Street;
+            PhoneNumber = client.PhoneNumber;
         }
     }
 }

@@ -15,10 +15,11 @@ namespace Pizza.Net.Screens.Tables
         public ClientsTableViewModel()
         {
             //remove
+            
             Clients.Add(new Client()
             {
-                FirstName = "Dariusz",
-                LastName = "Maciejewski"
+       //         FirstName = "Dariusz",
+       //         LastName = "Maciejewski"
             });
         }
 

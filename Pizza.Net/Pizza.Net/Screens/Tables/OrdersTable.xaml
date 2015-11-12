@@ -7,13 +7,13 @@
              xmlns:designTime="clr-namespace:Pizza.Net.Screens.DesignTimeData"
              mc:Ignorable="d" 
              d:DesignHeight="400"
-             d:DesignWidth="725"
+             d:DesignWidth="635"
              d:DataContext="{d:DesignInstance designTime:OrdersTable,
                                               IsDesignTimeCreatable=True}">
     <DataGrid ItemsSource="{Binding Orders}"
               AutoGenerateColumns="False"
               SelectedItem="{Binding SelectedOrder}"
-              MaxWidth="725"
+              MaxWidth="635"
               IsReadOnly="True">
         <DataGrid.Columns>
             <DataGridTextColumn Binding="{Binding Client}" 

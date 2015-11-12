@@ -29,20 +29,14 @@
                     VerticalAlignment="Bottom">
             <Button Content="Previous step"
                     Command="{Binding PreviousCommand}"
-                    FontSize="20"
-                    IsEnabled="{Binding IsPreviousStepButtonEnabled}"
-                    Margin="10,0,10,0"
-                    Height="30"/>
+                    FontSize="18"
+                    IsEnabled="{Binding IsPreviousStepButtonEnabled}"/>
             <Button Content="{Binding NextStepButtonContent}"
                     Command="{Binding NextStepCommand}"
-                    FontSize="20"
-                    Margin="10,0,10,0"
-                    Height="30"/>
+                    FontSize="18"/>
             <Button Content="Reset"
-                    FontSize="20"
-                    Command="{Binding ResetCommand}"
-                    Margin="10,0,10,0"
-                    Height="30"/>
+                    FontSize="18"
+                    Command="{Binding ResetCommand}"/>
         </StackPanel>
     </StackPanel>
 </UserControl>

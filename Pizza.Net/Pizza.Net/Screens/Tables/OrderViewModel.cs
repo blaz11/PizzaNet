@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace Pizza.Net.Screens.Tables
 {
@@ -9,11 +10,27 @@ namespace Pizza.Net.Screens.Tables
     {
         public OrderViewModel(Order order)
         {
-            Client = order.Client.FirstName + " " + order.Client.LastName;
-            Pizzas = ConvertFromPizzaOrderCollectionToStringCollection(order.PizzaOrders);
-            OrderValue = CalculateTotalOrderValue(order.PizzaOrders);
+            Pizzas = new ObservableCollection<string>();
+            int sum= 0;
+            using (PizzaNetEntities pne = new PizzaNetEntities())
+            {
+                var c= pne.Clients.Find(order.IDClient);
+                Client = c.FirstName + " " + c.LastName;
+
+                var pi = pne.PizzaOrders.Where(p => p.IDOrder == order.IDOrder);
+                foreach(var v in pi)
+                {
+                    Pizzas.Add(pne.Pizzas.Find(v.IDPizza).Name);
+                    sum += (int)pne.Pizzas.Find(v.IDPizza).Price * v.Size.BasePriceMultiplier;
+                }
+            }
+            OrderValue = sum;
+            DateTime myDatetime = new DateTime();
             StartDate = order.StartOrderDate;
-            FinishDate = order.FinishOrderDate;
+            if (DateTime.Compare(order.FinishOrderDate, myDatetime) <= 0)
+                FinishDate = "Not finished";
+            else
+                FinishDate = order.FinishOrderDate.ToLongDateString();
             Order = order;
         }
 
@@ -26,16 +43,6 @@ namespace Pizza.Net.Screens.Tables
                 converted.Add(v);
             }
             return converted;
-        }
-
-        private double CalculateTotalOrderValue(ICollection<PizzaOrder> pizzaOrder)
-        {
-            double result = 0;
-            foreach(var item in pizzaOrder)
-            {
-                result += (double)(item.Pizza.Price * item.Size.BasePriceMultiplier);
-            }
-            return result;
         }
 
         public Order Order { get; private set; }
@@ -91,8 +98,8 @@ namespace Pizza.Net.Screens.Tables
             }
         }
 
-        private DateTime _finishDate;
-        public DateTime FinishDate
+        private string _finishDate;
+        public string FinishDate
         {
             get
             {

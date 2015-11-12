@@ -8,16 +8,19 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" 
              d:DesignWidth="900">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/Screens/Pages/Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
     <StackPanel>
-        <TextBlock Text="Client" 
-                   FontSize="20"
-                   HorizontalAlignment="Center"
-                   VerticalAlignment="Center"/>
+        <TextBlock Text="Client"
+                   Style="{StaticResource TabelLabelTextBlockStyle}"/>
         <tables:ClientsTable DataContext="{Binding Client}"/>
-        <TextBlock Text="Pizzas" 
-                   FontSize="20"
-                   HorizontalAlignment="Center"
-                   VerticalAlignment="Center"/>
+        <TextBlock Text="Pizzas"
+                   Style="{StaticResource TabelLabelTextBlockStyle}"/>
         <tables:PizzasTable DataContext="{Binding Pizzas}"/>
     </StackPanel>
 </UserControl>

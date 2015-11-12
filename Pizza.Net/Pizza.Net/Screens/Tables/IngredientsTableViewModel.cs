@@ -11,6 +11,7 @@ namespace Pizza.Net.Screens.Tables
 
     class IngredientsTableViewModel : ObservableObject, IIngredientsTableViewModel
     {
+
         private ObservableCollection<Ingredient> _ingredients = new ObservableCollection<Ingredient>();
         public ObservableCollection<Ingredient> Ingredients
         {

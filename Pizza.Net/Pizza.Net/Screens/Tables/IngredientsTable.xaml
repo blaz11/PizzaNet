@@ -13,7 +13,8 @@
     <DataGrid ItemsSource="{Binding Ingredients}"
               AutoGenerateColumns="False"
               SelectedItem="{Binding SelectedIngredient}"
-              IsReadOnly="True">
+              IsReadOnly="True"
+              MaxWidth="100">
         <DataGrid.Columns>
             <DataGridTextColumn Binding="{Binding Name}" 
                                     Header="Name" />

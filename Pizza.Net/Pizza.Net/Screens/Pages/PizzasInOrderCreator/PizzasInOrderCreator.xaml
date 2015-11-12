@@ -16,18 +16,14 @@
     </UserControl.Resources>
     <StackPanel>
         <TextBlock Text="Selected pizzas"
-                   HorizontalAlignment="Center"
-                   VerticalAlignment="Center"
-                   FontSize="18"/>
-        <tables:PizzasTable DataContext="{Binding SelectedPizzasTableViewModel}" />
+                   Style="{StaticResource TabelLabelTextBlockStyle}"/>
+        <tables:PizzasTable DataContext="{Binding SelectedPizzasViewModel}" />
         <TextBlock Text="Select pizzas"
-                   HorizontalAlignment="Center"
-                   VerticalAlignment="Center"
-                   FontSize="18"/>
+                   Style="{StaticResource TabelLabelTextBlockStyle}"/>
         <StackPanel Orientation="Horizontal"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Center">
-            <tables:PizzasTable DataContext="{Binding SearchPizzasTableViewModel}" 
+            <tables:PizzasTable DataContext="{Binding SearchPizzasViewModel}" 
                               Margin="20"/>
             <tables:SizesTable DataContext="{Binding SizesTableViewModel}"
                                Margin="20"/> 
@@ -36,11 +32,11 @@
                     VerticalAlignment="Center"
                     HorizontalAlignment="Center">
             <Button Content="Add pizza to order"
-                    Style="{StaticResource PageButtonStyle}"
-                    Command="{Binding AddPizzaCommand}"/>
+                    Command="{Binding AddPizzaCommands}"
+                    FontSize="18"/>
             <Button Content="Remove pizza from order"
-                     Style="{StaticResource PageButtonStyle}"
-                     Command="{Binding RemovePizzaCommand}"/>
+                     Command="{Binding RemovePizzaCommand}"
+                     FontSize="18"/>
         </StackPanel>
     </StackPanel>
 </UserControl>

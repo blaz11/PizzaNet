@@ -1,5 +1,7 @@
-﻿using Pizza.Net.Screens.Tables;
+﻿using Pizza.Net.Domain;
+using Pizza.Net.Screens.Tables;
 using System;
+using System.Linq;
 using System.Windows.Input;
 
 namespace Pizza.Net.Screens.Pages
@@ -18,10 +20,17 @@ namespace Pizza.Net.Screens.Pages
         IPizzasTableViewModel SelectedPizzasViewModel { get; }
         DateTime? ToDate { get; set; }
         uint? ToValue { get; set; }
+        IOrdersTableViewModel UnfinishedOrders { get; }
     }
 
     class OrdersPageViewModel : ObservableObject, IOrdersPageViewModel
     {
+        public IOrdersTableViewModel UnfinishedOrders { get; private set; }
+        public OrdersPageViewModel()
+        {
+            UnfinishedOrders = new OrdersTableViewModel();
+        }
+
         public string PageName
         {
             get
@@ -143,7 +152,7 @@ namespace Pizza.Net.Screens.Pages
                 if (_searchCommand == null)
                 {
                     _searchCommand = new RelayCommand(
-                        param => AddToSelected());
+                        param => Search());
                 }
                 return _searchCommand;
             }
@@ -154,12 +163,12 @@ namespace Pizza.Net.Screens.Pages
         {
             get
             {
-                if (_searchCommand == null)
+                if (_clearCommand == null)
                 {
-                    _searchCommand = new RelayCommand(
+                    _clearCommand = new RelayCommand(
                         param => Clear());
                 }
-                return _searchCommand;
+                return _clearCommand;
             }
         }
 
@@ -193,25 +202,37 @@ namespace Pizza.Net.Screens.Pages
 
         private void AddToSelected()
         {
-            var item = PizzasToSelectViewModel.SelectedPizza;
-            if (item == null)
-                return;
-            PizzasToSelectViewModel.Pizzas.Remove(item);
-            SelectedPizzasViewModel.Pizzas.Add(item);
+            //       var item = PizzasToSelectViewModel.SelectedPizza;
+            //       if (item == null)
+            //            return;
+            //        PizzasToSelectViewModel.Pizzas.Remove(item);
+            //       SelectedPizzasViewModel.Pizzas.Add(item);
         }
 
         private void RemoveFromSelected()
         {
-            var item = PizzasToSelectViewModel.SelectedPizza;
-            if (item == null)
-                return;
-            SelectedPizzasViewModel.Pizzas.Add(item);
-            PizzasToSelectViewModel.Pizzas.Remove(item);
+            //       var item = PizzasToSelectViewModel.SelectedPizza;
+            //       if (item == null)
+            //           return;
+            //      SelectedPizzasViewModel.Pizzas.Add(item);
+            //       PizzasToSelectViewModel.Pizzas.Remove(item);
         }
 
         private void Search()
         {
-            //Janek
+            using (PizzaNetEntities pne = new PizzaNetEntities())
+            {
+                Console.WriteLine(FromDate);
+                var a = pne.Orders.Where(p =>
+                (FromDate == null || DateTime.Compare(p.StartOrderDate, FromDate.Value) >= 0) &&
+                (ToDate == null || DateTime.Compare(p.StartOrderDate, ToDate.Value) < 0) &&
+                (FirstName == null || FirstName == "" || String.Compare(p.Client.FirstName, FirstName) == 0) &&
+                (LastName == null || LastName == "" || String.Compare(p.Client.LastName, LastName) == 0)
+                );
+                UnfinishedOrders.Orders.Clear();
+                foreach (var v in a)
+                    UnfinishedOrders.Orders.Add(new OrderViewModel(v));
+            }
         }
 
         private void Clear()
@@ -220,6 +241,7 @@ namespace Pizza.Net.Screens.Pages
             FromValue = null;
             ToDate = null;
             FromDate = null;
+            Search();
         }
     }
 }

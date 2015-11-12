@@ -1,5 +1,4 @@
-﻿using Pizza.Net.Screens.Tables;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
@@ -17,11 +16,11 @@ namespace Pizza.Net.Screens.Pages
             _nextStepButtonContents.Add("Add pizzas");
             PageViewModels.Add(new OrderSubmitViewModel());
             _nextStepButtonContents.Add("Submit Order");
-
             AdvanceToNextStep();
         }
 
         private List<string> _nextStepButtonContents = new List<string>();
+
         private int _currentStepIndex = 0;
         private IOrderCreatorModel _orderCreatorModel;
 
@@ -34,7 +33,7 @@ namespace Pizza.Net.Screens.Pages
             }
             set
             {
-                if(value != _nextStepButtonContent)
+                if (value != _nextStepButtonContent)
                 {
                     _nextStepButtonContent = value;
                     OnPropertyChanged();
@@ -114,6 +113,7 @@ namespace Pizza.Net.Screens.Pages
 
         private void AdvanceToNextStep()
         {
+            var orderSubmitViewModel = (PageViewModels[2] as OrderSubmitViewModel);
             switch (_currentStepIndex)
             {
                 case 0:
@@ -121,21 +121,28 @@ namespace Pizza.Net.Screens.Pages
                 case 1:
                     var client = (CurrentPageViewModel as ClientsPageViewModel).SelectedClient;
                     if (client == null)
-                        break;
-                    _orderCreatorModel.AddClient(client);
+                    {
+                        return;
+                    }
+                    orderSubmitViewModel.Client.Clients.Clear();
+                    orderSubmitViewModel.Client.Clients.Add(client);
                     break;
+
                 case 2:
-                    //client = (CurrentPageViewModel as ClientsPageViewModel).SelectedClient;
-                    client = null;
-                    ObservableCollection<Domain.Pizza> pizzas = null;
-                    if (pizzas == null)
-                        break;
-                    _orderCreatorModel.AddPizza(pizzas);
-                    (PageViewModels[2] as OrderSubmitViewModel).Client = client;
-                    (PageViewModels[2] as OrderSubmitViewModel).Pizzas = pizzas;
+                    var selectedPizzasViewModel = (CurrentPageViewModel as PizzasInOrderCreatorViewModel).SelectedPizzasViewModel;
+                    if (selectedPizzasViewModel.Pizzas.Count == 0)
+                    {
+                        return;
+                    }
+                    orderSubmitViewModel.Sizes = (CurrentPageViewModel as PizzasInOrderCreatorViewModel).sizes;
+                    ObservableCollection<Domain.Pizza> pizzas = new ObservableCollection<Domain.Pizza>();
+                    foreach (var v in selectedPizzasViewModel.Pizzas)
+                    {
+                        orderSubmitViewModel.Pizzas.Pizzas.Add(v);
+                    }
                     break;
                 case 3:
-                    _orderCreatorModel.SubmitOrder();
+                    orderSubmitViewModel.Submit();
                     Reset();
                     return;
             }
@@ -157,12 +164,17 @@ namespace Pizza.Net.Screens.Pages
             _currentStepIndex--;
             CurrentPageViewModel = PageViewModels[_currentStepIndex - 1];
             NextStepButtonContent = _nextStepButtonContents[_currentStepIndex - 1];
+            if (_currentStepIndex == 1)
+            {
+                var clientsPageViewModel = (CurrentPageViewModel as ClientsPageViewModel);
+                clientsPageViewModel.SetActiveClient(clientsPageViewModel.SelectedClient);
+            }
             ManagePreviousButtonStatus();
         }
 
         private void ManagePreviousButtonStatus()
         {
-            if (_currentStepIndex == 0)
+            if (_currentStepIndex == 1)
                 IsPreviousStepButtonEnabled = false;
             else
                 IsPreviousStepButtonEnabled = true;

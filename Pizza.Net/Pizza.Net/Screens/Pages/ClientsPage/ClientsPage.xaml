@@ -23,31 +23,27 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <TextBlock Text="Clients"
-                   Grid.Row="0"
-                   Style="{StaticResource PageLabelTextBlockStyle}"/>
+                   Style="{StaticResource TitleTextBlockStyle}"
+                   Grid.Row="0"/>
         <StackPanel Grid.Row="1" Orientation="Horizontal"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Center"
                     Margin="20">
             <TextBlock Text="First Name:"
-                       Style="{StaticResource SearchLabelTextBlockStyle}"/>
+                       Style="{StaticResource LabelTextBlockStyle}"/>
             <TextBox Width="120"
-                     Style="{StaticResource SearchTextBoxStyle}"
                      Text="{Binding FirstName, UpdateSourceTrigger=PropertyChanged}"/>
             <TextBlock Text="Last Name:"
-                       Style="{StaticResource SearchLabelTextBlockStyle}"/>
-            <TextBox Width="120"
-                     Style="{StaticResource SearchTextBoxStyle}"       
+                       Style="{StaticResource LabelTextBlockStyle}"/>
+            <TextBox Width="120"       
                      Text="{Binding LastName, UpdateSourceTrigger=PropertyChanged}"/>
             <TextBlock Text="City:"
-                       Style="{StaticResource SearchLabelTextBlockStyle}"/>
-            <TextBox Width="120"
-                     Style="{StaticResource SearchTextBoxStyle}"       
+                       Style="{StaticResource LabelTextBlockStyle}"/>
+            <TextBox Width="120"  
                      Text="{Binding City, UpdateSourceTrigger=PropertyChanged}"/>
             <TextBlock Text="Zip-Code:"
-                       Style="{StaticResource SearchLabelTextBlockStyle}"/>
-            <TextBox Width="120"
-                     Style="{StaticResource SearchTextBoxStyle}"       
+                       Style="{StaticResource LabelTextBlockStyle}"/>
+            <TextBox Width="120"    
                      Text="{Binding ZipCode, UpdateSourceTrigger=PropertyChanged}"/>
         </StackPanel>
         <StackPanel Grid.Row="2" Orientation="Horizontal"
@@ -55,24 +51,20 @@
                     HorizontalAlignment="Center"
                     Margin="20">
             <TextBlock Text="Street:"
-                       Style="{StaticResource SearchLabelTextBlockStyle}"/>
+                       Style="{StaticResource LabelTextBlockStyle}"/>
             <TextBox Width="200"
-                     Style="{StaticResource SearchTextBoxStyle}"
                      Text="{Binding Street, UpdateSourceTrigger=PropertyChanged}"/>
             <TextBlock Text="Premise Number:"
-                       Style="{StaticResource SearchLabelTextBlockStyle}"/>
+                       Style="{StaticResource LabelTextBlockStyle}"/>
             <TextBox Width="60"
-                     Style="{StaticResource SearchTextBoxStyle}"
                      Text="{Binding PremiseNumber, UpdateSourceTrigger=PropertyChanged}"/>
             <TextBlock Text="Flat Number:"
-                       Style="{StaticResource SearchLabelTextBlockStyle}"/>
+                       Style="{StaticResource LabelTextBlockStyle}"/>
             <TextBox Width="60"
-                     Style="{StaticResource SearchTextBoxStyle}"
                      Text="{Binding FlatNumber, UpdateSourceTrigger=PropertyChanged}"/>
             <TextBlock Text="Phone Number:"
-                       Style="{StaticResource SearchLabelTextBlockStyle}"/>
+                       Style="{StaticResource LabelTextBlockStyle}"/>
             <TextBox Width="160"
-                     Style="{StaticResource SearchTextBoxStyle}"
                      Text="{Binding PhoneNumber, UpdateSourceTrigger=PropertyChanged}"/>
         </StackPanel>
         <StackPanel Grid.Row="3" Orientation="Horizontal"
@@ -82,26 +74,27 @@
             <Button Content="Search"
                     Command="{Binding SearchCommand}"
                     IsEnabled="{Binding SearchMode}"
-                    Style="{StaticResource PageButtonStyle}"/>
+                    FontSize="18"/>
             <Button Content="Clear"
                     Command="{Binding ClearCommand}"
                     IsEnabled="{Binding SearchMode}"
-                    Style="{StaticResource PageButtonStyle}"/>
+                    FontSize="18"/>
             <Button Content="{Binding AddButtonContent}"
                     Command="{Binding AddCommand}"
-                    Style="{StaticResource PageButtonStyle}"/>
+                    FontSize="18"/>
             <Button Content="{Binding EditButtonContent}"
                     Command="{Binding EditCommand}"
-                    Style="{StaticResource PageButtonStyle}"/>
+                    FontSize="18"/>
             <Button Content="Show Orders History"
                     IsEnabled="{Binding SearchMode}"
                     Command="{Binding ShowHistoryCommand}"
-                    Style="{StaticResource PageButtonStyle}"/>
+                    FontSize="18"/>
         </StackPanel>
         <tables:ClientsTable Grid.Row="4"
-                            DataContext="{Binding ClientsTableViewModel}"
-                            VerticalAlignment="Top"
-                            HorizontalAlignment="Center"
-                            Margin="20"/>
+                             DataContext="{Binding ClientsTableViewModel}"
+                             VerticalAlignment="Top"
+                             MaxWidth="780"
+                             HorizontalAlignment="Center"
+                             Margin="20"/>
     </Grid>
 </UserControl>

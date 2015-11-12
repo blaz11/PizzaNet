@@ -9,12 +9,12 @@
              d:DesignHeight="1000" d:DesignWidth="1000">
     <UserControl.Resources>
         <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/Screens/Pages/Styles.xaml" />
-            </ResourceDictionary.MergedDictionaries>
             <DataTemplate DataType="{x:Type tables:PizzasTableViewModel}">
                 <tables:PizzasTable />
             </DataTemplate>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/Screens/Pages/Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
@@ -26,21 +26,18 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <TextBlock Text="Pizzas"
-                   Grid.Row="0"
-                   Style="{StaticResource PageLabelTextBlockStyle}"/>
+                   Style="{StaticResource TitleTextBlockStyle}"/>
         <StackPanel Grid.Row="1" Orientation="Horizontal"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Center"
                     Margin="20">
             <TextBlock Text="Name:"
-                       Style="{StaticResource SearchLabelTextBlockStyle}"/>
+                       Style="{StaticResource LabelTextBlockStyle}"/>
             <TextBox Width="120"
-                     Style="{StaticResource SearchTextBoxStyle}"
-                     Text="{Binding FirstName, UpdateSourceTrigger=PropertyChanged}"/>
+                     Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"/>
             <TextBlock Text="Price:"
-                       Style="{StaticResource SearchLabelTextBlockStyle}"/>
+                       Style="{StaticResource LabelTextBlockStyle}"/>
             <TextBox Width="80"
-                     Style="{StaticResource SearchTextBoxStyle}"
                      Text="{Binding Price, UpdateSourceTrigger=PropertyChanged}"/>
         </StackPanel>
         <StackPanel Grid.Row="2"
@@ -48,36 +45,33 @@
                     HorizontalAlignment="Center"
                     Margin="20">
             <TextBlock Text="Ingredients:"
-                       Style="{StaticResource PageLabelTextBlockStyle}"/>
+                       Style="{StaticResource TabelLabelTextBlockStyle}"/>
             <StackPanel VerticalAlignment="Center"
                         HorizontalAlignment="Center"
                         Margin="10"
                         Orientation="Horizontal">
                 <StackPanel>
                     <TextBlock Text="Select Pizzas:"
-                           Style="{StaticResource SearchLabelTextBlockStyle}"/>
+                               Style="{StaticResource TabelLabelTextBlockStyle}"/>
                     <tables:IngredientsTable DataContext="{Binding IngredientsToSelectViewModel}"/>
                 </StackPanel>
                 <Button Content="+"
                         Command="{Binding AddToSelectedCommand}"
-                        Style="{StaticResource PageButtonStyle}"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
                         Height="30"
                         Width="30"/>
                 <Button Content="-"
                         Command="{Binding RemoveFromSelectedCommand}"
-                        Style="{StaticResource PageButtonStyle}"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
                         Height="30"
                         Width="30"/>
                 <StackPanel>
                     <TextBlock Text="Selected Pizzas:"
-                           Style="{StaticResource SearchLabelTextBlockStyle}"/>
+                               Style="{StaticResource TabelLabelTextBlockStyle}"/>
                     <tables:IngredientsTable DataContext="{Binding SelectedIngredientsViewModel}"/>
                 </StackPanel>
-                
             </StackPanel>
         </StackPanel>
         <StackPanel Grid.Row="3" Orientation="Horizontal"
@@ -87,17 +81,17 @@
             <Button Content="Search"
                     Command="{Binding SearchCommand}"
                     IsEnabled="{Binding SearchMode}"
-                    Style="{StaticResource PageButtonStyle}"/>
+                    FontSize="18"/>
             <Button Content="Clear"
                     Command="{Binding ClearCommand}"
                     IsEnabled="{Binding SearchMode}"
-                    Style="{StaticResource PageButtonStyle}"/>
+                    FontSize="18"/>
             <Button Content="{Binding AddButtonContent}"
                     Command="{Binding AddCommand}"
-                    Style="{StaticResource PageButtonStyle}"/>
+                    FontSize="18"/>
             <Button Content="{Binding EditButtonContent}"
                     Command="{Binding EditCommand}"
-                    Style="{StaticResource PageButtonStyle}"/>
+                    FontSize="18"/>
         </StackPanel>
         <ContentControl Grid.Row="4"
                         Content="{Binding PizzasTableViewModel}"

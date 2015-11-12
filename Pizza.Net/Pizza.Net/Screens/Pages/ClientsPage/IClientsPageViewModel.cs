@@ -20,5 +20,6 @@ namespace Pizza.Net.Screens.Pages
         Client SelectedClient { get; }
         string Street { get; set; }
         string ZipCode { get; set; }
+        void SetActiveClient(Client client);
     }
 }

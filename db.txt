@@ -11,46 +11,20 @@ CREATE TABLE [dbo].[Clients] (
     PRIMARY KEY CLUSTERED ([IDClient] ASC)
 );
 
-CREATE TABLE [dbo].[Positions] (
-    [IDPosition] INT          IDENTITY (1, 1) NOT NULL,
-    [Name]       VARCHAR (30) NOT NULL,
-    PRIMARY KEY CLUSTERED ([IDPosition] ASC)
-);
-
-CREATE TABLE [dbo].[Accounts] (
-    [IDAccount] INT          IDENTITY (1, 1) NOT NULL,
-    [Username]  VARCHAR (20) NOT NULL,
-    [Password]  VARCHAR (20) NOT NULL,
-    PRIMARY KEY CLUSTERED ([IDAccount] ASC),
-    UNIQUE NONCLUSTERED ([Username] ASC)
-);
-
-CREATE TABLE [dbo].[Employees] (
-    [IDEmployee] INT          IDENTITY (1, 1) NOT NULL,
-    [IDAccount]  INT          NOT NULL,
-    [LastName]   VARCHAR (30) NOT NULL,
-    [FirstName]  VARCHAR (30) NOT NULL,
-    [IDPosition] INT          NOT NULL,
-    PRIMARY KEY CLUSTERED ([IDEmployee] ASC),
-    FOREIGN KEY ([IDAccount]) REFERENCES [dbo].[Accounts] ([IDAccount]),
-    FOREIGN KEY ([IDPosition]) REFERENCES [dbo].[Positions] ([IDPosition])
-);
-
 CREATE TABLE [dbo].[Orders] (
     [IDOrder]         INT  IDENTITY (1, 1) NOT NULL,
     [IDClient]        INT  NOT NULL,
-    [IDEmployee]      INT  NOT NULL,
     [StartOrderDate]  DATE NOT NULL,
     [FinishOrderDate] DATE NOT NULL,
     PRIMARY KEY CLUSTERED ([IDOrder] ASC),
     FOREIGN KEY ([IDClient]) REFERENCES [dbo].[Clients] ([IDClient]),
-    FOREIGN KEY ([IDEmployee]) REFERENCES [dbo].[Employees] ([IDEmployee])
 );
 
 CREATE TABLE [dbo].[Sizes] (
     [IDSize]     INT          IDENTITY (1, 1) NOT NULL,
     [Name]       VARCHAR (20) NOT NULL,
     [RadiusInCm] SMALLINT     NOT NULL,
+	[BasePriceMultiplier] SMALLINT NOT NULL,
     PRIMARY KEY CLUSTERED ([IDSize] ASC),
     UNIQUE NONCLUSTERED ([Name] ASC)
 );

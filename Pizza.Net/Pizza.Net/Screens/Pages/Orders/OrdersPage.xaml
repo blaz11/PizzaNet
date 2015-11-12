@@ -24,28 +24,26 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <TextBlock Text="Orders"
-                   Grid.Row="0"
-                   Style="{StaticResource PageLabelTextBlockStyle}"/>
+                   Style="{StaticResource TitleTextBlockStyle}"
+                   Grid.Row="0"/>
         <StackPanel Grid.Row="1" Orientation="Horizontal"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Center"
                     Margin="20">
             <TextBlock Text="Client First Name:"
-                       Style="{StaticResource SearchLabelTextBlockStyle}"/>
+                       Style="{StaticResource LabelTextBlockStyle}"/>
             <TextBox Width="120"
-                     Style="{StaticResource SearchTextBoxStyle}"
                      Text="{Binding FirstName, UpdateSourceTrigger=PropertyChanged}"/>
             <TextBlock Text="Client Last Name:"
-                       Style="{StaticResource SearchLabelTextBlockStyle}"/>
-            <TextBox Width="120"
-                     Style="{StaticResource SearchTextBoxStyle}"       
+                       Style="{StaticResource LabelTextBlockStyle}"/>
+            <TextBox Width="120"      
                      Text="{Binding LastName, UpdateSourceTrigger=PropertyChanged}"/>
             <TextBlock Text="From:"
-                       Style="{StaticResource SearchLabelTextBlockStyle}"/>
+                       Style="{StaticResource LabelTextBlockStyle}"/>
             <DatePicker Width="120"
                      Text="{Binding FromDate, UpdateSourceTrigger=PropertyChanged}"/>
             <TextBlock Text="To:"
-                       Style="{StaticResource SearchLabelTextBlockStyle}"/>
+                       Style="{StaticResource LabelTextBlockStyle}"/>
             <DatePicker Width="120"     
                      Text="{Binding ToDate, UpdateSourceTrigger=PropertyChanged}"/>
         </StackPanel>
@@ -54,35 +52,31 @@
                     HorizontalAlignment="Center"
                     Margin="20">
             <TextBlock Text="From:"
-                       Style="{StaticResource SearchLabelTextBlockStyle}"/>
+                       Style="{StaticResource LabelTextBlockStyle}"/>
             <TextBox Width="120"
-                     Style="{StaticResource SearchTextBoxStyle}"       
                      Text="{Binding FromValue, UpdateSourceTrigger=PropertyChanged}"/>
             <TextBlock Text="$"
-                       Style="{StaticResource SearchLabelTextBlockStyle}"/>
-            <TextBlock Text="From:"
-                       Style="{StaticResource SearchLabelTextBlockStyle}"/>
-            <TextBox Width="120"
-                     Style="{StaticResource SearchTextBoxStyle}"       
+                       Style="{StaticResource LabelTextBlockStyle}"/>
+            <TextBlock Text="To:"
+                       Style="{StaticResource LabelTextBlockStyle}"/>
+            <TextBox Width="120"    
                      Text="{Binding ToValue, UpdateSourceTrigger=PropertyChanged}"/>
             <TextBlock Text="$"
-                       Style="{StaticResource SearchLabelTextBlockStyle}"/>
+                       Style="{StaticResource LabelTextBlockStyle}"/>
         </StackPanel>
         <StackPanel Grid.Row="3" Orientation="Vertical"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Center"
                     Margin="20">
-            <TextBlock Text="Ingredients:"
-                       Style="{StaticResource PageLabelTextBlockStyle}"/>
             <StackPanel VerticalAlignment="Center"
                         HorizontalAlignment="Center"
                         Margin="10"
                         Orientation="Horizontal">
-                <StackPanel>
+                <!--StackPanel>
                     <TextBlock Text="Select Ingredient:"
                            Style="{StaticResource SearchLabelTextBlockStyle}"/>
                     <tables:PizzasTable DataContext="{Binding PizzasToSelectViewModel}"/>
-                </StackPanel>
+                </>
                 <Button Content="+"
                         Command="{Binding AddToSelectedCommand}"
                         Style="{StaticResource PageButtonStyle}"
@@ -101,7 +95,8 @@
                     <TextBlock Text="Selected Ingredients:"
                            Style="{StaticResource SearchLabelTextBlockStyle}"/>
                     <tables:PizzasTable DataContext="{Binding SelectedPizzasViewModel}"/>
-                </StackPanel>
+                </StackPanel-->
+                <tables:OrdersTable DataContext="{Binding UnfinishedOrders}" />
             </StackPanel>
             <StackPanel Grid.Row="4" Orientation="Vertical"
                     VerticalAlignment="Center"
@@ -113,11 +108,11 @@
                     HorizontalAlignment="Center"
                     Margin="20">
                 <Button Content="Search"
-                    Command="{Binding SearchCommand}"
-                    Style="{StaticResource PageButtonStyle}"/>
+                        Command="{Binding SearchCommand}"
+                        FontSize="18"/>
                 <Button Content="Clear"
-                    Command="{Binding ClearCommand}"
-                    Style="{StaticResource PageButtonStyle}"/>
+                        Command="{Binding ClearCommand}"
+                        FontSize="18"/>
             </StackPanel>
             <tables:OrdersTable Grid.Row="6"
                         Content="{Binding ClientsTableViewModel}"

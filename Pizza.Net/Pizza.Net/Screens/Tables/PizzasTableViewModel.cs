@@ -1,4 +1,10 @@
 ﻿using System.Collections.ObjectModel;
+using Pizza.Net.Domain;
+using Pizza.Net.Screens.Tables;
+using System.Collections.Generic;
+using System.Windows.Input;
+using System.Linq;
+using System.Data.Entity;
 
 namespace Pizza.Net.Screens.Tables
 {
@@ -10,6 +16,7 @@ namespace Pizza.Net.Screens.Tables
 
     class PizzasTableViewModel : ObservableObject, IPizzasTableViewModel
     {
+
         private ObservableCollection<PizzaViewModel> _pizzas = new ObservableCollection<PizzaViewModel>();
         public ObservableCollection<PizzaViewModel> Pizzas
         {

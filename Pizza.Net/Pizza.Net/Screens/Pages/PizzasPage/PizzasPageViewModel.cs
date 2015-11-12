@@ -2,6 +2,10 @@
 using Pizza.Net.Screens.Tables;
 using System.Collections.Generic;
 using System.Windows.Input;
+using System.Linq;
+using System.Data.Entity.Core.Objects;
+using System.Data.Entity;
+
 
 namespace Pizza.Net.Screens.Pages
 {
@@ -13,7 +17,14 @@ namespace Pizza.Net.Screens.Pages
             //Janek wszystkie ingredients z bazy danych dodaj do IngredientsToSelectViewModel i przy clearze zresetuj je.
             SelectedIngredientsViewModel = new IngredientsTableViewModel();
             IngredientsToSelectViewModel = new IngredientsTableViewModel();
-            Ingredient i1 = new Ingredient();
+            using (PizzaNetEntities pne = new PizzaNetEntities())
+            {
+                var ing = pne.Ingredients.Where(p => true);
+                foreach (var v in ing)
+                    IngredientsToSelectViewModel.Ingredients.Add(v);
+            }
+            Search();
+     /*       Ingredient i1 = new Ingredient();
             i1.Name = "Cheese";
             SelectedIngredientsViewModel.Ingredients.Add(i1);
             i1 = new Ingredient();
@@ -47,7 +58,7 @@ namespace Pizza.Net.Screens.Pages
             s = new PizzaIngredient();
             s.Ingredient = i1;
             p.PizzaIngredients.Add(s);
-            PizzasTableViewModel.Pizzas.Add(new PizzaViewModel(p));
+            PizzasTableViewModel.Pizzas.Add(new PizzaViewModel(p));*/
         }
 
         public string PageName
@@ -75,8 +86,8 @@ namespace Pizza.Net.Screens.Pages
             }
         }
 
-        private uint? _price;
-        public uint? Price
+        private decimal _price;
+        public decimal Price
         {
             get
             {
@@ -144,27 +155,112 @@ namespace Pizza.Net.Screens.Pages
 
         public override void Search()
         {
-            //Janek
+            //Janek TODO szukanie po cenie i skladnikach
+            using (PizzaNetEntities pne = new PizzaNetEntities())
+            {
+           
+                var a = pne.Pizzas.Where(p =>
+                (p.Name == Name || Name == "" || Name == null) &&
+                (Price == 0 || p.Price == Price)
+                );
+                List<Domain.Pizza> lp = new List<Domain.Pizza>();
+                foreach(var v in a)
+                {
+                    var b = pne.PizzaIngredients.Where(x => x.IDPizza == v.IDPizza).Select(y => y.IDIngredient).ToList();
+                    foreach(var v1 in SelectedIngredientsViewModel.Ingredients)
+                    {
+                        if (!b.Contains(v1.IDIngredient))
+                            lp.Add(v);
+                    }
+
+                }
+                PizzasTableViewModel.Pizzas.Clear();
+                foreach (var v in a)
+                    if(!lp.Contains(v))
+                        PizzasTableViewModel.Pizzas.Add(new PizzaViewModel(v));
+ 
+            }
         }
 
         public override void Clear()
         {
-            Name = null;
+            Name = "";
+            Price = 0;
+                foreach (var v in SelectedIngredientsViewModel.Ingredients)
+                {
+                    IngredientsToSelectViewModel.Ingredients.Add(v);
+                    
+                }
+                SelectedIngredientsViewModel.Ingredients.Clear();
+            Search();
             //Janek
         }
 
         public override void Add()
         {
-            //Janek
+
+
             if (SearchMode)
             {
                 //Tutaj dodajemy nowy
+                //Janek
+                using (PizzaNetEntities pne = new PizzaNetEntities())
+                {
+                    Domain.Pizza p = new Domain.Pizza();
+                    p.Name = Name;
+                    p.Price = (decimal)Price;
+                    pne.Pizzas.Add(p);
+                    pne.SaveChanges();
+                    System.Console.WriteLine(p.IDPizza);
+                    foreach (var v in SelectedIngredientsViewModel.Ingredients)
+                    {
+                        //         System.Console.WriteLine(v);
+                        pne.PizzaIngredients.Add(new PizzaIngredient
+                        {
+                            Pizza = pne.Pizzas.Find(p.IDPizza),
+                            Ingredient = pne.Ingredients.Find(v.IDIngredient)
+                        });
+                    }
+                    pne.SaveChanges();
+                    //         System.Console.WriteLine();
+
+                }
             }
             else
             {
                 //Tutaj edytujemy
+                using (PizzaNetEntities pne = new PizzaNetEntities())
+                {
+                    int id = PizzasTableViewModel.SelectedPizza.Pizza.IDPizza;
+                    var original = pne.Pizzas.Find(id);
+
+                    if (original != null)
+                    {
+                        original.Name = Name;
+                        original.Price = (decimal)Price;
+                        List<PizzaIngredient> p = new List<PizzaIngredient>();
+                        foreach(var v in original.PizzaIngredients)
+                        {
+                            p.Add(v);
+                           
+                        }
+                        pne.PizzaIngredients.RemoveRange(p);
+                        foreach (var v in SelectedIngredientsViewModel.Ingredients)
+                        {
+                            //         System.Console.WriteLine(v);
+                            pne.PizzaIngredients.Add(new PizzaIngredient
+                            {
+                                Pizza = pne.Pizzas.Find(id),
+                                Ingredient = pne.Ingredients.Find(v.IDIngredient)
+                            });
+                        }
+                        pne.SaveChanges();
+                    }
+                    SearchMode = true;
+                }
                 SearchMode = true;
             }
+            Clear();
         }
 
         public override void Edit()
