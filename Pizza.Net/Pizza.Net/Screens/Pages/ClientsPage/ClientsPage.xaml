@@ -32,11 +32,11 @@
             <TextBlock Text="First Name:"
                        Style="{StaticResource LabelTextBlockStyle}"/>
             <TextBox Width="120"
-                     Text="{Binding FirstName, UpdateSourceTrigger=PropertyChanged}"/>
+                     Text="{Binding FirstName,ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"/>
             <TextBlock Text="Last Name:"
                        Style="{StaticResource LabelTextBlockStyle}"/>
             <TextBox Width="120"       
-                     Text="{Binding LastName, UpdateSourceTrigger=PropertyChanged}"/>
+                     Text="{Binding LastName,ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"/>
             <TextBlock Text="City:"
                        Style="{StaticResource LabelTextBlockStyle}"/>
             <TextBox Width="120"  
@@ -73,7 +73,7 @@
                     Margin="20">
             <Button Content="Search"
                     Command="{Binding SearchCommand}"
-                    IsEnabled="{Binding SearchMode}"
+                    IsEnabled="{Binding Path=AllPropertiesValid}"
                     FontSize="18"/>
             <Button Content="Clear"
                     Command="{Binding ClearCommand}"

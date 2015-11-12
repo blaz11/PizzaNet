@@ -41,11 +41,11 @@
             <TextBlock Text="From:"
                        Style="{StaticResource LabelTextBlockStyle}"/>
             <DatePicker Width="120"
-                     Text="{Binding FromDate, UpdateSourceTrigger=PropertyChanged}"/>
+                     SelectedDate="{Binding FromDate, UpdateSourceTrigger=PropertyChanged}"/>
             <TextBlock Text="To:"
                        Style="{StaticResource LabelTextBlockStyle}"/>
             <DatePicker Width="120"     
-                     Text="{Binding ToDate, UpdateSourceTrigger=PropertyChanged}"/>
+                     SelectedDate="{Binding ToDate, UpdateSourceTrigger=PropertyChanged}"/>
         </StackPanel>
         <StackPanel Grid.Row="2" Orientation="Horizontal"
                     VerticalAlignment="Center"

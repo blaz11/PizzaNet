@@ -42,7 +42,8 @@ namespace Pizza.Net.Screens
             var clientsTableViewModel = new ClientsTableViewModel();
             var clientsPageModel = new ClientsPageModel();
             var ordersTableViewModel = new OrdersTableViewModel();
-            var clientsPageViewModel = new ClientsPageViewModel(clientsTableViewModel, clientsPageModel, ordersTableViewModel);
+            var clientPageModel = new ClientsPageModel();
+            var clientsPageViewModel = new ClientsPageViewModel(clientsTableViewModel, clientsPageModel, ordersTableViewModel, clientPageModel);
             var ordersCreatorModel = new OrderCreatorModel();
             var pizzasTableViewModel = new PizzasTableViewModel();
             var pizzasPageViewModel = new PizzasPageViewModel(pizzasTableViewModel);

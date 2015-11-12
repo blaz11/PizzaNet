@@ -223,15 +223,26 @@ namespace Pizza.Net.Screens.Pages
             using (PizzaNetEntities pne = new PizzaNetEntities())
             {
                 Console.WriteLine(FromDate);
+                Console.WriteLine(ToDate);
                 var a = pne.Orders.Where(p =>
                 (FromDate == null || DateTime.Compare(p.StartOrderDate, FromDate.Value) >= 0) &&
-                (ToDate == null || DateTime.Compare(p.StartOrderDate, ToDate.Value) < 0) &&
+                (ToDate == null || DateTime.Compare(p.StartOrderDate, ToDate.Value) <= 0) &&
                 (FirstName == null || FirstName == "" || String.Compare(p.Client.FirstName, FirstName) == 0) &&
                 (LastName == null || LastName == "" || String.Compare(p.Client.LastName, LastName) == 0)
                 );
                 UnfinishedOrders.Orders.Clear();
                 foreach (var v in a)
-                    UnfinishedOrders.Orders.Add(new OrderViewModel(v));
+                {
+                    int sum = 0;
+                    var pi = pne.PizzaOrders.Where(p => p.IDOrder == v.IDOrder);
+                    foreach (var v1 in pi)
+                    {
+                        sum += (int)pne.Pizzas.Find(v1.IDPizza).Price * v1.Size.BasePriceMultiplier;
+                    }
+                    if((!ToValue.HasValue || sum<ToValue.Value) && (!FromValue.HasValue || sum>FromValue.Value))
+                        UnfinishedOrders.Orders.Add(new OrderViewModel(v));
+                }
+                    
             }
         }
 
@@ -239,8 +250,8 @@ namespace Pizza.Net.Screens.Pages
         {
             ToValue = null;
             FromValue = null;
-            ToDate = null;
-            FromDate = null;
+            ToDate = DateTime.Now;
+            FromDate = DateTime.Now;
             Search();
         }
     }
