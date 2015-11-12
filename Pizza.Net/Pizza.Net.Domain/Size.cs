@@ -17,14 +17,15 @@ namespace Pizza.Net.Domain
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Size()
         {
-            this.Pizza_Order = new HashSet<Pizza_Order>();
+            this.PizzaOrders = new HashSet<PizzaOrder>();
         }
     
-        public int ID_Size { get; set; }
+        public int IDSize { get; set; }
         public string Name { get; set; }
-        public short Radius_In_Cm { get; set; }
+        public short RadiusInCm { get; set; }
+        public short BasePriceMultiplier { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Pizza_Order> Pizza_Order { get; set; }
+        public virtual ICollection<PizzaOrder> PizzaOrders { get; set; }
     }
 }

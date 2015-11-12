@@ -12,8 +12,6 @@ namespace Pizza.Net.Domain.DatabaseAccess
 
         public bool IsDisposed { get; private set; }
 
-        private object _transcationLock = new object();
-
         public void ExecuteInTransaction(Action<DbOperationContext> operation)
         {
             ExecuteInTransaction(dbOperationContext =>
@@ -25,22 +23,19 @@ namespace Pizza.Net.Domain.DatabaseAccess
 
         public T ExecuteInTransaction<T>(Func<DbOperationContext, T> operation)
         {
-            lock (_transcationLock)
+            using (var transactionScope = new TransactionScope())
             {
-                using (var transactionScope = new TransactionScope())
+                using (var entities = new PizzaNetEntities())
                 {
-                    using (var entities = new PizzaNetDatabaseEntities())
+                    using (var dbOperationContext = new DbOperationContext(entities))
                     {
-                        using (var dbOperationContext = new DbOperationContext(entities))
+                        T result = operation(dbOperationContext);
+                        if (!dbOperationContext.RequestRollback)
                         {
-                            T result = operation(dbOperationContext);
-                            if (!dbOperationContext.RequestRollback)
-                            {
-                                entities.SaveChanges();
-                                transactionScope.Complete();
-                            }
-                            return result;
+                            entities.SaveChanges();
+                            transactionScope.Complete();
                         }
+                        return result;
                     }
                 }
             }

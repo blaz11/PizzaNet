@@ -1,0 +1,100 @@
+﻿<UserControl x:Class="Pizza.Net.Screens.Pages.ClientsPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Pizza.Net.Screens.Pages"
+             xmlns:tables="clr-namespace:Pizza.Net.Screens.Tables"
+             mc:Ignorable="d" 
+             d:DesignHeight="1000" d:DesignWidth="1000">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/Screens/Pages/Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Text="Clients"
+                   Style="{StaticResource TitleTextBlockStyle}"
+                   Grid.Row="0"/>
+        <StackPanel Grid.Row="1" Orientation="Horizontal"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    Margin="20">
+            <TextBlock Text="First Name:"
+                       Style="{StaticResource LabelTextBlockStyle}"/>
+            <TextBox Width="120"
+                     Text="{Binding FirstName, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBlock Text="Last Name:"
+                       Style="{StaticResource LabelTextBlockStyle}"/>
+            <TextBox Width="120"       
+                     Text="{Binding LastName, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBlock Text="City:"
+                       Style="{StaticResource LabelTextBlockStyle}"/>
+            <TextBox Width="120"  
+                     Text="{Binding City, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBlock Text="Zip-Code:"
+                       Style="{StaticResource LabelTextBlockStyle}"/>
+            <TextBox Width="120"    
+                     Text="{Binding ZipCode, UpdateSourceTrigger=PropertyChanged}"/>
+        </StackPanel>
+        <StackPanel Grid.Row="2" Orientation="Horizontal"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    Margin="20">
+            <TextBlock Text="Street:"
+                       Style="{StaticResource LabelTextBlockStyle}"/>
+            <TextBox Width="200"
+                     Text="{Binding Street, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBlock Text="Premise Number:"
+                       Style="{StaticResource LabelTextBlockStyle}"/>
+            <TextBox Width="60"
+                     Text="{Binding PremiseNumber, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBlock Text="Flat Number:"
+                       Style="{StaticResource LabelTextBlockStyle}"/>
+            <TextBox Width="60"
+                     Text="{Binding FlatNumber, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBlock Text="Phone Number:"
+                       Style="{StaticResource LabelTextBlockStyle}"/>
+            <TextBox Width="160"
+                     Text="{Binding PhoneNumber, UpdateSourceTrigger=PropertyChanged}"/>
+        </StackPanel>
+        <StackPanel Grid.Row="3" Orientation="Horizontal"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    Margin="20">
+            <Button Content="Search"
+                    Command="{Binding SearchCommand}"
+                    IsEnabled="{Binding SearchMode}"
+                    FontSize="18"/>
+            <Button Content="Clear"
+                    Command="{Binding ClearCommand}"
+                    IsEnabled="{Binding SearchMode}"
+                    FontSize="18"/>
+            <Button Content="{Binding AddButtonContent}"
+                    Command="{Binding AddCommand}"
+                    FontSize="18"/>
+            <Button Content="{Binding EditButtonContent}"
+                    Command="{Binding EditCommand}"
+                    FontSize="18"/>
+            <Button Content="Show Orders History"
+                    IsEnabled="{Binding SearchMode}"
+                    Command="{Binding ShowHistoryCommand}"
+                    FontSize="18"/>
+        </StackPanel>
+        <tables:ClientsTable Grid.Row="4"
+                             DataContext="{Binding ClientsTableViewModel}"
+                             VerticalAlignment="Top"
+                             MaxWidth="780"
+                             HorizontalAlignment="Center"
+                             Margin="20"/>
+    </Grid>
+</UserControl>

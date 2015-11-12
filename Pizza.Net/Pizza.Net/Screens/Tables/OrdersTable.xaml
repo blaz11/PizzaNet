@@ -1,0 +1,36 @@
+﻿<UserControl x:Class="Pizza.Net.Screens.Tables.OrdersTable"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Pizza.Net.Screens.Tables"
+             xmlns:designTime="clr-namespace:Pizza.Net.Screens.DesignTimeData"
+             mc:Ignorable="d" 
+             d:DesignHeight="400"
+             d:DesignWidth="635"
+             d:DataContext="{d:DesignInstance designTime:OrdersTable,
+                                              IsDesignTimeCreatable=True}">
+    <DataGrid ItemsSource="{Binding Orders}"
+              AutoGenerateColumns="False"
+              SelectedItem="{Binding SelectedOrder}"
+              MaxWidth="635"
+              IsReadOnly="True">
+        <DataGrid.Columns>
+            <DataGridTextColumn Binding="{Binding Client}" 
+                                Header="Client" />
+            <DataGridTemplateColumn Header="Pizzas">
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <ItemsControl ItemsSource="{Binding Pizzas}"/>
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+            <DataGridTextColumn Binding="{Binding StartDate}" 
+                                Header="Start Date" />
+            <DataGridTextColumn Binding="{Binding FinishDate}" 
+                                Header="Finish Date" />
+            <DataGridTextColumn Binding="{Binding OrderValue}" 
+                                Header="Order Value" />
+        </DataGrid.Columns>
+    </DataGrid>
+</UserControl>
