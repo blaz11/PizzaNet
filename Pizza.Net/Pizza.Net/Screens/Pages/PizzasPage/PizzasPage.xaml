@@ -51,7 +51,7 @@
                         Margin="10"
                         Orientation="Horizontal">
                 <StackPanel>
-                    <TextBlock Text="Select Pizzas:"
+                    <TextBlock Text="Select Ingredients:"
                                Style="{StaticResource TabelLabelTextBlockStyle}"/>
                     <tables:IngredientsTable DataContext="{Binding IngredientsToSelectViewModel}"/>
                 </StackPanel>
@@ -68,7 +68,7 @@
                         Height="30"
                         Width="30"/>
                 <StackPanel>
-                    <TextBlock Text="Selected Pizzas:"
+                    <TextBlock Text="Selected Ingredients:"
                                Style="{StaticResource TabelLabelTextBlockStyle}"/>
                     <tables:IngredientsTable DataContext="{Binding SelectedIngredientsViewModel}"/>
                 </StackPanel>

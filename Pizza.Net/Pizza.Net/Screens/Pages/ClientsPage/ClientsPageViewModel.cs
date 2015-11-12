@@ -93,7 +93,7 @@ namespace Pizza.Net.Screens.Pages
             }
             set
             {
-                if(value != currentClient.FirstName)
+                if(value != _firstName)
                 {
                     currentClient.FirstName = value;
                     base.OnPropertyChanged();
@@ -250,9 +250,9 @@ namespace Pizza.Net.Screens.Pages
                 var orders = currentClient.ShowHistory(client);
                 if (orders.Count < 1)
                     return;
-                    var app = new OrdersHistory();
+                var app = new OrdersHistory();
                 var orderEntities = new ObservableCollection<OrderViewModel>();
-                foreach(var order in orders)
+                foreach (var order in orders)
                 {
                     orderEntities.Add(new OrderViewModel(order));
                 }
@@ -289,8 +289,6 @@ namespace Pizza.Net.Screens.Pages
             if (SearchMode)
             {
                 currentClient.Add();
-
-
             }
             else
             {
