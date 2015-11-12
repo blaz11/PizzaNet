@@ -26,11 +26,11 @@ namespace Pizza.Net.Screens.Tables
             }
             OrderValue = sum;
             DateTime myDatetime = new DateTime();
-            StartDate = order.StartOrderDate;
+            StartDate = order.StartOrderDate.ToString() ;
             if (DateTime.Compare(order.FinishOrderDate, myDatetime) <= 0)
                 FinishDate = "Not finished";
             else
-                FinishDate = order.FinishOrderDate.ToLongDateString();
+                FinishDate = order.FinishOrderDate.ToString();
             Order = order;
         }
 
@@ -81,8 +81,8 @@ namespace Pizza.Net.Screens.Tables
             }
         }
 
-        private DateTime _startDate;
-        public DateTime StartDate
+        private string _startDate;
+        public string StartDate
         {
             get
             {

@@ -3,9 +3,6 @@ using Pizza.Net.Screens.Tables;
 using System.Collections.Generic;
 using System.Windows.Input;
 using System.Linq;
-using System.Data.Entity.Core.Objects;
-using System.Data.Entity;
-
 
 namespace Pizza.Net.Screens.Pages
 {
@@ -14,7 +11,6 @@ namespace Pizza.Net.Screens.Pages
         public PizzasPageViewModel(IPizzasTableViewModel _pizzasTableViewModel)
         {
             PizzasTableViewModel = _pizzasTableViewModel;
-            //Janek wszystkie ingredients z bazy danych dodaj do IngredientsToSelectViewModel i przy clearze zresetuj je.
             SelectedIngredientsViewModel = new IngredientsTableViewModel();
             IngredientsToSelectViewModel = new IngredientsTableViewModel();
             using (PizzaNetEntities pne = new PizzaNetEntities())
@@ -24,41 +20,6 @@ namespace Pizza.Net.Screens.Pages
                     IngredientsToSelectViewModel.Ingredients.Add(v);
             }
             Search();
-     /*       Ingredient i1 = new Ingredient();
-            i1.Name = "Cheese";
-            SelectedIngredientsViewModel.Ingredients.Add(i1);
-            i1 = new Ingredient();
-            i1.Name = "Ham";
-            SelectedIngredientsViewModel.Ingredients.Add(i1);
-            i1 = new Ingredient();
-            i1.Name = "Pineapple";
-            IngredientsToSelectViewModel.Ingredients.Add(i1);
-            i1 = new Ingredient();
-            i1.Name = "Salami";
-            IngredientsToSelectViewModel.Ingredients.Add(i1);
-            i1 = new Ingredient();
-            i1.Name = "Grilled chicken";
-            IngredientsToSelectViewModel.Ingredients.Add(i1);
-            i1 = new Ingredient();
-            i1.Name = "Tuna";
-            IngredientsToSelectViewModel.Ingredients.Add(i1);
-            i1 = new Ingredient();
-            i1.Name = "Tomato";
-            IngredientsToSelectViewModel.Ingredients.Add(i1);
-            Pizza.Net.Domain.Pizza p = new Domain.Pizza();
-            p.Name = "Cheese pizza";
-            p.Price = 23;
-            i1 = new Ingredient();
-            i1.Name = "Cheese";
-            var s = new PizzaIngredient();
-            s.Ingredient = i1;
-            p.PizzaIngredients.Add(s);
-            i1 = new Ingredient();
-            i1.Name = "Salami";
-            s = new PizzaIngredient();
-            s.Ingredient = i1;
-            p.PizzaIngredients.Add(s);
-            PizzasTableViewModel.Pizzas.Add(new PizzaViewModel(p));*/
         }
 
         public string PageName
@@ -155,19 +116,18 @@ namespace Pizza.Net.Screens.Pages
 
         public override void Search()
         {
-            //Janek TODO szukanie po cenie i skladnikach
             using (PizzaNetEntities pne = new PizzaNetEntities())
             {
-           
+
                 var a = pne.Pizzas.Where(p =>
                 (p.Name == Name || Name == "" || Name == null) &&
                 (Price == 0 || p.Price == Price)
                 );
                 List<Domain.Pizza> lp = new List<Domain.Pizza>();
-                foreach(var v in a)
+                foreach (var v in a)
                 {
                     var b = pne.PizzaIngredients.Where(x => x.IDPizza == v.IDPizza).Select(y => y.IDIngredient).ToList();
-                    foreach(var v1 in SelectedIngredientsViewModel.Ingredients)
+                    foreach (var v1 in SelectedIngredientsViewModel.Ingredients)
                     {
                         if (!b.Contains(v1.IDIngredient))
                             lp.Add(v);
@@ -176,9 +136,9 @@ namespace Pizza.Net.Screens.Pages
                 }
                 PizzasTableViewModel.Pizzas.Clear();
                 foreach (var v in a)
-                    if(!lp.Contains(v))
+                    if (!lp.Contains(v))
                         PizzasTableViewModel.Pizzas.Add(new PizzaViewModel(v));
- 
+
             }
         }
 
@@ -186,24 +146,21 @@ namespace Pizza.Net.Screens.Pages
         {
             Name = "";
             Price = 0;
-                foreach (var v in SelectedIngredientsViewModel.Ingredients)
-                {
-                    IngredientsToSelectViewModel.Ingredients.Add(v);
-                    
-                }
-                SelectedIngredientsViewModel.Ingredients.Clear();
+            foreach (var v in SelectedIngredientsViewModel.Ingredients)
+            {
+                IngredientsToSelectViewModel.Ingredients.Add(v);
+
+            }
+            SelectedIngredientsViewModel.Ingredients.Clear();
             Search();
-            //Janek
         }
+
+        private int _editedPizzaId;
 
         public override void Add()
         {
-
-
             if (SearchMode)
             {
-                //Tutaj dodajemy nowy
-                //Janek
                 using (PizzaNetEntities pne = new PizzaNetEntities())
                 {
                     Domain.Pizza p = new Domain.Pizza();
@@ -211,10 +168,8 @@ namespace Pizza.Net.Screens.Pages
                     p.Price = (decimal)Price;
                     pne.Pizzas.Add(p);
                     pne.SaveChanges();
-                    System.Console.WriteLine(p.IDPizza);
                     foreach (var v in SelectedIngredientsViewModel.Ingredients)
                     {
-                        //         System.Console.WriteLine(v);
                         pne.PizzaIngredients.Add(new PizzaIngredient
                         {
                             Pizza = pne.Pizzas.Find(p.IDPizza),
@@ -222,35 +177,29 @@ namespace Pizza.Net.Screens.Pages
                         });
                     }
                     pne.SaveChanges();
-                    //         System.Console.WriteLine();
-
                 }
             }
             else
             {
-                //Tutaj edytujemy
                 using (PizzaNetEntities pne = new PizzaNetEntities())
                 {
-                    int id = PizzasTableViewModel.SelectedPizza.Pizza.IDPizza;
-                    var original = pne.Pizzas.Find(id);
-
+                    var original = pne.Pizzas.Find(_editedPizzaId);
                     if (original != null)
                     {
                         original.Name = Name;
                         original.Price = (decimal)Price;
                         List<PizzaIngredient> p = new List<PizzaIngredient>();
-                        foreach(var v in original.PizzaIngredients)
+                        foreach (var v in original.PizzaIngredients)
                         {
                             p.Add(v);
-                           
+
                         }
                         pne.PizzaIngredients.RemoveRange(p);
                         foreach (var v in SelectedIngredientsViewModel.Ingredients)
                         {
-                            //         System.Console.WriteLine(v);
                             pne.PizzaIngredients.Add(new PizzaIngredient
                             {
-                                Pizza = pne.Pizzas.Find(id),
+                                Pizza = pne.Pizzas.Find(_editedPizzaId),
                                 Ingredient = pne.Ingredients.Find(v.IDIngredient)
                             });
                         }
@@ -265,14 +214,23 @@ namespace Pizza.Net.Screens.Pages
 
         public override void Edit()
         {
-            //Janek
             if (SearchMode)
             {
-                if(PizzasTableViewModel.SelectedPizza != null)
+                if (PizzasTableViewModel.SelectedPizza != null)
                 {
+                    var pizza = PizzasTableViewModel.SelectedPizza;
+                    if (pizza == null)
+                        return;
+                    Clear();
                     SearchMode = false;
-                    var pizza =  PizzasTableViewModel.SelectedPizza;
+                    _editedPizzaId = pizza.Pizza.IDPizza;
                     Name = pizza.Name;
+                    Price = (decimal)pizza.Price;
+                    foreach (var ingredient in pizza.Pizza.PizzaIngredients)
+                    {
+                        SelectedIngredientsViewModel.Ingredients.Add(ingredient.Ingredient);
+                        IngredientsToSelectViewModel.Ingredients.Remove(ingredient.Ingredient);
+                    }
                 }
             }
             else
