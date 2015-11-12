@@ -265,7 +265,9 @@ namespace Pizza.Net.Screens.Pages
 
         public override void Search()
         {
-            ClientsTableViewModel=currentClient.SearchClients();
+            ClientsTableViewModel.Clients.Clear();
+            foreach (var v in currentClient.SearchClients().Clients)
+                ClientsTableViewModel.Clients.Add(v);
 
         }
         

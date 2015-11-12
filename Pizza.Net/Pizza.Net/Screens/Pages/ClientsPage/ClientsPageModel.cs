@@ -32,6 +32,7 @@ namespace Pizza.Net.Screens.Pages
             ClientsTableViewModel pom = new ClientsTableViewModel();
             using (PizzaNetEntities pne = new PizzaNetEntities())
             {
+                Console.WriteLine(FirstName);
                 var a = pne.Clients.Where(p =>
                 (p.City == City || City == "" || City == null) &&
                 (p.FirstName == FirstName || FirstName == "" || FirstName == null) &&
