@@ -3,9 +3,7 @@ using System.ComponentModel;
 using System;
 using Pizza.Net.Screens.Tables;
 using System.Collections.ObjectModel;
-using System.Windows.Input;
 using System.Linq;
-using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
 namespace Pizza.Net.Screens.Pages

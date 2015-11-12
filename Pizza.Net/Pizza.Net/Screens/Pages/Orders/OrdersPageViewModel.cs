@@ -11,14 +11,14 @@ namespace Pizza.Net.Screens.Pages
         ICommand AddToSelectedCommand { get; }
         ICommand ClearCommand { get; }
         string FirstName { get; set; }
-        DateTime FromDate { get; set; }
+        DateTime? FromDate { get; set; }
         uint? FromValue { get; set; }
         string LastName { get; set; }
         IPizzasTableViewModel PizzasToSelectViewModel { get; }
         ICommand RemoveFromSelectedCommand { get; }
         ICommand SearchCommand { get; }
         IPizzasTableViewModel SelectedPizzasViewModel { get; }
-        DateTime ToDate { get; set; }
+        DateTime? ToDate { get; set; }
         uint? ToValue { get; set; }
         IOrdersTableViewModel UnfinishedOrders { get; }
     }
@@ -74,8 +74,8 @@ namespace Pizza.Net.Screens.Pages
             }
         }
 
-        private DateTime _toDate;
-        public DateTime ToDate
+        private DateTime? _toDate;
+        public DateTime? ToDate
         {
             get
             {
@@ -91,8 +91,8 @@ namespace Pizza.Net.Screens.Pages
             }
         }
 
-        private DateTime _fromDate;
-        public DateTime FromDate
+        private DateTime? _fromDate;
+        public DateTime? FromDate
         {
             get
             {
@@ -226,8 +226,8 @@ namespace Pizza.Net.Screens.Pages
                 Console.WriteLine(FromDate);
                 Console.WriteLine(ToDate);
                 var a = pne.Orders.Where(p =>
-                (FromDate == null || DateTime.Compare(p.StartOrderDate, FromDate) >= 0) &&
-                (ToDate == null || DateTime.Compare(p.StartOrderDate, ToDate) < 0) &&
+                (FromDate == null || DateTime.Compare(p.StartOrderDate, FromDate.Value) >= 0) &&
+                (ToDate == null || DateTime.Compare(p.StartOrderDate, ToDate.Value) < 0) &&
                 (FirstName == null || FirstName == "" || String.Compare(p.Client.FirstName, FirstName) == 0) &&
                 (LastName == null || LastName == "" || String.Compare(p.Client.LastName, LastName) == 0)
                 );

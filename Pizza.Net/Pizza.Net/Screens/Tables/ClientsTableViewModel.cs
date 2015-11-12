@@ -7,20 +7,12 @@ namespace Pizza.Net.Screens.Tables
     {
         ObservableCollection<Client> Clients { get; set; }
         Client SelectedClient { get; set; }
-        void ClientEditingFinished(Client client);
     }
 
     class ClientsTableViewModel : ObservableObject, IClientsTableViewModel
     {
         public ClientsTableViewModel()
         {
-            //remove
-            
-            Clients.Add(new Client()
-            {
-       //         FirstName = "Dariusz",
-       //         LastName = "Maciejewski"
-            });
         }
 
         private ObservableCollection<Client> _clients = new ObservableCollection<Client>();
@@ -55,11 +47,6 @@ namespace Pizza.Net.Screens.Tables
                     OnPropertyChanged();
                 }
             }
-        }
-
-        public void ClientEditingFinished(Client client)
-        {
-
         }
     }
 }

@@ -2,7 +2,6 @@
 using Pizza.Net.Screens.Tables;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
-using System.Linq;
 using System;
 using System.ComponentModel;
 using System.Collections.Generic;
@@ -14,14 +13,14 @@ namespace Pizza.Net.Screens.Pages
         public ClientsPageViewModel(IClientsTableViewModel clientsTableViewModel, IClientsPageModel clientsPageModel, IOrdersTableViewModel ordersTableViewModel, ClientsPageModel newClient)
         {
             _currentClient = newClient;
-            _validProperties= new Dictionary<string, bool>();
+            _validProperties = new Dictionary<string, bool>();
             _validProperties.Add("FirstName", false);
             _validProperties.Add("LastName", false);
-            validProperties.Add("City", false);
-            validProperties.Add("ZipCode", false);
-            validProperties.Add("Street", false);
-            validProperties.Add("PhoneNumber", false);
-            validProperties.Add("PremiseNumber", false);
+            _validProperties.Add("City", false);
+            _validProperties.Add("ZipCode", false);
+            _validProperties.Add("Street", false);
+            _validProperties.Add("PhoneNumber", false);
+            _validProperties.Add("PremiseNumber", false);
             ClientsTableViewModel = clientsTableViewModel;
             _clientsPageModel = clientsPageModel;
             _ordersTableViewModel = ordersTableViewModel;
@@ -97,7 +96,7 @@ namespace Pizza.Net.Screens.Pages
             }
             set
             {
-                if(value != _currentClient.FirstName)
+                if (value != _currentClient.FirstName)
                 {
                     _currentClient.FirstName = value;
                     base.OnPropertyChanged();
@@ -187,7 +186,6 @@ namespace Pizza.Net.Screens.Pages
             }
         }
 
-
         public string PremiseNumber
         {
             get
@@ -251,7 +249,7 @@ namespace Pizza.Net.Screens.Pages
             if (ClientsTableViewModel.SelectedClient != null)
             {
                 var client = ClientsTableViewModel.SelectedClient;
-                var orders = currentClient.ShowHistory(client);
+                var orders = _currentClient.ShowHistory(client);
                 if (orders.Count < 1)
                     return;
                 var app = new OrdersHistory();
@@ -269,12 +267,11 @@ namespace Pizza.Net.Screens.Pages
 
         public override void Search()
         {
-            ClientsTableViewModel=currentClient.SearchClients();
-            foreach (var v in currentClient.SearchClients().Clients)
+            ClientsTableViewModel.Clients.Clear();
+            foreach (var v in _currentClient.SearchClients().Clients)
                 ClientsTableViewModel.Clients.Add(v);
-
         }
-        
+
         public override void Clear()
         {
             FlatNumber = null;
@@ -288,16 +285,17 @@ namespace Pizza.Net.Screens.Pages
             Search();
         }
 
+        private int _editedClientID;
+
         public override void Add()
         {
             if (SearchMode)
             {
-                currentClient.Add();
+                _currentClient.Add();
             }
             else
             {
-                int id = ClientsTableViewModel.SelectedClient.IDClient;
-                currentClient.Edit(id);
+                _currentClient.Edit(_editedClientID);
                 SearchMode = true;
             }
             Clear();
@@ -311,6 +309,7 @@ namespace Pizza.Net.Screens.Pages
                 {
                     SearchMode = false;
                     var client = ClientsTableViewModel.SelectedClient;
+                    _editedClientID = client.IDClient;
                     SetActiveClient(client);
                 }
             }
