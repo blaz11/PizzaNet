@@ -6,12 +6,14 @@ using System.Collections.ObjectModel;
 using System.Windows.Input;
 using System.Linq;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace Pizza.Net.Screens.Pages
 {
     interface IClientsPageModel
     {
         ClientsTableViewModel SearchClients();
+        ObservableCollection<Order> ShowHistory(Client client);
     }
 
     class ClientsPageModel : IClientsPageModel, IDataErrorInfo
@@ -46,6 +48,18 @@ namespace Pizza.Net.Screens.Pages
             }
 
         }
+        public ObservableCollection<Order> ShowHistory(Client client)
+        {
+            
+            var orders = new ObservableCollection<Order>();
+            using (PizzaNetEntities pne = new PizzaNetEntities())
+            {
+                var a = pne.Orders.Where(p => p.Client.IDClient == client.IDClient);
+                foreach (var v in a)
+                    orders.Add(v);
+            }
+            return orders;
+        }
         public string Error
         {
             get { throw new NotImplementedException(); }
@@ -58,11 +72,26 @@ namespace Pizza.Net.Screens.Pages
                 string validationResult = null;
                 switch (propertyName)
                 {
-                    case "FirstName":
+                    case ("FirstName"):
                         validationResult = ValidateFirstName();
                         break;
                     case "LastName":
                         validationResult = ValidatelastName();
+                        break;
+                    case "City":
+                        validationResult = ValidateCity();
+                        break;
+                    case "ZipCode":
+                        validationResult = ValidateZipCode();
+                        break;
+                    case "Street":
+                        validationResult = ValidateStreet();
+                        break;
+                    case "PhoneNumber":
+                        validationResult = ValidatePhone();
+                        break;
+                    case "PremiseNumber":
+                        validationResult = ValidatePremise();
                         break;
                     default:
                         throw new ApplicationException("Unknown Property being validated on Product.");
@@ -87,6 +116,51 @@ namespace Pizza.Net.Screens.Pages
                 return "Surname needs to be entered.";
             else if (this.LastName.Length < 2)
                 return "Surname should have more than 2 letters.";
+            else
+                return String.Empty;
+        }
+        private string ValidateCity()
+        {
+            if (String.IsNullOrEmpty(this.City))
+                return "City needs to be entered.";
+            else if (this.City.Length < 2)
+                return "City should have more than 2 letters.";
+            else
+                return String.Empty;
+        }
+        private string ValidateZipCode()
+        {
+            Regex regex = new Regex(@"^\d{2}-\d{3}$");
+            if (String.IsNullOrEmpty(this.ZipCode))
+                return "ZipCode needs to be entered.";
+            else if (!regex.IsMatch(this.ZipCode))
+                return "Bad format.";
+            else
+                return String.Empty;
+        }
+        private string ValidateStreet()
+        {
+            if (String.IsNullOrEmpty(this.Street))
+                return "Street needs to be entered.";
+            else if (this.Street.Length < 2)
+                return "Street should have more than 2 letters.";
+            else
+                return String.Empty;
+        }
+        private string ValidatePhone()
+        {
+            Regex regex = new Regex(@"^\d{9}$");
+            if (String.IsNullOrEmpty(this.PhoneNumber))
+                return "Phone number needs to be entered.";
+            else if (!regex.IsMatch(this.PhoneNumber))
+                return "Phone number should have 9 digits.";
+            else
+                return String.Empty;
+        }
+        private string ValidatePremise()
+        {
+            if (String.IsNullOrEmpty(this.PremiseNumber))
+                return "Premise needs to be entered.";
             else
                 return String.Empty;
         }

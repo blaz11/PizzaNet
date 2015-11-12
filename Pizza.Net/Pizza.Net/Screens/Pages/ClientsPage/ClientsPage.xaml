@@ -40,11 +40,11 @@
             <TextBlock Text="City:"
                        Style="{StaticResource LabelTextBlockStyle}"/>
             <TextBox Width="120"  
-                     Text="{Binding City, UpdateSourceTrigger=PropertyChanged}"/>
+                     Text="{Binding City,ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"/>
             <TextBlock Text="Zip-Code:"
                        Style="{StaticResource LabelTextBlockStyle}"/>
             <TextBox Width="120"    
-                     Text="{Binding ZipCode, UpdateSourceTrigger=PropertyChanged}"/>
+                     Text="{Binding ZipCode,ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"/>
         </StackPanel>
         <StackPanel Grid.Row="2" Orientation="Horizontal"
                     VerticalAlignment="Center"
@@ -53,11 +53,11 @@
             <TextBlock Text="Street:"
                        Style="{StaticResource LabelTextBlockStyle}"/>
             <TextBox Width="200"
-                     Text="{Binding Street, UpdateSourceTrigger=PropertyChanged}"/>
+                     Text="{Binding Street,ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"/>
             <TextBlock Text="Premise Number:"
                        Style="{StaticResource LabelTextBlockStyle}"/>
             <TextBox Width="60"
-                     Text="{Binding PremiseNumber, UpdateSourceTrigger=PropertyChanged}"/>
+                     Text="{Binding PremiseNumber,ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"/>
             <TextBlock Text="Flat Number:"
                        Style="{StaticResource LabelTextBlockStyle}"/>
             <TextBox Width="60"
@@ -65,7 +65,7 @@
             <TextBlock Text="Phone Number:"
                        Style="{StaticResource LabelTextBlockStyle}"/>
             <TextBox Width="160"
-                     Text="{Binding PhoneNumber, UpdateSourceTrigger=PropertyChanged}"/>
+                     Text="{Binding PhoneNumber,ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"/>
         </StackPanel>
         <StackPanel Grid.Row="3" Orientation="Horizontal"
                     VerticalAlignment="Center"
@@ -73,7 +73,7 @@
                     Margin="20">
             <Button Content="Search"
                     Command="{Binding SearchCommand}"
-                    IsEnabled="{Binding Path=AllPropertiesValid}"
+                    IsEnabled="{Binding Path=SerchMode}"
                     FontSize="18"/>
             <Button Content="Clear"
                     Command="{Binding ClearCommand}"
@@ -81,6 +81,7 @@
                     FontSize="18"/>
             <Button Content="{Binding AddButtonContent}"
                     Command="{Binding AddCommand}"
+                    IsEnabled="{Binding Path=AllPropertiesValid}"
                     FontSize="18"/>
             <Button Content="{Binding EditButtonContent}"
                     Command="{Binding EditCommand}"

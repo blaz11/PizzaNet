@@ -21,6 +21,11 @@ namespace Pizza.Net.Screens.Pages
             validProperties= new Dictionary<string, bool>();
             validProperties.Add("FirstName", false);
             validProperties.Add("LastName", false);
+            validProperties.Add("City", false);
+            validProperties.Add("ZipCode", false);
+            validProperties.Add("Street", false);
+            validProperties.Add("PhoneNumber", false);
+            validProperties.Add("PremiseNumber", false);
             ClientsTableViewModel = clientsTableViewModel;
             _clientsPageModel = clientsPageModel;
             _ordersTableViewModel = ordersTableViewModel;
@@ -91,7 +96,7 @@ namespace Pizza.Net.Screens.Pages
                 if(value != currentClient.FirstName)
                 {
                     currentClient.FirstName = value;
-                    base.OnPropertyChanged("FirstName");
+                    base.OnPropertyChanged();
                 }
             }
         }
@@ -108,7 +113,7 @@ namespace Pizza.Net.Screens.Pages
                 if (value != currentClient.LastName)
                 {
                     currentClient.LastName = value;
-                    base.OnPropertyChanged("LastName");
+                    base.OnPropertyChanged();
                 }
             }
         }
@@ -125,7 +130,7 @@ namespace Pizza.Net.Screens.Pages
                 if (value != currentClient.City)
                 {
                     currentClient.City = value;
-                    OnPropertyChanged();
+                    base.OnPropertyChanged();
                 }
             }
         }
@@ -142,7 +147,7 @@ namespace Pizza.Net.Screens.Pages
                 if (value != currentClient.ZipCode)
                 {
                     currentClient.ZipCode = value;
-                    OnPropertyChanged();
+                    base.OnPropertyChanged();
                 }
             }
         }
@@ -159,7 +164,7 @@ namespace Pizza.Net.Screens.Pages
                 if (value != currentClient.Street)
                 {
                     currentClient.Street = value;
-                    OnPropertyChanged();
+                    base.OnPropertyChanged();
                 }
             }
         }
@@ -176,7 +181,7 @@ namespace Pizza.Net.Screens.Pages
                 if (value != currentClient.PhoneNumber)
                 {
                     currentClient.PhoneNumber = value;
-                    OnPropertyChanged();
+                    base.OnPropertyChanged();
                 }
             }
         }
@@ -193,7 +198,7 @@ namespace Pizza.Net.Screens.Pages
                 if (value != currentClient.PremiseNumber)
                 {
                     currentClient.PremiseNumber = value;
-                    OnPropertyChanged();
+                    base.OnPropertyChanged();
                 }
             }
         }
@@ -246,13 +251,7 @@ namespace Pizza.Net.Screens.Pages
             if (ClientsTableViewModel.SelectedClient != null)
             {
                 var client = ClientsTableViewModel.SelectedClient;
-                var orders = new ObservableCollection<Order>();
-                using (PizzaNetEntities pne = new PizzaNetEntities())
-                {
-                    var a = pne.Orders.Where(p => p.Client.IDClient == client.IDClient);
-                    foreach (var v in a)
-                        orders.Add(v);
-                }
+                var orders = currentClient.ShowHistory(client);
                 if (orders.Count < 1)
                     return;
                     var app = new OrdersHistory();
