@@ -8,14 +8,14 @@ using System.Text.RegularExpressions;
 
 namespace Pizza.Net.Screens.Pages
 {
-    interface IClientsPageModel
+    public interface IClientsPageModel
     {
         ClientsTableViewModel SearchClients();
         ObservableCollection<Order> ShowHistory(Client client);
         void Add();
     }
 
-    class ClientsPageModel : IClientsPageModel, IDataErrorInfo
+    public class ClientsPageModel : IClientsPageModel, IDataErrorInfo
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -31,7 +31,6 @@ namespace Pizza.Net.Screens.Pages
             ClientsTableViewModel pom = new ClientsTableViewModel();
             using (PizzaNetEntities pne = new PizzaNetEntities())
             {
-                Console.WriteLine(FirstName);
                 var a = pne.Clients.Where(p =>
                 (p.City == City || City == "" || City == null) &&
                 (p.FirstName == FirstName || FirstName == "" || FirstName == null) &&
@@ -49,6 +48,7 @@ namespace Pizza.Net.Screens.Pages
             }
 
         }
+
         public void Add()
         {
             using (PizzaNetEntities pne = new PizzaNetEntities())
@@ -67,11 +67,11 @@ namespace Pizza.Net.Screens.Pages
 
             }
         }
+
         public void Edit(int id)
         {
             using (PizzaNetEntities pne = new PizzaNetEntities())
-            {
-                
+            {   
                 var original = pne.Clients.Find(id);
 
                 if (original != null)
@@ -89,9 +89,9 @@ namespace Pizza.Net.Screens.Pages
                 
             }
         }
+
         public ObservableCollection<Order> ShowHistory(Client client)
         {
-            
             var orders = new ObservableCollection<Order>();
             using (PizzaNetEntities pne = new PizzaNetEntities())
             {
@@ -101,6 +101,7 @@ namespace Pizza.Net.Screens.Pages
             }
             return orders;
         }
+
         public string Error
         {
             get { throw new NotImplementedException(); }

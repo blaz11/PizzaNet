@@ -3,13 +3,13 @@ using System.Collections.ObjectModel;
 
 namespace Pizza.Net.Screens.Tables
 {
-    interface IClientsTableViewModel
+    public interface IClientsTableViewModel
     {
         ObservableCollection<Client> Clients { get; set; }
         Client SelectedClient { get; set; }
     }
 
-    class ClientsTableViewModel : ObservableObject, IClientsTableViewModel
+    public class ClientsTableViewModel : ObservableObject, IClientsTableViewModel
     {
         public ClientsTableViewModel()
         {
