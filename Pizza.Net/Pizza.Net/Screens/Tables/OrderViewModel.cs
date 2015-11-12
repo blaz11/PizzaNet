@@ -11,6 +11,7 @@ namespace Pizza.Net.Screens.Tables
         public OrderViewModel(Order order)
         {
             Pizzas = new ObservableCollection<string>();
+            decimal suma = 0;
             using (PizzaNetEntities pne = new PizzaNetEntities())
             {
                 var c= pne.Clients.Find(order.IDClient);
@@ -20,14 +21,20 @@ namespace Pizza.Net.Screens.Tables
                 foreach(var v in pi)
                 {
                     Pizzas.Add(pne.Pizzas.Find(v.IDPizza).Name);
+                    suma += pne.Pizzas.Find(v.IDPizza).Price;
                 }
             }
 
-         //   Client = order.Client.FirstName + " " + order.Client.LastName;
-     //       Pizzas = ConvertFromPizzaOrderCollectionToStringCollection(order.PizzaOrders);
+            //   Client = order.Client.FirstName + " " + order.Client.LastName;
+            //       Pizzas = ConvertFromPizzaOrderCollectionToStringCollection(order.PizzaOrders);
             //OrderValue = CalculateTotalOrderValue(order.PizzaOrders);
+            OrderValue = (double)suma;
+            DateTime myDatetime = new DateTime();
             StartDate = order.StartOrderDate;
-            FinishDate = order.FinishOrderDate;
+            if (DateTime.Compare(order.FinishOrderDate, myDatetime) <= 0)
+                FinishDate = "otwarte";
+            else
+                FinishDate = order.FinishOrderDate.ToLongDateString();
             Order = order;
         }
 
@@ -105,8 +112,8 @@ namespace Pizza.Net.Screens.Tables
             }
         }
 
-        private DateTime _finishDate;
-        public DateTime FinishDate
+        private string _finishDate;
+        public string FinishDate
         {
             get
             {

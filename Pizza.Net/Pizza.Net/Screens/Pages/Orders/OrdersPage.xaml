@@ -72,17 +72,17 @@
                     VerticalAlignment="Center"
                     HorizontalAlignment="Center"
                     Margin="20">
-            <TextBlock Text="Ingredients:"
+            <TextBlock Text="Orders:"
                        Style="{StaticResource PageLabelTextBlockStyle}"/>
             <StackPanel VerticalAlignment="Center"
                         HorizontalAlignment="Center"
                         Margin="10"
                         Orientation="Horizontal">
-                <StackPanel>
+                <!--StackPanel>
                     <TextBlock Text="Select Ingredient:"
                            Style="{StaticResource SearchLabelTextBlockStyle}"/>
                     <tables:PizzasTable DataContext="{Binding PizzasToSelectViewModel}"/>
-                </StackPanel>
+                </>
                 <Button Content="+"
                         Command="{Binding AddToSelectedCommand}"
                         Style="{StaticResource PageButtonStyle}"
@@ -101,7 +101,8 @@
                     <TextBlock Text="Selected Ingredients:"
                            Style="{StaticResource SearchLabelTextBlockStyle}"/>
                     <tables:PizzasTable DataContext="{Binding SelectedPizzasViewModel}"/>
-                </StackPanel>
+                </StackPanel-->
+                <tables:OrdersTable DataContext="{Binding UnfinishedOrders}" />
             </StackPanel>
             <StackPanel Grid.Row="4" Orientation="Vertical"
                     VerticalAlignment="Center"

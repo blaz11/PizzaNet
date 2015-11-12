@@ -9,7 +9,7 @@
              d:DesignHeight="300" d:DesignWidth="800">
     <StackPanel HorizontalAlignment="Center"
                 VerticalAlignment="Top">
-            <tables:OrdersTable DataContext="{Binding UnfinishedOrders}" />
+        <tables:OrdersTable DataContext="{Binding UnfinishedOrders}" />
             <Button Content="Order finished"
                     Command="{Binding FinalizeCommand}"
                     HorizontalAlignment="Center"
