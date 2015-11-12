@@ -51,6 +51,7 @@ namespace Pizza.Net.Screens.Pages
             }
 
         }
+<<<<<<< HEAD
         public void Add()
         {
             using (PizzaNetEntities pne = new PizzaNetEntities())
@@ -103,6 +104,9 @@ namespace Pizza.Net.Screens.Pages
             }
             return orders;
         }
+=======
+
+>>>>>>> fixing
         public string Error
         {
             get { throw new NotImplementedException(); }

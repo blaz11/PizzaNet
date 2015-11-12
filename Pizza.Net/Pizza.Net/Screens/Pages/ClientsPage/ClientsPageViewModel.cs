@@ -6,21 +6,17 @@ using System.Linq;
 using System;
 using System.ComponentModel;
 using System.Collections.Generic;
-using System.Text;
-using System.Windows;
 
 namespace Pizza.Net.Screens.Pages
 {
     class ClientsPageViewModel : BaseTableInteractionViewModel, IClientsPageViewModel, IDataErrorInfo
     {
-        private readonly ClientsPageModel currentClient;
-        private Dictionary<string, bool> validProperties;
         public ClientsPageViewModel(IClientsTableViewModel clientsTableViewModel, IClientsPageModel clientsPageModel, IOrdersTableViewModel ordersTableViewModel, ClientsPageModel newClient)
         {
-            currentClient = newClient;
-            validProperties= new Dictionary<string, bool>();
-            validProperties.Add("FirstName", false);
-            validProperties.Add("LastName", false);
+            _currentClient = newClient;
+            _validProperties= new Dictionary<string, bool>();
+            _validProperties.Add("FirstName", false);
+            _validProperties.Add("LastName", false);
             validProperties.Add("City", false);
             validProperties.Add("ZipCode", false);
             validProperties.Add("Street", false);
@@ -31,19 +27,20 @@ namespace Pizza.Net.Screens.Pages
             _ordersTableViewModel = ordersTableViewModel;
             Search();
         }
+
         #region IDataErrorInfo members
 
         public string Error
         {
-            get { return (currentClient as IDataErrorInfo).Error; }
+            get { return (_currentClient as IDataErrorInfo).Error; }
         }
 
         public string this[string propertyName]
         {
             get
             {
-                string error = (currentClient as IDataErrorInfo)[propertyName];
-                validProperties[propertyName] = String.IsNullOrEmpty(error) ? true : false;
+                string error = (_currentClient as IDataErrorInfo)[propertyName];
+                _validProperties[propertyName] = String.IsNullOrEmpty(error) ? true : false;
                 ValidateProperties();
                 CommandManager.InvalidateRequerySuggested();
                 return error;
@@ -51,9 +48,14 @@ namespace Pizza.Net.Screens.Pages
         }
 
         #endregion
+
+        private readonly ClientsPageModel _currentClient;
+
+        private Dictionary<string, bool> _validProperties;
+
         private void ValidateProperties()
         {
-            foreach (bool isValid in validProperties.Values)
+            foreach (bool isValid in _validProperties.Values)
             {
                 if (!isValid)
                 {
@@ -63,6 +65,7 @@ namespace Pizza.Net.Screens.Pages
             }
             this.AllPropertiesValid = true;
         }
+
         private bool allPropertiesValid = false;
         public bool AllPropertiesValid
         {
@@ -76,6 +79,7 @@ namespace Pizza.Net.Screens.Pages
                 }
             }
         }
+
         public string PageName
         {
             get
@@ -89,13 +93,13 @@ namespace Pizza.Net.Screens.Pages
         {
             get
             {
-                return currentClient.FirstName;
+                return _currentClient.FirstName;
             }
             set
             {
-                if(value != _firstName)
+                if(value != _currentClient.FirstName)
                 {
-                    currentClient.FirstName = value;
+                    _currentClient.FirstName = value;
                     base.OnPropertyChanged();
                 }
             }
@@ -106,13 +110,13 @@ namespace Pizza.Net.Screens.Pages
         {
             get
             {
-                return currentClient.LastName;
+                return _currentClient.LastName;
             }
             set
             {
-                if (value != currentClient.LastName)
+                if (value != _currentClient.LastName)
                 {
-                    currentClient.LastName = value;
+                    _currentClient.LastName = value;
                     base.OnPropertyChanged();
                 }
             }
@@ -123,13 +127,13 @@ namespace Pizza.Net.Screens.Pages
         {
             get
             {
-                return currentClient.City;
+                return _currentClient.City;
             }
             set
             {
-                if (value != currentClient.City)
+                if (value != _currentClient.City)
                 {
-                    currentClient.City = value;
+                    _currentClient.City = value;
                     base.OnPropertyChanged();
                 }
             }
@@ -139,13 +143,13 @@ namespace Pizza.Net.Screens.Pages
         {
             get
             {
-                return currentClient.ZipCode;
+                return _currentClient.ZipCode;
             }
             set
             {
-                if (value != currentClient.ZipCode)
+                if (value != _currentClient.ZipCode)
                 {
-                    currentClient.ZipCode = value;
+                    _currentClient.ZipCode = value;
                     base.OnPropertyChanged();
                 }
             }
@@ -155,13 +159,13 @@ namespace Pizza.Net.Screens.Pages
         {
             get
             {
-                return currentClient.Street;
+                return _currentClient.Street;
             }
             set
             {
-                if (value != currentClient.Street)
+                if (value != _currentClient.Street)
                 {
-                    currentClient.Street = value;
+                    _currentClient.Street = value;
                     base.OnPropertyChanged();
                 }
             }
@@ -171,13 +175,13 @@ namespace Pizza.Net.Screens.Pages
         {
             get
             {
-                return currentClient.PhoneNumber;
+                return _currentClient.PhoneNumber;
             }
             set
             {
-                if (value != currentClient.PhoneNumber)
+                if (value != _currentClient.PhoneNumber)
                 {
-                    currentClient.PhoneNumber = value;
+                    _currentClient.PhoneNumber = value;
                     base.OnPropertyChanged();
                 }
             }
@@ -188,13 +192,13 @@ namespace Pizza.Net.Screens.Pages
         {
             get
             {
-                return currentClient.PremiseNumber;
+                return _currentClient.PremiseNumber;
             }
             set
             {
-                if (value != currentClient.PremiseNumber)
+                if (value != _currentClient.PremiseNumber)
                 {
-                    currentClient.PremiseNumber = value;
+                    _currentClient.PremiseNumber = value;
                     base.OnPropertyChanged();
                 }
             }
@@ -204,13 +208,13 @@ namespace Pizza.Net.Screens.Pages
         {
             get
             {
-                return currentClient.FlatNumber;
+                return _currentClient.FlatNumber;
             }
             set
             {
-                if (value != currentClient.FlatNumber)
+                if (value != _currentClient.FlatNumber)
                 {
-                    currentClient.FlatNumber = value;
+                    _currentClient.FlatNumber = value;
                     OnPropertyChanged();
                 }
             }
@@ -265,7 +269,7 @@ namespace Pizza.Net.Screens.Pages
 
         public override void Search()
         {
-            ClientsTableViewModel.Clients.Clear();
+            ClientsTableViewModel=currentClient.SearchClients();
             foreach (var v in currentClient.SearchClients().Clients)
                 ClientsTableViewModel.Clients.Add(v);
 
