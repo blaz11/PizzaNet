@@ -25,11 +25,13 @@ namespace Pizza.Net.Screens.Pages
 
     class OrdersPageViewModel : ObservableObject, IOrdersPageViewModel
     {
+        private readonly OrdersPageModel _currentOrdersPageModel;
         public IOrdersTableViewModel UnfinishedOrders { get; private set; }
-        public OrdersPageViewModel()
+        public OrdersPageViewModel(OrdersPageModel newOrdersPageModel)
         {
+            _currentOrdersPageModel = newOrdersPageModel;
             UnfinishedOrders = new OrdersTableViewModel();
-            ToDate = DateTime.Now;
+           // ToDate = DateTime.Now;
         }
 
         public string PageName
@@ -40,103 +42,97 @@ namespace Pizza.Net.Screens.Pages
             }
         }
 
-        private string _firstName;
         public string FirstName
         {
             get
             {
-                return _firstName;
+                return _currentOrdersPageModel.FirstName;
             }
             set
             {
-                if (value != _firstName)
+                if (value != _currentOrdersPageModel.FirstName)
                 {
-                    _firstName = value;
+                    _currentOrdersPageModel.FirstName = value;
                     OnPropertyChanged();
                 }
             }
         }
 
-        private string _lastName;
         public string LastName
         {
             get
             {
-                return _lastName;
+                return _currentOrdersPageModel.LastName;
             }
             set
             {
-                if (value != _lastName)
+                if (value != _currentOrdersPageModel.LastName)
                 {
-                    _lastName = value;
+                    _currentOrdersPageModel.LastName = value;
                     OnPropertyChanged();
                 }
             }
         }
 
-        private DateTime? _toDate;
         public DateTime? ToDate
         {
             get
             {
-                return _toDate;
+                return _currentOrdersPageModel.ToDate;
             }
             set
             {
-                if (value != _toDate)
+                if (value != _currentOrdersPageModel.ToDate)
                 {
-                    _toDate = value;
+                    _currentOrdersPageModel.ToDate = value;
                     OnPropertyChanged();
                 }
             }
         }
 
-        private DateTime? _fromDate;
         public DateTime? FromDate
         {
             get
             {
-                return _fromDate;
+                return _currentOrdersPageModel.FromDate;
             }
             set
             {
-                if (value != _fromDate)
+                if (value != _currentOrdersPageModel.FromDate)
                 {
-                    _fromDate = value;
+                    _currentOrdersPageModel.FromDate = value;
                     OnPropertyChanged();
                 }
             }
         }
 
-        private uint? _fromValue;
         public uint? FromValue
         {
             get
             {
-                return _fromValue;
+                return _currentOrdersPageModel.FromValue;
             }
             set
             {
-                if (value != _fromValue)
+                if (value != _currentOrdersPageModel.FromValue)
                 {
-                    _fromValue = value;
+                    _currentOrdersPageModel.FromValue = value;
                     OnPropertyChanged();
                 }
             }
         }
 
-        private uint? _toValue;
         public uint? ToValue
         {
             get
             {
-                return _toValue;
+                return _currentOrdersPageModel.ToValue;
             }
             set
             {
-                if (value != _toValue)
+                if (value != _currentOrdersPageModel.ToValue)
                 {
-                    _toValue = value;
+                    _currentOrdersPageModel.ToValue = value;
                     OnPropertyChanged();
                 }
             }
@@ -221,35 +217,17 @@ namespace Pizza.Net.Screens.Pages
 
         private void Search()
         {
-            using (PizzaNetEntities pne = new PizzaNetEntities())
-            {
-                Console.WriteLine(FromDate);
-                Console.WriteLine(ToDate);
-                var a = pne.Orders.Where(p =>
-                (FromDate == null || DateTime.Compare(p.StartOrderDate, FromDate.Value) >= 0) &&
-                (ToDate == null || DateTime.Compare(p.StartOrderDate, ToDate.Value) < 0) &&
-                (FirstName == null || FirstName == "" || String.Compare(p.Client.FirstName, FirstName) == 0) &&
-                (LastName == null || LastName == "" || String.Compare(p.Client.LastName, LastName) == 0)
-                );
-                UnfinishedOrders.Orders.Clear();
-                foreach (var v in a)
-                {
-                    int sum = 0;
-                    var pi = pne.PizzaOrders.Where(p => p.IDOrder == v.IDOrder);
-                    foreach (var v1 in pi)
-                    {
-                        sum += (int)pne.Pizzas.Find(v1.IDPizza).Price * v1.Size.BasePriceMultiplier;
-                    }
-                    if((!ToValue.HasValue || sum<ToValue.Value) && (!FromValue.HasValue || sum>FromValue.Value))
-                        UnfinishedOrders.Orders.Add(new OrderViewModel(v));
-                }
-                    
-            }
+
+            UnfinishedOrders.Orders.Clear();
+            foreach(var v in _currentOrdersPageModel.Search())
+                UnfinishedOrders.Orders.Add(new OrderViewModel(v));
         }
 
         private void Clear()
         {
             ToValue = null;
+            FirstName = null;
+            LastName = null;
             FromValue = null;
             ToDate = null;
             FromDate = null;

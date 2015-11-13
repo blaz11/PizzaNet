@@ -3,25 +3,42 @@ using Pizza.Net.Screens.Tables;
 using System.Collections.Generic;
 using System.Windows.Input;
 using System.Linq;
+using System;
+using System.ComponentModel;
+using System.Collections.ObjectModel;
 
 namespace Pizza.Net.Screens.Pages
 {
-    class PizzasPageViewModel : BaseTableInteractionViewModel, IPizzasPageViewModel
+    class PizzasPageViewModel : BaseTableInteractionViewModel, IPizzasPageViewModel, IDataErrorInfo
     {
-        public PizzasPageViewModel(IPizzasTableViewModel _pizzasTableViewModel)
+        private readonly PizzasPageModel _currentPizzasPageModel;
+        private Dictionary<string, bool> validProperties;
+        public PizzasPageViewModel(IPizzasTableViewModel _pizzasTableViewModel, PizzasPageModel newPizzasPageModel)
         {
+            _currentPizzasPageModel = newPizzasPageModel;
             PizzasTableViewModel = _pizzasTableViewModel;
             SelectedIngredientsViewModel = new IngredientsTableViewModel();
             IngredientsToSelectViewModel = new IngredientsTableViewModel();
-            using (PizzaNetEntities pne = new PizzaNetEntities())
-            {
-                var ing = pne.Ingredients.Where(p => true);
-                foreach (var v in ing)
-                    IngredientsToSelectViewModel.Ingredients.Add(v);
-            }
+            this.validProperties = new Dictionary<string, bool>();
+            this.validProperties.Add("Name", false);
+            this.validProperties.Add("Price", false);
+            foreach (var v in _currentPizzasPageModel.getIngridients())
+                IngredientsToSelectViewModel.Ingredients.Add(v);
             Search();
         }
-
+        private bool allPropertiesValid = false;
+        public bool AllPropertiesValid
+        {
+            get { return allPropertiesValid; }
+            set
+            {
+                if (allPropertiesValid != value)
+                {
+                    allPropertiesValid = value;
+                    base.OnPropertyChanged("AllPropertiesValid");
+                }
+            }
+        }
         public string PageName
         {
             get
@@ -30,40 +47,69 @@ namespace Pizza.Net.Screens.Pages
             }
         }
 
-        private string _name;
         public string Name
         {
             get
             {
-                return _name;
+                return _currentPizzasPageModel.Name;
             }
             set
             {
-                if (value != _name)
+                if (value != _currentPizzasPageModel.Name)
                 {
-                    _name = value;
-                    OnPropertyChanged();
+                    _currentPizzasPageModel.Name = value;
+                    base.OnPropertyChanged();
                 }
             }
         }
 
-        private decimal _price;
         public decimal Price
         {
             get
             {
-                return _price;
+                return _currentPizzasPageModel.Price;
             }
             set
             {
-                if (value != _price)
+                if (value != _currentPizzasPageModel.Price)
                 {
-                    _price = value;
-                    OnPropertyChanged();
+                    _currentPizzasPageModel.Price = value;
+                    base.OnPropertyChanged();
                 }
             }
         }
 
+        #region IDataErrorInfo members
+
+        public string Error
+        {
+            get { return (_currentPizzasPageModel as IDataErrorInfo).Error; }
+        }
+
+        public string this[string propertyName]
+        {
+            get
+            {
+                string error = (_currentPizzasPageModel as IDataErrorInfo)[propertyName];
+                validProperties[propertyName] = String.IsNullOrEmpty(error) ? true : false;
+                ValidateProperties();
+                CommandManager.InvalidateRequerySuggested();
+                return error;
+            }
+        }
+        private void ValidateProperties()
+        {
+            foreach (bool isValid in validProperties.Values)
+            {
+                if (!isValid)
+                {
+                    this.AllPropertiesValid = false;
+                    return;
+                }
+            }
+            this.AllPropertiesValid = true;
+        }
+        #endregion
         public IPizzasTableViewModel PizzasTableViewModel { get; private set; }
         public IIngredientsTableViewModel SelectedIngredientsViewModel { get; private set; }
         public IIngredientsTableViewModel IngredientsToSelectViewModel { get; private set; }
@@ -101,8 +147,16 @@ namespace Pizza.Net.Screens.Pages
             var item = IngredientsToSelectViewModel.SelectedIngredient;
             if (item == null)
                 return;
-            IngredientsToSelectViewModel.Ingredients.Remove(item);
-            SelectedIngredientsViewModel.Ingredients.Add(item);
+            bool contains = false;
+            foreach (var v in SelectedIngredientsViewModel.Ingredients)
+                if (v.IDIngredient == item.IDIngredient)
+                    contains = true;
+            
+            if (!contains)
+            {
+                IngredientsToSelectViewModel.Ingredients.Remove(item);
+                SelectedIngredientsViewModel.Ingredients.Add(item);
+            }
         }
 
         private void RemoveFromSelected()
@@ -110,13 +164,25 @@ namespace Pizza.Net.Screens.Pages
             var item = SelectedIngredientsViewModel.SelectedIngredient;
             if (item == null)
                 return;
-            IngredientsToSelectViewModel.Ingredients.Add(item);
+            bool contains = false;
+            foreach (var v in IngredientsToSelectViewModel.Ingredients)
+                if (v.IDIngredient == item.IDIngredient)
+                    contains = true;
+            if (!contains) 
+                IngredientsToSelectViewModel.Ingredients.Add(item);
             SelectedIngredientsViewModel.Ingredients.Remove(item);
+            
         }
 
         public override void Search()
         {
-            using (PizzaNetEntities pne = new PizzaNetEntities())
+            ObservableCollection<Ingredient> ingr = new ObservableCollection<Ingredient>();
+            foreach (var v in SelectedIngredientsViewModel.Ingredients)
+                ingr.Add(v);
+            PizzasTableViewModel.Pizzas.Clear();
+            foreach (var v in _currentPizzasPageModel.Search(ingr))
+                PizzasTableViewModel.Pizzas.Add(v);
+         /*   using (PizzaNetEntities pne = new PizzaNetEntities())
             {
 
                 var a = pne.Pizzas.Where(p =>
@@ -139,7 +205,7 @@ namespace Pizza.Net.Screens.Pages
                     if (!lp.Contains(v))
                         PizzasTableViewModel.Pizzas.Add(new PizzaViewModel(v));
 
-            }
+            }*/
         }
 
         public override void Clear()
@@ -161,7 +227,11 @@ namespace Pizza.Net.Screens.Pages
         {
             if (SearchMode)
             {
-                using (PizzaNetEntities pne = new PizzaNetEntities())
+                ObservableCollection<Ingredient> ingr = new ObservableCollection<Ingredient>();
+                foreach (var v in SelectedIngredientsViewModel.Ingredients)
+                    ingr.Add(v);
+                _currentPizzasPageModel.Add(ingr);
+             /*       using (PizzaNetEntities pne = new PizzaNetEntities())
                 {
                     Domain.Pizza p = new Domain.Pizza();
                     p.Name = Name;
@@ -177,36 +247,15 @@ namespace Pizza.Net.Screens.Pages
                         });
                     }
                     pne.SaveChanges();
-                }
+                }*/
             }
             else
             {
-                using (PizzaNetEntities pne = new PizzaNetEntities())
-                {
-                    var original = pne.Pizzas.Find(_editedPizzaId);
-                    if (original != null)
-                    {
-                        original.Name = Name;
-                        original.Price = (decimal)Price;
-                        List<PizzaIngredient> p = new List<PizzaIngredient>();
-                        foreach (var v in original.PizzaIngredients)
-                        {
-                            p.Add(v);
+                ObservableCollection<Ingredient> ingr = new ObservableCollection<Ingredient>();
+                foreach (var v in SelectedIngredientsViewModel.Ingredients)
+                    ingr.Add(v);
+                _currentPizzasPageModel.Edit(ingr, _editedPizzaId);
 
-                        }
-                        pne.PizzaIngredients.RemoveRange(p);
-                        foreach (var v in SelectedIngredientsViewModel.Ingredients)
-                        {
-                            pne.PizzaIngredients.Add(new PizzaIngredient
-                            {
-                                Pizza = pne.Pizzas.Find(_editedPizzaId),
-                                Ingredient = pne.Ingredients.Find(v.IDIngredient)
-                            });
-                        }
-                        pne.SaveChanges();
-                    }
-                    SearchMode = true;
-                }
                 SearchMode = true;
             }
             Clear();

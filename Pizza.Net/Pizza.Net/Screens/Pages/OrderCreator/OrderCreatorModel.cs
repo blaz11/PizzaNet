@@ -19,7 +19,7 @@ namespace Pizza.Net.Screens.Pages
         {
             _client= client ;
         }
-
+        //niepotrzebne
         public void AddPizza(ICollection<Pizza.Net.Domain.Pizza> pizzas)
         {
              _pizzas= pizzas;
@@ -27,7 +27,7 @@ namespace Pizza.Net.Screens.Pages
 
         public void SubmitOrder()
         {
-            //Janek
+            //Janek niepotrzebne
             System.Console.WriteLine(    _pizzas);
             System.Console.WriteLine();
         }

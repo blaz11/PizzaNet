@@ -86,14 +86,18 @@
     <Compile Include="Screens\DesignTimeData\SizeItem.cs" />
     <Compile Include="Screens\DesignTimeData\SizesTable.cs" />
     <Compile Include="Screens\DesignTimeData\ClientItem.cs" />
+    <Compile Include="Screens\Pages\OrderFinalizator\OrderFinalizationModel.cs" />
     <Compile Include="Screens\Pages\Orders\OrdersPage.xaml.cs">
       <DependentUpon>OrdersPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Screens\Pages\Orders\OrdersPageModel.cs" />
     <Compile Include="Screens\Pages\Orders\OrdersPageViewModel.cs" />
+    <Compile Include="Screens\Pages\PizzasInOrderCreator\PizzasInOrderCreatorModel.cs" />
     <Compile Include="Screens\Pages\PizzasInOrderCreator\PizzasInOrderCreatorViewModel.cs" />
     <Compile Include="Screens\Pages\PizzasInOrderCreator\PizzasInOrderCreator.xaml.cs">
       <DependentUpon>PizzasInOrderCreator.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Screens\Pages\PizzasPage\PizzasPageModel.cs" />
     <Compile Include="Screens\Tables\OrderViewModel.cs" />
     <Compile Include="Screens\Tables\PizzaViewModel.cs" />
     <Compile Include="Screens\Pages\OrderFinalizator\OrderFinalizator.xaml.cs">

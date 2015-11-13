@@ -46,15 +46,15 @@ namespace Pizza.Net.Screens
             var clientsPageViewModel = new ClientsPageViewModel(clientsTableViewModel, clientsPageModel, ordersTableViewModel, clientPageModel);
             var ordersCreatorModel = new OrderCreatorModel();
             var pizzasTableViewModel = new PizzasTableViewModel();
-            var pizzasPageViewModel = new PizzasPageViewModel(pizzasTableViewModel);
-            var pizzasInOrderCreatorViewModel = new PizzasInOrderCreatorViewModel();
+            var pizzasPageViewModel = new PizzasPageViewModel(pizzasTableViewModel, new PizzasPageModel());
+            var pizzasInOrderCreatorViewModel = new PizzasInOrderCreatorViewModel(new PizzasInOrderCreatorModel());
 
             // Add available pages
             PageViewModels.Add(clientsPageViewModel);
             PageViewModels.Add(pizzasPageViewModel);
-            PageViewModels.Add(new OrdersPageViewModel());
+            PageViewModels.Add(new OrdersPageViewModel(new OrdersPageModel()));
             PageViewModels.Add(new OrderCreatorViewModel(ordersCreatorModel, clientsPageViewModel, pizzasInOrderCreatorViewModel));
-            PageViewModels.Add(new OrderFinalizatorViewModel());
+            PageViewModels.Add(new OrderFinalizatorViewModel(new OrderFinalizationModel()));
 
             // Set starting page
             CurrentPageViewModel = PageViewModels[0];

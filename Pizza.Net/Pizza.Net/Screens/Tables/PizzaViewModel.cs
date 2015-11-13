@@ -4,7 +4,7 @@ using System.Collections.ObjectModel;
 
 namespace Pizza.Net.Screens.Tables
 {
-    class PizzaViewModel : ObservableObject
+    public class PizzaViewModel : ObservableObject
     {
         public PizzaViewModel(Domain.Pizza pizza)
         {

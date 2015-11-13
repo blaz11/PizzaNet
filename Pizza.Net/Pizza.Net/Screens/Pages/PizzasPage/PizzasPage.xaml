@@ -34,11 +34,11 @@
             <TextBlock Text="Name:"
                        Style="{StaticResource LabelTextBlockStyle}"/>
             <TextBox Width="120"
-                     Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"/>
+                     Text="{Binding Name,ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"/>
             <TextBlock Text="Price:"
                        Style="{StaticResource LabelTextBlockStyle}"/>
             <TextBox Width="80"
-                     Text="{Binding Price, UpdateSourceTrigger=PropertyChanged}"/>
+                     Text="{Binding Price,ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"/>
         </StackPanel>
         <StackPanel Grid.Row="2"
                     VerticalAlignment="Center"
@@ -88,6 +88,7 @@
                     FontSize="18"/>
             <Button Content="{Binding AddButtonContent}"
                     Command="{Binding AddCommand}"
+                    IsEnabled="{Binding Path=AllPropertiesValid}"
                     FontSize="18"/>
             <Button Content="{Binding EditButtonContent}"
                     Command="{Binding EditCommand}"

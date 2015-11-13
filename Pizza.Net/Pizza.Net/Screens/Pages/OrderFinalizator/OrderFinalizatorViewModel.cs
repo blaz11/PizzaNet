@@ -15,8 +15,10 @@ namespace Pizza.Net.Screens.Pages
 
     class OrderFinalizatorViewModel : ObservableObject, IPageViewModel, IOrderFinalizatorViewModel
     {
-        public OrderFinalizatorViewModel()
+        private readonly OrderFinalizationModel _currentFinalizator;
+        public OrderFinalizatorViewModel(OrderFinalizationModel newOrderFinalizator)
         {
+            _currentFinalizator = newOrderFinalizator;
             UnfinishedOrders = new OrdersTableViewModel();
             PopulateUnfinishedOrders();
         }
@@ -64,28 +66,15 @@ namespace Pizza.Net.Screens.Pages
             var orderToFinalize = UnfinishedOrders.SelectedOrder;
             if (orderToFinalize == null)
                 return;
-            using (PizzaNetEntities pne = new PizzaNetEntities())
-            {
-                Order o = pne.Orders.Find(orderToFinalize.Order.IDOrder);
-                o.FinishOrderDate= new DateTime();
-                o.FinishOrderDate = DateTime.Today;
-                pne.SaveChanges();
-            }
+            _currentFinalizator.FinalizeSelected(orderToFinalize.Order.IDOrder);
             PopulateUnfinishedOrders();
         }
 
         private void PopulateUnfinishedOrders()
         {
-            using (PizzaNetEntities pne = new PizzaNetEntities())
-            {
-                DateTime myDate = new DateTime();
-                var a = pne.Orders.Where(p =>
-                DateTime.Compare(p.FinishOrderDate, myDate)<=0
-                );
-                UnfinishedOrders.Orders.Clear();
-                foreach (var v in a)
-                    UnfinishedOrders.Orders.Add(new OrderViewModel(v));
-            }
+            UnfinishedOrders.Orders.Clear();
+            foreach (var v in _currentFinalizator.PopulateUnfinishedOrders())
+                UnfinishedOrders.Orders.Add(new OrderViewModel(v));
         }
     }
 }

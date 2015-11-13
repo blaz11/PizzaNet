@@ -18,27 +18,24 @@ namespace Pizza.Net.Screens.Pages
 
     class PizzasInOrderCreatorViewModel : IPizzasInOrderCreatorViewModel
     {
-        public PizzasInOrderCreatorViewModel()
+        private readonly PizzasInOrderCreatorModel _currentPizzasInOrderCreatorModel;
+        public PizzasInOrderCreatorViewModel(PizzasInOrderCreatorModel newPizzasInOrderCreatorModel)
         {
+            _currentPizzasInOrderCreatorModel = newPizzasInOrderCreatorModel;
             SearchPizzasViewModel = new PizzasTableViewModel();
             SelectedPizzasViewModel = new PizzasTableViewModel();
             SizesTableViewModel = new SizesTableViewModel();
             using (PizzaNetEntities pne = new PizzaNetEntities())
             {
-
-                var a = pne.Pizzas.Where(p => true);
                 SearchPizzasViewModel.Pizzas.Clear();
-                foreach (var v in a)
-                    SearchPizzasViewModel.Pizzas.Add(new PizzaViewModel(v));
+                foreach (var v in _currentPizzasInOrderCreatorModel.getPizza())
+                    SearchPizzasViewModel.Pizzas.Add(v);
 
-                var b = pne.Sizes.Where(p => true);
                 SizesTableViewModel.Sizes.Clear();
-                foreach (var v in b)
+                foreach (var v in _currentPizzasInOrderCreatorModel.getSizes())
                     SizesTableViewModel.Sizes.Add(v);
-
+                Console.WriteLine();
             }
-            Console.WriteLine();
-
         }
         public ObservableCollection<Size> sizes = new ObservableCollection<Size>();
         public string PageName
