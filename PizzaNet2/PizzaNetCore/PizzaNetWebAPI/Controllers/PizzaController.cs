@@ -8,13 +8,12 @@ using PizzaNetCore;
 
 namespace PizzaNetWebAPI.Controllers
 {
-    [Authorize]
-    public class OrderController : ApiController
+    public class PizzaController : ApiController
     {
-        // GET: api/Order
+        // GET: api/Pizza
         public IHttpActionResult Get()
         {
-            List<OrderModel> ord = null;
+            List<PizzaModel> ord = null;
 
             if (ord == null)
             {
@@ -23,15 +22,6 @@ namespace PizzaNetWebAPI.Controllers
             return Ok();
         }
 
-
-        // POST: api/Order
-        public IHttpActionResult Post([FromBody]string value)
-        {
-            OrderModel ord = new OrderModel();
-
-            return Ok();
-
-        }
-
+     
     }
 }

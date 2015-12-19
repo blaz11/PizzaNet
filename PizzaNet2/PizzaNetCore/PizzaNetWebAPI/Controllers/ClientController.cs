@@ -4,34 +4,29 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http;
 using PizzaNetCore;
 
 namespace PizzaNetWebAPI.Controllers
 {
-    [Authorize]
-    public class OrderController : ApiController
+    public class ClientController : ApiController
     {
-        // GET: api/Order
+        // GET: api/Client
         public IHttpActionResult Get()
         {
-            List<OrderModel> ord = null;
+            ClientModel client = null;
 
-            if (ord == null)
+            if (client == null)
             {
                 return NotFound();
             }
             return Ok();
         }
-
-
-        // POST: api/Order
-        public IHttpActionResult Post([FromBody]string value)
+        // PUT: api/Client/5
+        public IHttpActionResult Put(int id, [FromBody]string value)
         {
-            OrderModel ord = new OrderModel();
-
+            ClientModel client = new ClientModel();
             return Ok();
-
         }
-
     }
 }
