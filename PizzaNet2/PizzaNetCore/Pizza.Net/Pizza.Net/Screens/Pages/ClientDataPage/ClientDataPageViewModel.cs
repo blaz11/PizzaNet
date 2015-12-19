@@ -1,73 +1,17 @@
 ﻿using Pizza.Net.Screens.Windows;
 using PizzaNetCore;
 using System.Windows.Input;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System;
 
 namespace Pizza.Net.Screens.Pages
 {
-    class ClientDataPageViewModel : ObservableObject, IPageViewModel, IDataErrorInfo
+    class ClientDataPageViewModel : ObservableObject, IPageViewModel
     {
         private ClientDataPageModel _model;
-        private Dictionary<string, bool> _validProperties;
-
-        private void ValidateProperties()
-        {
-            foreach (bool isValid in _validProperties.Values)
-            {
-                if (!isValid)
-                {
-                    this.AllPropertiesValid = false;
-                    return;
-                }
-            }
-            this.AllPropertiesValid = true;
-        }
-
-        private bool allPropertiesValid = false;
-        public bool AllPropertiesValid
-        {
-            get { return allPropertiesValid; }
-            set
-            {
-                if (allPropertiesValid != value)
-                {
-                    allPropertiesValid = value;
-                    base.OnPropertyChanged("AllPropertiesValid");
-                }
-            }
-        }
 
         public ClientDataPageViewModel(ClientDataPageModel model)
         {
             _model = model;
-            _validProperties = new Dictionary<string, bool>();
-            _validProperties.Add("FirstName", false);
-            _validProperties.Add("LastName", false);
-            _validProperties.Add("City", false);
-            _validProperties.Add("ZipCode", false);
-            _validProperties.Add("Street", false);
-            _validProperties.Add("FlatNumber", false);
-            _validProperties.Add("PhoneNumber", false);
-            _validProperties.Add("PremiseNumber", false);
             _currentClient = new ClientModel();
-        }
-        public string Error
-        {
-            get { return (_model as IDataErrorInfo).Error; }
-        }
-
-        public string this[string propertyName]
-        {
-            get
-            {
-                string error = (_model as IDataErrorInfo)[propertyName];
-                _validProperties[propertyName] = String.IsNullOrEmpty(error) ? true : false;
-                ValidateProperties();
-                CommandManager.InvalidateRequerySuggested();
-                return error;
-            }
         }
 
         private ICommand _okButtonClickCommand;
@@ -252,7 +196,7 @@ namespace Pizza.Net.Screens.Pages
 
         private void AcceptChanges()
         {
-            System.Console.WriteLine();
+
         }
 
         private void CancelChanges()

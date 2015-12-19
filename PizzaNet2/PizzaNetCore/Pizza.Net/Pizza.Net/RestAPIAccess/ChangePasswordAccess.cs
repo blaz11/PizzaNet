@@ -1,4 +1,6 @@
-﻿using System.Net.Http.Headers;
+﻿using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
 namespace Pizza.Net.RestAPIAccess
@@ -34,6 +36,15 @@ namespace Pizza.Net.RestAPIAccess
     class ChangePasswordResponse
     {
         public string Message { get; set; }
-        public ModelState ModelState { get; set; }
+        public ModelStatePassword ModelState { get; set; }
+    }
+
+    class ModelStatePassword
+    {
+        [JsonProperty(PropertyName = "model.Password")]
+        public List<string> ModelPassword { get; set; }
+
+        [JsonProperty(PropertyName = "model.NewPassword")]
+        public List<string> ModelNewPassword { get; set; }
     }
 }

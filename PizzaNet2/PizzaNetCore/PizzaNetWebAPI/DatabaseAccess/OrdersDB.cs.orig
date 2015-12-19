@@ -1,16 +1,13 @@
-﻿using Pizza.Net.Domain.DatabaseAccess;
+﻿using PizzaNetCore;
 using System.Threading.Tasks;
-using System.Linq;
-using System;
-using PizzaNetCore;
-using System.Collections.Generic;
 
 namespace PizzaNetWebAPI.DatabaseAccess
 {
-    static public class OrdersDB
+    public class OrdersDB
     {
-        static public async Task<ClientOrdersModel> GetAllClientsOrders(string username)
+        public async Task<ClientOrdersModel> GetAllClientsOrders()
         {
+<<<<<<< HEAD
             var clientID = Convert.ToInt32(await ClientsDB.GetClientID(username));
             var dbACcess = new PizzaNetDbAccess();
             var f = new Func<DbOperationContext, IQueryable<Pizza.Net.Domain.Order>>((db) =>
@@ -50,6 +47,9 @@ namespace PizzaNetWebAPI.DatabaseAccess
             }
             result.Orders = ordersList;
             return result;
+=======
+            return null;
+>>>>>>> 87e87b671763e870d6ff0b45ffa8f49514e26b0f
         }
 
         static public async Task AddOrder(OrderModel order)

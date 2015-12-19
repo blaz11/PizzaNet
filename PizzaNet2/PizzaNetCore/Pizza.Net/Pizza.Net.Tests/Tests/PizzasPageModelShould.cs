@@ -9,7 +9,7 @@ namespace Pizza.Net.Tests.Tests
     [TestClass]
     public class PizzasPageModelShould
     {
-      /*  [TestInitialize]
+        [TestInitialize]
         public void Initialize()
         {
             Database.SetInitializer(new DropCreateDatabaseAlways<PizzaNetEntities>());
@@ -79,6 +79,6 @@ namespace Pizza.Net.Tests.Tests
             pizzaPageModel.Name = "NotVeryUniqueName";
             var result = pizzaPageModel.Edit(ingredients, 1);
             Assert.AreEqual(result, false);
-        }*/
+        }
     }
 }

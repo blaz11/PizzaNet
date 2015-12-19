@@ -19,6 +19,7 @@ namespace Pizza.Net.Domain
         {
             this.PizzaOrders = new HashSet<PizzaOrder>();
         }
+    
         public int IDOrder { get; set; }
         public int IDClient { get; set; }
         public System.DateTime StartOrderDate { get; set; }

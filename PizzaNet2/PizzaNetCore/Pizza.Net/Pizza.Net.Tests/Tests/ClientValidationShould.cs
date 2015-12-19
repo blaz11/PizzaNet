@@ -7,7 +7,7 @@ namespace Pizza.Net.Tests
     [TestClass]
     public class ClientValidationShould
     {
-      /*  [TestMethod]
+        [TestMethod]
         public void ValidateClient()
         {
             var clientData = new ClientModel();
@@ -102,6 +102,6 @@ namespace Pizza.Net.Tests
             clientData.ZipCode = GenerateBadZipCode();
             string error = clientData["ZipCode"];
             Assert.AreEqual(error, "Bad format.");
-        }*/
+        }
     }
 }

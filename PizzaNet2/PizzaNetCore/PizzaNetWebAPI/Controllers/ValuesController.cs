@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Web.Http;
+﻿using System.Web.Http;
 
 namespace PizzaNetWebAPI.Controllers
 {
@@ -13,7 +8,7 @@ namespace PizzaNetWebAPI.Controllers
         // GET api/values
         public TestValue Get()
         {
-            return new TestValue() { Value = "Wygralem" };
+            return new TestValue() { Value = User.Identity.Name };
         }
 
         // GET api/values/5
