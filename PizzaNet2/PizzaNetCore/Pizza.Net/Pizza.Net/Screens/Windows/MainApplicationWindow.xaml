@@ -1,0 +1,59 @@
+﻿<Controls:MetroWindow x:Class="Pizza.Net.Screens.MainApplicationWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:local="clr-namespace:Pizza.Net.Screens"
+        xmlns:pages="clr-namespace:Pizza.Net.Screens.Pages"
+        mc:Ignorable="d"
+        Title="MainApplicationWindow"
+        Height="900" 
+        Width="1200">
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type pages:OrderCreatorViewModel}">
+            <pages:OrderCreator />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type pages:OrdersPageViewModel}">
+            <pages:OrdersPage />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type pages:ClientDataPageViewModel}">
+            <pages:ClientDataPage />
+        </DataTemplate>
+    </Window.Resources>
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0" 
+                                 EndPoint="1,1">
+                <GradientStop Color="#136a8a" Offset="0"/>
+                <GradientStop Color="#2E4272" Offset="1.0"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0">
+            <ItemsControl ItemsSource="{Binding PageViewModels}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <UniformGrid Rows="1" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Button  Content="{Binding PageName}"
+                                 Command="{Binding DataContext.ChangePageCommand,
+                                    RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
+                                 CommandParameter="{Binding }"
+                                 FontSize="28"
+                                 Background="DarkOliveGreen"
+                                 Foreground="Beige"/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </StackPanel>
+        <ContentControl Grid.Row="1" 
+                        Content="{Binding CurrentPageViewModel}" />
+    </Grid>
+</Controls:MetroWindow>

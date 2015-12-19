@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="32fc999e36d74208bf03bb36e3e10062" Name="Diagram1">
+        <EntityTypeShape EntityType="PizzaNetEntitiesModels.C__MigrationHistory" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PizzaNetEntitiesModels.AspNetRole" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="PizzaNetEntitiesModels.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PizzaNetEntitiesModels.AspNetUserLogin" Width="1.5" PointX="5.25" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PizzaNetEntitiesModels.AspNetUser" Width="1.5" PointX="3" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PizzaNetEntitiesModels.Client" Width="1.5" PointX="6" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PizzaNetEntitiesModels.ClientsAspNetUser" Width="1.5" PointX="8.25" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PizzaNetEntitiesModels.Ingredient" Width="1.5" PointX="8.25" PointY="19.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PizzaNetEntitiesModels.Order" Width="1.5" PointX="8.25" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PizzaNetEntitiesModels.PizzaIngredient" Width="1.5" PointX="10.5" PointY="13.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PizzaNetEntitiesModels.PizzaOrder" Width="1.5" PointX="10.5" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PizzaNetEntitiesModels.Pizza" Width="1.5" PointX="8.25" PointY="13.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PizzaNetEntitiesModels.Size" Width="1.5" PointX="8.25" PointY="16.125" IsExpanded="true" />
+        <AssociationConnector Association="PizzaNetEntitiesModels.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="PizzaNetEntitiesModels.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="PizzaNetEntitiesModels.FK__ClientsAs__IdAsp__3F466844" ManuallyRouted="false" />
+        <AssociationConnector Association="PizzaNetEntitiesModels.FK__ClientsAs__IDCli__3E52440B" ManuallyRouted="false" />
+        <AssociationConnector Association="PizzaNetEntitiesModels.FK__Orders__IDClient__4222D4EF" ManuallyRouted="false" />
+        <AssociationConnector Association="PizzaNetEntitiesModels.FK__PizzaIngr__IDIng__4D94879B" ManuallyRouted="false" />
+        <AssociationConnector Association="PizzaNetEntitiesModels.FK__PizzaOrde__IDOrd__5165187F" ManuallyRouted="false" />
+        <AssociationConnector Association="PizzaNetEntitiesModels.FK__PizzaIngr__IDPiz__4E88ABD4" ManuallyRouted="false" />
+        <AssociationConnector Association="PizzaNetEntitiesModels.FK__PizzaOrde__IDPiz__534D60F1" ManuallyRouted="false" />
+        <AssociationConnector Association="PizzaNetEntitiesModels.FK__PizzaOrde__IDSiz__52593CB8" ManuallyRouted="false" />
+        <AssociationConnector Association="PizzaNetEntitiesModels.AspNetUserRoles" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

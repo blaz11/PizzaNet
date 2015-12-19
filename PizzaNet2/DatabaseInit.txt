@@ -1,0 +1,187 @@
+CREATE TABLE [dbo].[AspNetUsers] (
+    [Id]                   NVARCHAR (128) NOT NULL,
+    [Email]                NVARCHAR (256) NULL,
+    [EmailConfirmed]       BIT            NOT NULL,
+    [PasswordHash]         NVARCHAR (MAX) NULL,
+    [SecurityStamp]        NVARCHAR (MAX) NULL,
+    [PhoneNumber]          NVARCHAR (MAX) NULL,
+    [PhoneNumberConfirmed] BIT            NOT NULL,
+    [TwoFactorEnabled]     BIT            NOT NULL,
+    [LockoutEndDateUtc]    DATETIME       NULL,
+    [LockoutEnabled]       BIT            NOT NULL,
+    [AccessFailedCount]    INT            NOT NULL,
+    [UserName]             NVARCHAR (256) NOT NULL,
+    CONSTRAINT [PK_dbo.AspNetUsers] PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+
+GO
+CREATE UNIQUE NONCLUSTERED INDEX [UserNameIndex]
+    ON [dbo].[AspNetUsers]([UserName] ASC);
+
+CREATE TABLE [dbo].[__MigrationHistory] (
+    [MigrationId]    NVARCHAR (150)  NOT NULL,
+    [ContextKey]     NVARCHAR (300)  NOT NULL,
+    [Model]          VARBINARY (MAX) NOT NULL,
+    [ProductVersion] NVARCHAR (32)   NOT NULL,
+    CONSTRAINT [PK_dbo.__MigrationHistory] PRIMARY KEY CLUSTERED ([MigrationId] ASC, [ContextKey] ASC)
+);
+
+CREATE TABLE [dbo].[AspNetRoles] (
+    [Id]   NVARCHAR (128) NOT NULL,
+    [Name] NVARCHAR (256) NOT NULL,
+    CONSTRAINT [PK_dbo.AspNetRoles] PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+
+GO
+CREATE UNIQUE NONCLUSTERED INDEX [RoleNameIndex]
+    ON [dbo].[AspNetRoles]([Name] ASC);
+	
+CREATE TABLE [dbo].[AspNetUserClaims] (
+    [Id]         INT            IDENTITY (1, 1) NOT NULL,
+    [UserId]     NVARCHAR (128) NOT NULL,
+    [ClaimType]  NVARCHAR (MAX) NULL,
+    [ClaimValue] NVARCHAR (MAX) NULL,
+    CONSTRAINT [PK_dbo.AspNetUserClaims] PRIMARY KEY CLUSTERED ([Id] ASC),
+    CONSTRAINT [FK_dbo.AspNetUserClaims_dbo.AspNetUsers_UserId] FOREIGN KEY ([UserId]) REFERENCES [dbo].[AspNetUsers] ([Id]) ON DELETE CASCADE
+);
+
+GO
+CREATE NONCLUSTERED INDEX [IX_UserId]
+    ON [dbo].[AspNetUserClaims]([UserId] ASC);
+
+CREATE TABLE [dbo].[AspNetUserLogins] (
+    [LoginProvider] NVARCHAR (128) NOT NULL,
+    [ProviderKey]   NVARCHAR (128) NOT NULL,
+    [UserId]        NVARCHAR (128) NOT NULL,
+    CONSTRAINT [PK_dbo.AspNetUserLogins] PRIMARY KEY CLUSTERED ([LoginProvider] ASC, [ProviderKey] ASC, [UserId] ASC),
+    CONSTRAINT [FK_dbo.AspNetUserLogins_dbo.AspNetUsers_UserId] FOREIGN KEY ([UserId]) REFERENCES [dbo].[AspNetUsers] ([Id]) ON DELETE CASCADE
+);
+
+GO
+CREATE NONCLUSTERED INDEX [IX_UserId]
+    ON [dbo].[AspNetUserLogins]([UserId] ASC);
+
+CREATE TABLE [dbo].[AspNetUserRoles] (
+    [UserId] NVARCHAR (128) NOT NULL,
+    [RoleId] NVARCHAR (128) NOT NULL,
+    CONSTRAINT [PK_dbo.AspNetUserRoles] PRIMARY KEY CLUSTERED ([UserId] ASC, [RoleId] ASC),
+    CONSTRAINT [FK_dbo.AspNetUserRoles_dbo.AspNetRoles_RoleId] FOREIGN KEY ([RoleId]) REFERENCES [dbo].[AspNetRoles] ([Id]) ON DELETE CASCADE,
+    CONSTRAINT [FK_dbo.AspNetUserRoles_dbo.AspNetUsers_UserId] FOREIGN KEY ([UserId]) REFERENCES [dbo].[AspNetUsers] ([Id]) ON DELETE CASCADE
+);
+
+GO
+CREATE NONCLUSTERED INDEX [IX_UserId]
+    ON [dbo].[AspNetUserRoles]([UserId] ASC);
+
+GO
+CREATE NONCLUSTERED INDEX [IX_RoleId]
+    ON [dbo].[AspNetUserRoles]([RoleId] ASC);
+	
+CREATE TABLE [dbo].[Clients] (
+    [IDClient]      INT          IDENTITY (1, 1) NOT NULL,
+    [LastName]      VARCHAR (30) NOT NULL,
+    [FirstName]     VARCHAR (30) NOT NULL,
+    [PhoneNumber]   VARCHAR (30) NOT NULL,
+    [City]          VARCHAR (30) NOT NULL,
+    [Street]        VARCHAR (30) NOT NULL,
+    [ZipCode]       VARCHAR (30) NULL,
+    [PremiseNumber] VARCHAR (20) NOT NULL,
+    [FlatNumber]    VARCHAR (20) NULL,
+    PRIMARY KEY CLUSTERED ([IDClient] ASC)
+);
+	
+CREATE TABLE [dbo].[ClientsAspNetUsers](
+    [IDClientsAspNetUsers] INT IDENTITY (1, 1) NOT NULL,
+    [IDClient]           INT NOT NULL,
+    [IdAspNetUsers]      NVARCHAR (128) NOT NULL,
+    PRIMARY KEY CLUSTERED ([IDClientsAspNetUsers] ASC),
+    FOREIGN KEY ([IDClient]) REFERENCES [dbo].[Clients] ([IDClient]),
+    FOREIGN KEY ([IdAspNetUsers]) REFERENCES [dbo].[AspNetUsers] ([Id])
+);
+
+CREATE TABLE [dbo].[Orders] (
+    [IDOrder]         INT  IDENTITY (1, 1) NOT NULL,
+    [IDClient]        INT  NOT NULL,
+    [StartOrderDate]  DATETIME NOT NULL,
+    [FinishOrderDate] DATETIME NOT NULL,
+    PRIMARY KEY CLUSTERED ([IDOrder] ASC),
+    FOREIGN KEY ([IDClient]) REFERENCES [dbo].[Clients] ([IDClient]),
+);
+
+CREATE TABLE [dbo].[Sizes] (
+    [IDSize]     INT          IDENTITY (1, 1) NOT NULL,
+    [Name]       VARCHAR (20) NOT NULL,
+    [RadiusInCm] SMALLINT     NOT NULL,
+	[BasePriceMultiplier] SMALLINT NOT NULL,
+    PRIMARY KEY CLUSTERED ([IDSize] ASC),
+    UNIQUE NONCLUSTERED ([Name] ASC)
+);
+
+
+CREATE TABLE [dbo].[Ingredients] (
+    [IDIngredient] INT          IDENTITY (1, 1) NOT NULL,
+    [Name]         VARCHAR (20) NOT NULL,
+    PRIMARY KEY CLUSTERED ([IDIngredient] ASC),
+    UNIQUE NONCLUSTERED ([Name] ASC)
+);
+
+CREATE TABLE [dbo].[Pizzas] (
+    [IDPizza] INT          IDENTITY (1, 1) NOT NULL,
+    [Name]    VARCHAR (20) NOT NULL,
+    [Price]   SMALLMONEY   NOT NULL,
+    PRIMARY KEY CLUSTERED ([IDPizza] ASC),
+    UNIQUE NONCLUSTERED ([Name] ASC)
+);
+
+CREATE TABLE [dbo].[PizzaIngredients] (
+    [IDPizzaIngredient] INT IDENTITY (1, 1) NOT NULL,
+    [IDPizza]           INT NOT NULL,
+    [IDIngredient]      INT NOT NULL,
+    PRIMARY KEY CLUSTERED ([IDPizzaIngredient] ASC),
+    FOREIGN KEY ([IDIngredient]) REFERENCES [dbo].[Ingredients] ([IDIngredient]),
+    FOREIGN KEY ([IDPizza]) REFERENCES [dbo].[Pizzas] ([IDPizza])
+);
+
+CREATE TABLE [dbo].[PizzaOrders] (
+    [IDPizzaOrder] INT IDENTITY (1, 1) NOT NULL,
+    [IDOrder]      INT NOT NULL,
+    [IDPizza]      INT NOT NULL,
+    [IDSize]       INT NOT NULL,
+    PRIMARY KEY CLUSTERED ([IDPizzaOrder] ASC),
+    FOREIGN KEY ([IDOrder]) REFERENCES [dbo].[Orders] ([IDOrder]),
+    FOREIGN KEY ([IDSize]) REFERENCES [dbo].[Sizes] ([IDSize]),
+    FOREIGN KEY ([IDPizza]) REFERENCES [dbo].[Pizzas] ([IDPizza])
+);
+
+INSERT INTO Ingredients
+VALUES ('Ham');
+
+INSERT INTO Ingredients
+VALUES ('Salami');
+
+INSERT INTO Ingredients
+VALUES ('Cheese');
+
+INSERT INTO Ingredients
+VALUES ('Pineapple');
+
+INSERT INTO Ingredients
+VALUES ('Tomatoes');
+
+INSERT INTO Ingredients
+VALUES ('Grilled Chicken');
+
+INSERT INTO Ingredients
+VALUES ('Corn');
+
+INSERT INTO Sizes
+VALUES ('Small', '25',1);
+
+INSERT INTO Sizes
+VALUES ('Medium', '27',2);
+
+INSERT INTO Sizes
+VALUES ('Large', '29',3);
+
+INSERT INTO Sizes
+VALUES ('Extra Large', '31',4);

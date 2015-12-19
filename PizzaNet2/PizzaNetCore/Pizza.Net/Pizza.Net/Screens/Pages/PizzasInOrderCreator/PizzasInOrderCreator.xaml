@@ -1,0 +1,56 @@
+﻿<UserControl x:Class="Pizza.Net.Screens.Pages.PizzasInOrderCreator"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Pizza.Net.Screens.Pages"
+             xmlns:tables="clr-namespace:Pizza.Net.Screens.Tables"
+             mc:Ignorable="d" 
+             d:DesignHeight="1000" d:DesignWidth="1000">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/Screens/Pages/Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <StackPanel>
+        <TextBlock Text="Selected pizzas"
+                   Style="{StaticResource TabelLabelTextBlockStyle}"/>
+        <tables:PizzasTable DataContext="{Binding SelectedPizzasViewModel}" 
+                            MaxHeight="300"/>
+        <TextBlock Text="Select pizzas"
+                   Style="{StaticResource TabelLabelTextBlockStyle}"/>
+        <StackPanel Orientation="Horizontal"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center">
+            <StackPanel>
+                <TextBlock Text="Select a pizza"
+                   Style="{StaticResource TabelLabelTextBlockStyle}"/>
+                <tables:PizzasTable DataContext="{Binding SearchPizzasViewModel}" 
+                                    Margin="20"
+                                    MaxHeight="500"/>
+            </StackPanel>
+            <StackPanel>
+                <TextBlock Text="Select size"
+                   Style="{StaticResource TabelLabelTextBlockStyle}"/>
+                <tables:SizesTable DataContext="{Binding SizesTableViewModel}"
+                                   Margin="20"
+                                   MaxHeight="500"/>
+            </StackPanel>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center">
+            <Button Content="Add pizza to order"
+                    Command="{Binding AddPizzaCommands}"
+                    FontSize="18"/>
+            <Button Content="Remove pizza from order"
+                     Command="{Binding RemovePizzaCommand}"
+                     FontSize="18"/>
+            <Button Content="Refresh"
+                     Command="{Binding RefreshCommand}"
+                     FontSize="18"/>
+        </StackPanel>
+    </StackPanel>
+</UserControl>
