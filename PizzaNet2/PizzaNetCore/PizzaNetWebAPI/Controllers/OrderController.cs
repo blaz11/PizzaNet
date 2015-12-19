@@ -25,7 +25,7 @@ namespace PizzaNetWebAPI.Controllers
 
 
         // POST: api/Order
-        public IHttpActionResult Post([FromBody]string value)
+        public IHttpActionResult Post(IEnumerable<OrderModel> value)
         {
             OrderModel ord = new OrderModel();
 

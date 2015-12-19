@@ -23,7 +23,7 @@ namespace PizzaNetWebAPI.Controllers
             return Ok();
         }
         // PUT: api/Client/5
-        public IHttpActionResult Put(int id, [FromBody]string value)
+        public IHttpActionResult Put(ClientModel value)
         {
             ClientModel client = new ClientModel();
             return Ok();

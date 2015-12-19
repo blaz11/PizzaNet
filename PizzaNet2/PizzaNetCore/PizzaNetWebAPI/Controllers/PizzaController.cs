@@ -11,15 +11,12 @@ namespace PizzaNetWebAPI.Controllers
     public class PizzaController : ApiController
     {
         // GET: api/Pizza
-        public IHttpActionResult Get()
+        public IEnumerable<PizzaModel> Get()
         {
             List<PizzaModel> ord = null;
 
-            if (ord == null)
-            {
-                return NotFound();
-            }
-            return Ok();
+
+            return ord;
         }
 
      //asdfasdfasdfasdf
