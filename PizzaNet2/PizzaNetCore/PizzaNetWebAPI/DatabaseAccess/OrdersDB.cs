@@ -11,7 +11,9 @@ namespace PizzaNetWebAPI.DatabaseAccess
     {
         static public async Task<ClientOrdersModel> GetAllClientsOrders(string username)
         {
-            var clientID = Convert.ToInt32(await ClientsDB.GetClientID(username));
+            var clientID = await ClientsDB.GetClientID(username);
+            if (clientID == -1)
+                return null;
             var dbACcess = new PizzaNetDbAccess();
             var f = new Func<DbOperationContext, IQueryable<Pizza.Net.Domain.Order>>((db) =>
             {
@@ -55,6 +57,22 @@ namespace PizzaNetWebAPI.DatabaseAccess
         static public async Task AddOrder(OrderModel order)
         {
             var dbACcess = new PizzaNetDbAccess();
+            var orderEntity = new Pizza.Net.Domain.Order();
+            orderEntity.FinishOrderDate = order.FinishOrderDate;
+            orderEntity.StartOrderDate = order.StartOrderDate;
+            var pizzaOrderEntities = new List<Pizza.Net.Domain.PizzaOrder>();
+            await dbACcess.ExecuteInTransactionAsync((db) =>
+            {
+                foreach (var pizza in order.Pizzas)
+                {
+                    var pizzaOrderEntity = new Pizza.Net.Domain.PizzaOrder();
+                    pizzaOrderEntity.Size = db.Entities.Sizes.Where(p => p.Name == pizza.SizeModel.Name).First();
+                    pizzaOrderEntity.Pizza = db.Entities.Pizzas.Where(p => p.Name == pizza.PizzaModel.Name).First();
+                    pizzaOrderEntities.Add(pizzaOrderEntity);
+                }
+                orderEntity.PizzaOrders = pizzaOrderEntities;
+                db.Entities.Orders.Add(orderEntity);
+            });
         }
     }
 }

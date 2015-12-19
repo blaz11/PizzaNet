@@ -8,16 +8,16 @@ namespace PizzaNetWebAPI.DatabaseAccess
 {
     static public class ClientsDB
     {
-        static public async Task<string> GetClientID(string username)
+        static public async Task<int> GetClientID(string username)
         {
             var dbACcess = new PizzaNetDbAccess();
-            var t = new Func<DbOperationContext, string>((db) =>
+            var t = new Func<DbOperationContext, int>((db) =>
             {
                 var user = db.Entities.AspNetUsers.Where(p => p.UserName == username);
                 if (user.Count() != 1)
-                    return null;
+                    return -1;
                 var userEntity = user.First();
-                return userEntity.ClientsAspNetUsers.First().Client.IDClient.ToString();
+                return userEntity.ClientsAspNetUsers.First().Client.IDClient;
             });
             var result = await dbACcess.ExecuteInTransactionAsync(t);
             return result;
