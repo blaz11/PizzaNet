@@ -10,8 +10,8 @@ namespace Pizza.Net.Screens.Pages
 
         public ClientDataPageViewModel(ClientDataPageModel model)
         {
-            _model = model;
-            _currentClient = model.CurrentClient;
+            _currentClient = new ClientModel();
+            model.CurrentClient = _currentClient;
         }
 
         private ICommand _okButtonClickCommand;
