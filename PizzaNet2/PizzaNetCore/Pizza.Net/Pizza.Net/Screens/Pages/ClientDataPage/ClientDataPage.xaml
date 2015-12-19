@@ -78,7 +78,7 @@
                        Style="{StaticResource LabelTextBlockStyle}"/>
             <TextBox Grid.Column="1"
                      Grid.Row="7"
-                     Text="{Binding FlatNumber, UpdateSourceTrigger=PropertyChanged}"/>
+                     Text="{Binding FlatNumber, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"/>
             <TextBlock Text="Phone Number:"
                        Grid.Column="0"
                        Grid.Row="8"
