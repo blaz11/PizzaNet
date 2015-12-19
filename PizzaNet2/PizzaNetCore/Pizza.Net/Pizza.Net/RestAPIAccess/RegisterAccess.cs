@@ -37,5 +37,8 @@ namespace Pizza.Net.RestAPIAccess
 
         [JsonProperty(PropertyName = "model.Password")]
         public List<string> ModelPassword { get; set; }
+
+        [JsonProperty(PropertyName = "model.NewPassword")]
+        public List<string> ModelNewPassword { get; set; }
     }
 }
