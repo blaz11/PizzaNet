@@ -2,7 +2,7 @@
 
 namespace PizzaNetCore
 {
-    class MenuModel
+    public class MenuModel
     {
         public IEnumerable<PizzaModel> Pizzas { get; set; }
     }

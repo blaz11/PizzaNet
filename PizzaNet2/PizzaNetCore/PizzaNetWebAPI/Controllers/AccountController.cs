@@ -15,6 +15,7 @@ using Microsoft.Owin.Security.OAuth;
 using PizzaNetWebAPI.Models;
 using PizzaNetWebAPI.Providers;
 using PizzaNetWebAPI.Results;
+using PizzaNetWebAPI.DatabaseAccess;
 
 namespace PizzaNetWebAPI.Controllers
 {
@@ -335,6 +336,8 @@ namespace PizzaNetWebAPI.Controllers
             {
                 return GetErrorResult(result);
             }
+
+            ClientsDB.AddClient(model.Email);
 
             return Ok();
         }

@@ -23,7 +23,7 @@ namespace PizzaNetWebAPI.DatabaseAccess
             return result;
         }
 
-        static public async Task<ClientModel> GetClientModel(string username)
+        static public ClientModel GetClientModel(string username)
         {
             var dbACcess = new PizzaNetDbAccess();
             var t = new Func<DbOperationContext, Pizza.Net.Domain.Client>((db) =>
@@ -34,7 +34,7 @@ namespace PizzaNetWebAPI.DatabaseAccess
                     return null;
                 return cu.First().Client;
             });
-            var result = await dbACcess.ExecuteInTransactionAsync(t);
+            var result = dbACcess.ExecuteInTransaction(t);
             if (result == null)
                 return null;
             var clientModel = new ClientModel();
@@ -49,16 +49,25 @@ namespace PizzaNetWebAPI.DatabaseAccess
             return clientModel;
         }
 
-        static public async Task AddClient(string username)
+        static public void AddClient(string username)
         {
             var dbACcess = new PizzaNetDbAccess();
-            await dbACcess.ExecuteInTransactionAsync((db) => 
+            dbACcess.ExecuteInTransaction((db) =>
             {
-                var userID = db.Entities.AspNetUsers.Where(p => p.UserName == username).First().Id;
+                var user = db.Entities.AspNetUsers.Where(p => p.UserName == username).First();
                 var client = new Pizza.Net.Domain.Client();
+                client.FirstName = " ";
+                client.LastName = " ";
+                client.PhoneNumber = " ";
+                client.PremiseNumber = " ";
+                client.City = " ";
+                client.Street = " ";
+                client.ZipCode = " ";
                 client = db.Entities.Clients.Add(client);
                 var clientUser = new Pizza.Net.Domain.ClientsAspNetUser();
-                clientUser.IdAspNetUsers = userID;
+                clientUser.AspNetUser = user;
+                clientUser.IdAspNetUsers = user.Id;
+                clientUser.Client = client;
                 clientUser.IDClient = client.IDClient;
                 db.Entities.ClientsAspNetUsers.Add(clientUser);
             });

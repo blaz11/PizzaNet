@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\John\Desktop\PizzaNet2\PizzaNetCore\Pizza.Net\Pizza.Net.Domain\PizzaNetEntities.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\John\Desktop\PizzaNet2Git\PizzaNet2\PizzaNetCore\Pizza.Net\Pizza.Net.Domain\PizzaNetEntities.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

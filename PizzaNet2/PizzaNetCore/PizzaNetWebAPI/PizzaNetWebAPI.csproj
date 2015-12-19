@@ -18,7 +18,7 @@
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
-    <IISExpressSSLPort />
+    <IISExpressSSLPort>44300</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -215,6 +215,7 @@
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="DatabaseAccess\ClientsDB.cs" />
     <Compile Include="DatabaseAccess\OrdersDB.cs" />
+    <Compile Include="DatabaseAccess\PizzasDB.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

@@ -131,6 +131,7 @@
     <Compile Include="Helpers\RelayCommand.cs" />
     <Compile Include="Helpers\ObservableObject.cs" />
     <Compile Include="RestAPIAccess\ChangePasswordAccess.cs" />
+    <Compile Include="RestAPIAccess\ClientAccess.cs" />
     <Compile Include="RestAPIAccess\RegisterAccess.cs" />
     <Compile Include="RestAPIAccess\TokenProvider.cs" />
     <Compile Include="RestAPIAccess\UserSingleton.cs" />
