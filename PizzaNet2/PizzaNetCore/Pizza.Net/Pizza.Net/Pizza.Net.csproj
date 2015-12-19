@@ -154,6 +154,7 @@
     <Compile Include="Screens\Pages\RegisterPage\RegisterPage.xaml.cs">
       <DependentUpon>RegisterPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Screens\Pages\RegisterPage\RegisterPageModel.cs" />
     <Compile Include="Screens\Pages\RegisterPage\RegisterPageViewModel.cs" />
     <Compile Include="Screens\Tables\ClientsTable.xaml.cs">
       <DependentUpon>ClientsTable.xaml</DependentUpon>

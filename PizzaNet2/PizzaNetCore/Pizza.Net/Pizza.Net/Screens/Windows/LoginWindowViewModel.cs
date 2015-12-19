@@ -10,7 +10,7 @@ namespace Pizza.Net.Screens.Windows
         public LoginWindowViewModel()
         {
             var loginPageViewModel = new LoginPageViewModel();
-            var registerPageViewModel = new RegisterPageViewModel();
+            var registerPageViewModel = new RegisterPageViewModel(new RegisterPageModel());
             PageViewModels.Add(loginPageViewModel);
             PageViewModels.Add(registerPageViewModel);
             CurrentPageViewModel = loginPageViewModel;
