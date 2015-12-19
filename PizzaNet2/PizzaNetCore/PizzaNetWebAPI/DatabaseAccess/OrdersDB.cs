@@ -26,7 +26,7 @@ namespace PizzaNetWebAPI.DatabaseAccess
                 order.FinishOrderDate = item.FinishOrderDate;
                 order.StartOrderDate = item.StartOrderDate;
                 var pizzasList = new List<PizzaInOrderModel>();
-                foreach(var pizza in item.PizzaOrders)
+                foreach (var pizza in item.PizzaOrders)
                 {
                     var pizzaModel = new PizzaInOrderModel();
                     pizzaModel.PizzaModel = new PizzaModel();
@@ -36,7 +36,7 @@ namespace PizzaNetWebAPI.DatabaseAccess
                     pizzaModel.SizeModel.Radius = pizza.Size.RadiusInCm;
                     pizzaModel.PizzaModel.Name = pizza.Pizza.Name;
                     var ingList = new List<IngeredientModel>();
-                    foreach(var ingredient in pizza.Pizza.PizzaIngredients)
+                    foreach (var ingredient in pizza.Pizza.PizzaIngredients)
                     {
                         var ing = new IngeredientModel();
                         ing.Name = ingredient.Ingredient.Name;
@@ -50,6 +50,11 @@ namespace PizzaNetWebAPI.DatabaseAccess
             }
             result.Orders = ordersList;
             return result;
+        }
+
+        static public async Task AddOrder(OrderModel order)
+        {
+            var dbACcess = new PizzaNetDbAccess();
         }
     }
 }
