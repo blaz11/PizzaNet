@@ -1,0 +1,868 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="PizzaNetEntitiesModels.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaims">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ClaimType" Type="nvarchar(max)" />
+          <Property Name="ClaimValue" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogins">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserRoles">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="datetime" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Clients">
+          <Key>
+            <PropertyRef Name="IDClient" />
+          </Key>
+          <Property Name="IDClient" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LastName" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="PhoneNumber" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="City" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Street" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="ZipCode" Type="varchar" MaxLength="30" />
+          <Property Name="PremiseNumber" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="FlatNumber" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="ClientsAspNetUsers">
+          <Key>
+            <PropertyRef Name="IDClientsAspNetUsers" />
+          </Key>
+          <Property Name="IDClientsAspNetUsers" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDClient" Type="int" Nullable="false" />
+          <Property Name="IdAspNetUsers" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ingredients">
+          <Key>
+            <PropertyRef Name="IDIngredient" />
+          </Key>
+          <Property Name="IDIngredient" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="IDOrder" />
+          </Key>
+          <Property Name="IDOrder" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDClient" Type="int" Nullable="false" />
+          <Property Name="StartOrderDate" Type="datetime" Nullable="false" />
+          <Property Name="FinishOrderDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PizzaIngredients">
+          <Key>
+            <PropertyRef Name="IDPizzaIngredient" />
+          </Key>
+          <Property Name="IDPizzaIngredient" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDPizza" Type="int" Nullable="false" />
+          <Property Name="IDIngredient" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PizzaOrders">
+          <Key>
+            <PropertyRef Name="IDPizzaOrder" />
+          </Key>
+          <Property Name="IDPizzaOrder" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDOrder" Type="int" Nullable="false" />
+          <Property Name="IDPizza" Type="int" Nullable="false" />
+          <Property Name="IDSize" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Pizzas">
+          <Key>
+            <PropertyRef Name="IDPizza" />
+          </Key>
+          <Property Name="IDPizza" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Price" Type="smallmoney" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sizes">
+          <Key>
+            <PropertyRef Name="IDSize" />
+          </Key>
+          <Property Name="IDSize" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="RadiusInCm" Type="smallint" Nullable="false" />
+          <Property Name="BasePriceMultiplier" Type="smallint" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__ClientsAs__IdAsp__3F466844">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="ClientsAspNetUsers" Type="Self.ClientsAspNetUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClientsAspNetUsers">
+              <PropertyRef Name="IdAspNetUsers" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ClientsAs__IDCli__3E52440B">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="ClientsAspNetUsers" Type="Self.ClientsAspNetUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="IDClient" />
+            </Principal>
+            <Dependent Role="ClientsAspNetUsers">
+              <PropertyRef Name="IDClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orders__IDClient__4222D4EF">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="IDClient" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="IDClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PizzaIngr__IDIng__4D94879B">
+          <End Role="Ingredients" Type="Self.Ingredients" Multiplicity="1" />
+          <End Role="PizzaIngredients" Type="Self.PizzaIngredients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ingredients">
+              <PropertyRef Name="IDIngredient" />
+            </Principal>
+            <Dependent Role="PizzaIngredients">
+              <PropertyRef Name="IDIngredient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PizzaIngr__IDPiz__4E88ABD4">
+          <End Role="Pizzas" Type="Self.Pizzas" Multiplicity="1" />
+          <End Role="PizzaIngredients" Type="Self.PizzaIngredients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pizzas">
+              <PropertyRef Name="IDPizza" />
+            </Principal>
+            <Dependent Role="PizzaIngredients">
+              <PropertyRef Name="IDPizza" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PizzaOrde__IDOrd__5165187F">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
+          <End Role="PizzaOrders" Type="Self.PizzaOrders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="IDOrder" />
+            </Principal>
+            <Dependent Role="PizzaOrders">
+              <PropertyRef Name="IDOrder" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PizzaOrde__IDPiz__534D60F1">
+          <End Role="Pizzas" Type="Self.Pizzas" Multiplicity="1" />
+          <End Role="PizzaOrders" Type="Self.PizzaOrders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pizzas">
+              <PropertyRef Name="IDPizza" />
+            </Principal>
+            <Dependent Role="PizzaOrders">
+              <PropertyRef Name="IDPizza" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PizzaOrde__IDSiz__52593CB8">
+          <End Role="Sizes" Type="Self.Sizes" Multiplicity="1" />
+          <End Role="PizzaOrders" Type="Self.PizzaOrders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sizes">
+              <PropertyRef Name="IDSize" />
+            </Principal>
+            <Dependent Role="PizzaOrders">
+              <PropertyRef Name="IDSize" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PizzaNetEntitiesModelsStoreContainer">
+          <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Clients" EntityType="Self.Clients" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClientsAspNetUsers" EntityType="Self.ClientsAspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ingredients" EntityType="Self.Ingredients" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PizzaIngredients" EntityType="Self.PizzaIngredients" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PizzaOrders" EntityType="Self.PizzaOrders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pizzas" EntityType="Self.Pizzas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sizes" EntityType="Self.Sizes" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__ClientsAs__IdAsp__3F466844" Association="Self.FK__ClientsAs__IdAsp__3F466844">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="ClientsAspNetUsers" EntitySet="ClientsAspNetUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ClientsAs__IDCli__3E52440B" Association="Self.FK__ClientsAs__IDCli__3E52440B">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="ClientsAspNetUsers" EntitySet="ClientsAspNetUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orders__IDClient__4222D4EF" Association="Self.FK__Orders__IDClient__4222D4EF">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PizzaIngr__IDIng__4D94879B" Association="Self.FK__PizzaIngr__IDIng__4D94879B">
+            <End Role="Ingredients" EntitySet="Ingredients" />
+            <End Role="PizzaIngredients" EntitySet="PizzaIngredients" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PizzaIngr__IDPiz__4E88ABD4" Association="Self.FK__PizzaIngr__IDPiz__4E88ABD4">
+            <End Role="Pizzas" EntitySet="Pizzas" />
+            <End Role="PizzaIngredients" EntitySet="PizzaIngredients" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PizzaOrde__IDOrd__5165187F" Association="Self.FK__PizzaOrde__IDOrd__5165187F">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="PizzaOrders" EntitySet="PizzaOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PizzaOrde__IDPiz__534D60F1" Association="Self.FK__PizzaOrde__IDPiz__534D60F1">
+            <End Role="Pizzas" EntitySet="Pizzas" />
+            <End Role="PizzaOrders" EntitySet="PizzaOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PizzaOrde__IDSiz__52593CB8" Association="Self.FK__PizzaOrde__IDSiz__52593CB8">
+            <End Role="Sizes" EntitySet="Sizes" />
+            <End Role="PizzaOrders" EntitySet="PizzaOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PizzaNetEntitiesModels" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="C__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaim">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogin">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProviderKey" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
+          <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
+          <NavigationProperty Name="ClientsAspNetUsers" Relationship="Self.FK__ClientsAs__IdAsp__3F466844" FromRole="AspNetUsers" ToRole="ClientsAspNetUsers" />
+          <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="IDClient" />
+          </Key>
+          <Property Name="IDClient" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LastName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="City" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Street" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ZipCode" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="PremiseNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FlatNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ClientsAspNetUsers" Relationship="Self.FK__ClientsAs__IDCli__3E52440B" FromRole="Clients" ToRole="ClientsAspNetUsers" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK__Orders__IDClient__4222D4EF" FromRole="Clients" ToRole="Orders" />
+        </EntityType>
+        <EntityType Name="ClientsAspNetUser">
+          <Key>
+            <PropertyRef Name="IDClientsAspNetUsers" />
+          </Key>
+          <Property Name="IDClientsAspNetUsers" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDClient" Type="Int32" Nullable="false" />
+          <Property Name="IdAspNetUsers" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK__ClientsAs__IdAsp__3F466844" FromRole="ClientsAspNetUsers" ToRole="AspNetUsers" />
+          <NavigationProperty Name="Client" Relationship="Self.FK__ClientsAs__IDCli__3E52440B" FromRole="ClientsAspNetUsers" ToRole="Clients" />
+        </EntityType>
+        <EntityType Name="Ingredient">
+          <Key>
+            <PropertyRef Name="IDIngredient" />
+          </Key>
+          <Property Name="IDIngredient" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="PizzaIngredients" Relationship="Self.FK__PizzaIngr__IDIng__4D94879B" FromRole="Ingredients" ToRole="PizzaIngredients" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="IDOrder" />
+          </Key>
+          <Property Name="IDOrder" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDClient" Type="Int32" Nullable="false" />
+          <Property Name="StartOrderDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FinishOrderDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Client" Relationship="Self.FK__Orders__IDClient__4222D4EF" FromRole="Orders" ToRole="Clients" />
+          <NavigationProperty Name="PizzaOrders" Relationship="Self.FK__PizzaOrde__IDOrd__5165187F" FromRole="Orders" ToRole="PizzaOrders" />
+        </EntityType>
+        <EntityType Name="PizzaIngredient">
+          <Key>
+            <PropertyRef Name="IDPizzaIngredient" />
+          </Key>
+          <Property Name="IDPizzaIngredient" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDPizza" Type="Int32" Nullable="false" />
+          <Property Name="IDIngredient" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Ingredient" Relationship="Self.FK__PizzaIngr__IDIng__4D94879B" FromRole="PizzaIngredients" ToRole="Ingredients" />
+          <NavigationProperty Name="Pizza" Relationship="Self.FK__PizzaIngr__IDPiz__4E88ABD4" FromRole="PizzaIngredients" ToRole="Pizzas" />
+        </EntityType>
+        <EntityType Name="PizzaOrder">
+          <Key>
+            <PropertyRef Name="IDPizzaOrder" />
+          </Key>
+          <Property Name="IDPizzaOrder" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDOrder" Type="Int32" Nullable="false" />
+          <Property Name="IDPizza" Type="Int32" Nullable="false" />
+          <Property Name="IDSize" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Order" Relationship="Self.FK__PizzaOrde__IDOrd__5165187F" FromRole="PizzaOrders" ToRole="Orders" />
+          <NavigationProperty Name="Pizza" Relationship="Self.FK__PizzaOrde__IDPiz__534D60F1" FromRole="PizzaOrders" ToRole="Pizzas" />
+          <NavigationProperty Name="Size" Relationship="Self.FK__PizzaOrde__IDSiz__52593CB8" FromRole="PizzaOrders" ToRole="Sizes" />
+        </EntityType>
+        <EntityType Name="Pizza">
+          <Key>
+            <PropertyRef Name="IDPizza" />
+          </Key>
+          <Property Name="IDPizza" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Precision="10" Scale="4" Nullable="false" />
+          <NavigationProperty Name="PizzaIngredients" Relationship="Self.FK__PizzaIngr__IDPiz__4E88ABD4" FromRole="Pizzas" ToRole="PizzaIngredients" />
+          <NavigationProperty Name="PizzaOrders" Relationship="Self.FK__PizzaOrde__IDPiz__534D60F1" FromRole="Pizzas" ToRole="PizzaOrders" />
+        </EntityType>
+        <EntityType Name="Size">
+          <Key>
+            <PropertyRef Name="IDSize" />
+          </Key>
+          <Property Name="IDSize" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RadiusInCm" Type="Int16" Nullable="false" />
+          <Property Name="BasePriceMultiplier" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="PizzaOrders" Relationship="Self.FK__PizzaOrde__IDSiz__52593CB8" FromRole="Sizes" ToRole="PizzaOrders" />
+        </EntityType>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ClientsAs__IdAsp__3F466844">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1" />
+          <End Role="ClientsAspNetUsers" Type="Self.ClientsAspNetUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClientsAspNetUsers">
+              <PropertyRef Name="IdAspNetUsers" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ClientsAs__IDCli__3E52440B">
+          <End Role="Clients" Type="Self.Client" Multiplicity="1" />
+          <End Role="ClientsAspNetUsers" Type="Self.ClientsAspNetUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="IDClient" />
+            </Principal>
+            <Dependent Role="ClientsAspNetUsers">
+              <PropertyRef Name="IDClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orders__IDClient__4222D4EF">
+          <End Role="Clients" Type="Self.Client" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="IDClient" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="IDClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PizzaIngr__IDIng__4D94879B">
+          <End Role="Ingredients" Type="Self.Ingredient" Multiplicity="1" />
+          <End Role="PizzaIngredients" Type="Self.PizzaIngredient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ingredients">
+              <PropertyRef Name="IDIngredient" />
+            </Principal>
+            <Dependent Role="PizzaIngredients">
+              <PropertyRef Name="IDIngredient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PizzaOrde__IDOrd__5165187F">
+          <End Role="Orders" Type="Self.Order" Multiplicity="1" />
+          <End Role="PizzaOrders" Type="Self.PizzaOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="IDOrder" />
+            </Principal>
+            <Dependent Role="PizzaOrders">
+              <PropertyRef Name="IDOrder" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PizzaIngr__IDPiz__4E88ABD4">
+          <End Role="Pizzas" Type="Self.Pizza" Multiplicity="1" />
+          <End Role="PizzaIngredients" Type="Self.PizzaIngredient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pizzas">
+              <PropertyRef Name="IDPizza" />
+            </Principal>
+            <Dependent Role="PizzaIngredients">
+              <PropertyRef Name="IDPizza" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PizzaOrde__IDPiz__534D60F1">
+          <End Role="Pizzas" Type="Self.Pizza" Multiplicity="1" />
+          <End Role="PizzaOrders" Type="Self.PizzaOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pizzas">
+              <PropertyRef Name="IDPizza" />
+            </Principal>
+            <Dependent Role="PizzaOrders">
+              <PropertyRef Name="IDPizza" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PizzaOrde__IDSiz__52593CB8">
+          <End Role="Sizes" Type="Self.Size" Multiplicity="1" />
+          <End Role="PizzaOrders" Type="Self.PizzaOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sizes">
+              <PropertyRef Name="IDSize" />
+            </Principal>
+            <Dependent Role="PizzaOrders">
+              <PropertyRef Name="IDSize" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AspNetUserRoles">
+          <End Role="AspNetRoles" Type="Self.AspNetRole" Multiplicity="*" />
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="PizzaNetEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRole" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaim" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogin" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUser" />
+          <EntitySet Name="Clients" EntityType="Self.Client" />
+          <EntitySet Name="ClientsAspNetUsers" EntityType="Self.ClientsAspNetUser" />
+          <EntitySet Name="Ingredients" EntityType="Self.Ingredient" />
+          <EntitySet Name="Orders" EntityType="Self.Order" />
+          <EntitySet Name="PizzaIngredients" EntityType="Self.PizzaIngredient" />
+          <EntitySet Name="PizzaOrders" EntityType="Self.PizzaOrder" />
+          <EntitySet Name="Pizzas" EntityType="Self.Pizza" />
+          <EntitySet Name="Sizes" EntityType="Self.Size" />
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ClientsAs__IdAsp__3F466844" Association="Self.FK__ClientsAs__IdAsp__3F466844">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="ClientsAspNetUsers" EntitySet="ClientsAspNetUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ClientsAs__IDCli__3E52440B" Association="Self.FK__ClientsAs__IDCli__3E52440B">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="ClientsAspNetUsers" EntitySet="ClientsAspNetUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orders__IDClient__4222D4EF" Association="Self.FK__Orders__IDClient__4222D4EF">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PizzaIngr__IDIng__4D94879B" Association="Self.FK__PizzaIngr__IDIng__4D94879B">
+            <End Role="Ingredients" EntitySet="Ingredients" />
+            <End Role="PizzaIngredients" EntitySet="PizzaIngredients" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PizzaOrde__IDOrd__5165187F" Association="Self.FK__PizzaOrde__IDOrd__5165187F">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="PizzaOrders" EntitySet="PizzaOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PizzaIngr__IDPiz__4E88ABD4" Association="Self.FK__PizzaIngr__IDPiz__4E88ABD4">
+            <End Role="Pizzas" EntitySet="Pizzas" />
+            <End Role="PizzaIngredients" EntitySet="PizzaIngredients" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PizzaOrde__IDPiz__534D60F1" Association="Self.FK__PizzaOrde__IDPiz__534D60F1">
+            <End Role="Pizzas" EntitySet="Pizzas" />
+            <End Role="PizzaOrders" EntitySet="PizzaOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PizzaOrde__IDSiz__52593CB8" Association="Self.FK__PizzaOrde__IDSiz__52593CB8">
+            <End Role="Sizes" EntitySet="Sizes" />
+            <End Role="PizzaOrders" EntitySet="PizzaOrders" />
+          </AssociationSet>
+          <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PizzaNetEntitiesModelsStoreContainer" CdmEntityContainer="PizzaNetEntities">
+          <EntitySetMapping Name="C__MigrationHistory">
+            <EntityTypeMapping TypeName="PizzaNetEntitiesModels.C__MigrationHistory">
+              <MappingFragment StoreEntitySet="__MigrationHistory">
+                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetRoles">
+            <EntityTypeMapping TypeName="PizzaNetEntitiesModels.AspNetRole">
+              <MappingFragment StoreEntitySet="AspNetRoles">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserClaims">
+            <EntityTypeMapping TypeName="PizzaNetEntitiesModels.AspNetUserClaim">
+              <MappingFragment StoreEntitySet="AspNetUserClaims">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserLogins">
+            <EntityTypeMapping TypeName="PizzaNetEntitiesModels.AspNetUserLogin">
+              <MappingFragment StoreEntitySet="AspNetUserLogins">
+                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="PizzaNetEntitiesModels.AspNetUser">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Clients">
+            <EntityTypeMapping TypeName="PizzaNetEntitiesModels.Client">
+              <MappingFragment StoreEntitySet="Clients">
+                <ScalarProperty Name="IDClient" ColumnName="IDClient" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Street" ColumnName="Street" />
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+                <ScalarProperty Name="PremiseNumber" ColumnName="PremiseNumber" />
+                <ScalarProperty Name="FlatNumber" ColumnName="FlatNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClientsAspNetUsers">
+            <EntityTypeMapping TypeName="PizzaNetEntitiesModels.ClientsAspNetUser">
+              <MappingFragment StoreEntitySet="ClientsAspNetUsers">
+                <ScalarProperty Name="IDClientsAspNetUsers" ColumnName="IDClientsAspNetUsers" />
+                <ScalarProperty Name="IDClient" ColumnName="IDClient" />
+                <ScalarProperty Name="IdAspNetUsers" ColumnName="IdAspNetUsers" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ingredients">
+            <EntityTypeMapping TypeName="PizzaNetEntitiesModels.Ingredient">
+              <MappingFragment StoreEntitySet="Ingredients">
+                <ScalarProperty Name="IDIngredient" ColumnName="IDIngredient" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="PizzaNetEntitiesModels.Order">
+              <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="IDOrder" ColumnName="IDOrder" />
+                <ScalarProperty Name="IDClient" ColumnName="IDClient" />
+                <ScalarProperty Name="StartOrderDate" ColumnName="StartOrderDate" />
+                <ScalarProperty Name="FinishOrderDate" ColumnName="FinishOrderDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PizzaIngredients">
+            <EntityTypeMapping TypeName="PizzaNetEntitiesModels.PizzaIngredient">
+              <MappingFragment StoreEntitySet="PizzaIngredients">
+                <ScalarProperty Name="IDPizzaIngredient" ColumnName="IDPizzaIngredient" />
+                <ScalarProperty Name="IDPizza" ColumnName="IDPizza" />
+                <ScalarProperty Name="IDIngredient" ColumnName="IDIngredient" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PizzaOrders">
+            <EntityTypeMapping TypeName="PizzaNetEntitiesModels.PizzaOrder">
+              <MappingFragment StoreEntitySet="PizzaOrders">
+                <ScalarProperty Name="IDPizzaOrder" ColumnName="IDPizzaOrder" />
+                <ScalarProperty Name="IDOrder" ColumnName="IDOrder" />
+                <ScalarProperty Name="IDPizza" ColumnName="IDPizza" />
+                <ScalarProperty Name="IDSize" ColumnName="IDSize" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pizzas">
+            <EntityTypeMapping TypeName="PizzaNetEntitiesModels.Pizza">
+              <MappingFragment StoreEntitySet="Pizzas">
+                <ScalarProperty Name="IDPizza" ColumnName="IDPizza" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sizes">
+            <EntityTypeMapping TypeName="PizzaNetEntitiesModels.Size">
+              <MappingFragment StoreEntitySet="Sizes">
+                <ScalarProperty Name="IDSize" ColumnName="IDSize" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="RadiusInCm" ColumnName="RadiusInCm" />
+                <ScalarProperty Name="BasePriceMultiplier" ColumnName="BasePriceMultiplier" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="AspNetUserRoles" TypeName="PizzaNetEntitiesModels.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+            <EndProperty Name="AspNetRoles">
+              <ScalarProperty Name="Id" ColumnName="RoleId" />
+            </EndProperty>
+            <EndProperty Name="AspNetUsers">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

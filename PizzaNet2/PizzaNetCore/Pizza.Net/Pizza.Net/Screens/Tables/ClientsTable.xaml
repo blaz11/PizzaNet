@@ -1,0 +1,37 @@
+﻿<UserControl x:Class="Pizza.Net.Screens.Tables.ClientsTable"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Pizza.Net.Screens.Tables"
+             xmlns:designTime="clr-namespace:Pizza.Net.Screens.DesignTimeData"
+             mc:Ignorable="d" 
+             d:DesignHeight="400"
+             d:DesignWidth="790"
+             d:DataContext="{d:DesignInstance designTime:ClientsTable,
+                                             IsDesignTimeCreatable=True}">
+    <DataGrid ItemsSource="{Binding Clients}"
+              AutoGenerateColumns="False"
+              SelectedItem="{Binding SelectedClient}"
+              MaxWidth="790"
+              IsReadOnly="True">
+        <DataGrid.Columns>
+            <DataGridTextColumn Binding="{Binding FirstName}" 
+                                Header="First Name" />
+            <DataGridTextColumn Binding="{Binding LastName}" 
+                                Header="Last Name" />
+            <DataGridTextColumn Binding="{Binding PhoneNumber}" 
+                                Header="Phone Number" />
+            <DataGridTextColumn Binding="{Binding City}" 
+                                Header="City" />
+            <DataGridTextColumn Binding="{Binding Street}" 
+                                Header="Street" />
+            <DataGridTextColumn Binding="{Binding ZipCode}" 
+                                Header="Zip Code" />
+            <DataGridTextColumn Binding="{Binding PremiseNumber}" 
+                                Header="Premise Number" />
+            <DataGridTextColumn Binding="{Binding FlatNumber}" 
+                                Header="Flat Number" />
+        </DataGrid.Columns>
+    </DataGrid>
+</UserControl>

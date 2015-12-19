@@ -1,0 +1,27 @@
+﻿<UserControl x:Class="Pizza.Net.Screens.Pages.OrderSubmit"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Pizza.Net.Screens.Pages"
+             xmlns:tables="clr-namespace:Pizza.Net.Screens.Tables"
+             mc:Ignorable="d" 
+             d:DesignHeight="1000" 
+             d:DesignWidth="1000">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/Screens/Pages/Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <StackPanel>
+        <TextBlock Text="Delivery to"
+                   Style="{StaticResource TabelLabelTextBlockStyle}"/>
+        <tables:ClientsTable DataContext="{Binding Client}"/>
+        <TextBlock Text="Pizzas"
+                   Style="{StaticResource TabelLabelTextBlockStyle}"/>
+        <tables:PizzasTable DataContext="{Binding Pizzas}"
+                            MaxHeight="800"/>
+    </StackPanel>
+</UserControl>
