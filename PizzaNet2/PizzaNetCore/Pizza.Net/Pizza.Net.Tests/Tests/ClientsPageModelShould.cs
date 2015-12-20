@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace Pizza.Net.Tests
 {
-    [TestClass]
+    /*[TestClass]
     public class ClientsPageModelShould
     {
         [TestInitialize]
@@ -62,5 +62,5 @@ namespace Pizza.Net.Tests
             var client = clientsPageModel.SearchClients().Clients.FirstOrDefault();
             Assert.AreNotEqual(client, null);
         }
-    }
+    }*/
 }

@@ -84,8 +84,17 @@ namespace Pizza.Net.Screens.Pages
             else
                 Message = "Registration successful.\nYou may now login.";
         }
-
-        public string Email { get; set; }
+        private string _email;
+        public string Email { get
+            {
+                return _model.Email;
+            }
+            set
+            {
+                _model.Email = value;
+                _email = value;
+            }
+        }
 
         private string _message;
         public string Message

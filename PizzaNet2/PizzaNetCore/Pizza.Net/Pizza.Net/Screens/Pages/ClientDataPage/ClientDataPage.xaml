@@ -6,11 +6,13 @@
              xmlns:local="clr-namespace:Pizza.Net.Screens.Pages"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="500">
+    
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/Screens/Pages/Styles.xaml" />
             </ResourceDictionary.MergedDictionaries>
+            <BooleanToVisibilityConverter x:Key="BoolToVisibility" />
         </ResourceDictionary>
     </UserControl.Resources>
     <StackPanel>
@@ -36,56 +38,109 @@
                        Style="{StaticResource LabelTextBlockStyle}"/>
             <TextBox Grid.Column="1"
                      Grid.Row="0"
-                     Text="{Binding FirstName,ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"/>
+                     Text="{Binding FirstName,ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged }" 
+                     Visibility="{Binding Path=EditVisible,UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVisibility} }"/>
+
+            <TextBox Grid.Column="1"
+                     Grid.Row="0"
+                     IsEnabled="False"
+                     Text="{Binding mod.Result.FirstName,ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged }" 
+                     Visibility="{Binding Path=ViewVisible,UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVisibility} }"/>
             <TextBlock Text="Last Name:"
                        Grid.Column="0"
                        Grid.Row="1"
                        Style="{StaticResource LabelTextBlockStyle}"/>
             <TextBox Grid.Column="1"
                      Grid.Row="1"
-                     Text="{Binding LastName,ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"/>
+                     Text="{Binding LastName,ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                     Visibility="{Binding Path=EditVisible,UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVisibility} }"/>
+
+            <TextBox Grid.Column="1"
+                     Grid.Row="1"
+                     IsEnabled="False"
+                     Text="{Binding  mod.Result.LastName,ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                     Visibility="{Binding Path=ViewVisible,UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVisibility} }"/>
             <TextBlock Text="City:"
                        Grid.Column="0"
                        Grid.Row="2"
                        Style="{StaticResource LabelTextBlockStyle}"/>
             <TextBox Grid.Column="1"
                      Grid.Row="2"
-                     Text="{Binding City,ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"/>
+                     Text="{Binding City,ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                     Visibility="{Binding Path=EditVisible,UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVisibility} }"/>
+
+            <TextBox Grid.Column="1"
+                     Grid.Row="2"
+                     IsEnabled="False"
+                     Text="{Binding  mod.Result.City,ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                     Visibility="{Binding Path=ViewVisible,UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVisibility} }"/>
             <TextBlock Text="Zip-Code:"
                        Grid.Column="0"
                        Grid.Row="3"
                        Style="{StaticResource LabelTextBlockStyle}"/>
             <TextBox Grid.Column="1"
                      Grid.Row="3"
-                     Text="{Binding ZipCode,ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"/>
+
+                     Text="{Binding ZipCode,ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                     Visibility="{Binding Path=EditVisible,UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVisibility} }"/>
+
+            <TextBox Grid.Column="1"
+                     Grid.Row="3"
+                     IsEnabled="False"
+                     Text="{Binding  mod.Result.ZipCode,ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                     Visibility="{Binding Path=ViewVisible,UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVisibility} }"/>
             <TextBlock Text="Street:"
                        Grid.Column="0"
                        Grid.Row="5"
                        Style="{StaticResource LabelTextBlockStyle}"/>
             <TextBox Grid.Column="1"
                      Grid.Row="5"
-                     Text="{Binding Street,ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"/>
+                     Text="{Binding Street,ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                     Visibility="{Binding Path=EditVisible,UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVisibility} }"/>
+            <TextBox Grid.Column="1"
+                     Grid.Row="5"
+                     IsEnabled="False"
+                     Text="{Binding  mod.Result.Street,ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                     Visibility="{Binding Path=ViewVisible,UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVisibility} }"/>
             <TextBlock Text="Premise Number:"
                        Grid.Column="0"
                        Grid.Row="6"
                        Style="{StaticResource LabelTextBlockStyle}"/>
             <TextBox Grid.Column="1"
                      Grid.Row="6"
-                     Text="{Binding PremiseNumber,ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"/>
+                     Text="{Binding PremiseNumber,ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                     Visibility="{Binding Path=EditVisible,UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVisibility} }"/>
+            <TextBox Grid.Column="1"
+                     Grid.Row="6"
+                     IsEnabled="False"
+                     Text="{Binding  mod.Result.PremiseNumber,ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                     Visibility="{Binding Path=ViewVisible,UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVisibility} }"/>
             <TextBlock Text="Flat Number:"
                        Grid.Column="0"
                        Grid.Row="7"
                        Style="{StaticResource LabelTextBlockStyle}"/>
             <TextBox Grid.Column="1"
                      Grid.Row="7"
-                     Text="{Binding FlatNumber, UpdateSourceTrigger=PropertyChanged}"/>
+                     Text="{Binding FlatNumber, UpdateSourceTrigger=PropertyChanged}"
+                     Visibility="{Binding Path=EditVisible,UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVisibility} }"/>
+            <TextBox Grid.Column="1"
+                     Grid.Row="7"
+                     IsEnabled="False"
+                     Text="{Binding  mod.Result.FlatNumber, UpdateSourceTrigger=PropertyChanged}"
+                     Visibility="{Binding Path=ViewVisible,UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVisibility} }"/>
             <TextBlock Text="Phone Number:"
                        Grid.Column="0"
                        Grid.Row="8"
                        Style="{StaticResource LabelTextBlockStyle}"/>
             <TextBox Grid.Column="1"
                      Grid.Row="8"
-                     Text="{Binding PhoneNumber,ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"/>
+                     Text="{Binding PhoneNumber,ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                     Visibility="{Binding Path=EditVisible,UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVisibility} }"/>
+            <TextBox Grid.Column="1"
+                     Grid.Row="8"
+                     IsEnabled="False"
+                     Text="{Binding  mod.Result.PhoneNumber,ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                     Visibility="{Binding Path=ViewVisible,UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVisibility} }"/>
         </Grid>
         <StackPanel Orientation="Horizontal"
                     HorizontalAlignment="Center"

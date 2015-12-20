@@ -4,7 +4,7 @@ using System;
 
 namespace Pizza.Net.Tests
 {
-    [TestClass]
+   /* [TestClass]
     public class ClientValidationShould
     {
         [TestMethod]
@@ -103,5 +103,5 @@ namespace Pizza.Net.Tests
             string error = clientData["ZipCode"];
             Assert.AreEqual(error, "Bad format.");
         }
-    }
+    }*/
 }
