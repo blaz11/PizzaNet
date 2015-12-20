@@ -7,6 +7,7 @@
         xmlns:local="clr-namespace:Pizza.Net.Screens"
         xmlns:pages="clr-namespace:Pizza.Net.Screens.Pages"
         mc:Ignorable="d"
+        DataContextChanged="MetroWindowDataContextChanged"
         Title="MainApplicationWindow"
         Height="900" 
         Width="1200">
@@ -32,6 +33,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0">
             <ItemsControl ItemsSource="{Binding PageViewModels}">
@@ -55,5 +57,15 @@
         </StackPanel>
         <ContentControl Grid.Row="1" 
                         Content="{Binding CurrentPageViewModel}" />
+        <StackPanel Grid.Row="2"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Bottom">
+            <TextBlock Text="{Binding Username}"
+                       TextAlignment="Center"
+                       FontSize="20"/>
+            <Button Content="Logout" 
+                    FontSize="20"
+                    Command="{Binding LogoutCommand}"/>
+        </StackPanel>
     </Grid>
 </Controls:MetroWindow>

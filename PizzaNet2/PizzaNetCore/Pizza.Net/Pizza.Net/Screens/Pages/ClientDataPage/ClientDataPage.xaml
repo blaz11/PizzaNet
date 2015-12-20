@@ -15,7 +15,8 @@
             <BooleanToVisibilityConverter x:Key="BoolToVisibility" />
         </ResourceDictionary>
     </UserControl.Resources>
-    <StackPanel>
+    <StackPanel HorizontalAlignment="Center"
+                VerticalAlignment="Center">
         <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
@@ -40,7 +41,6 @@
                      Grid.Row="0"
                      Text="{Binding FirstName,ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged }" 
                      Visibility="{Binding Path=EditVisible,UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVisibility} }"/>
-
             <TextBox Grid.Column="1"
                      Grid.Row="0"
                      IsEnabled="False"
@@ -144,13 +144,17 @@
         </Grid>
         <StackPanel Orientation="Horizontal"
                     HorizontalAlignment="Center"
-                    VerticalAlignment="Center">
+                    VerticalAlignment="Center"
+                    Margin="0,20,0,20">
             <Button Content="Ok"
-                    Command="{Binding OkButtonClickCommand}" />
+                    Command="{Binding OkButtonClickCommand}"
+                    FontSize="20"/>
             <Button Content="Cancel"
-                    Command="{Binding CancelButtonClickCommand}"/>
+                    Command="{Binding CancelButtonClickCommand}" 
+                    FontSize="20"/>
             <Button Content="Change password"
-                    Command="{Binding ChangePasswordButtonClickCommand}"/>
+                    Command="{Binding ChangePasswordButtonClickCommand}" 
+                    FontSize="20" />
         </StackPanel>
         <screens:NetworkOperationProgressBar Width="200"/>
     </StackPanel>

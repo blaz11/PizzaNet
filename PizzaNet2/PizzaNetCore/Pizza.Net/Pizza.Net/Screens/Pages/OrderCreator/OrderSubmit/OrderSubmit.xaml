@@ -23,7 +23,7 @@
         <TextBlock Text="Pizzas"
                    Style="{StaticResource TabelLabelTextBlockStyle}"/>
         <tables:PizzasTable DataContext="{Binding Pizzas}"
-                            MaxHeight="800"/>
+                            MaxHeight="400"/>
         <screens:NetworkOperationProgressBar Width="200"/>
     </StackPanel>
 </UserControl>

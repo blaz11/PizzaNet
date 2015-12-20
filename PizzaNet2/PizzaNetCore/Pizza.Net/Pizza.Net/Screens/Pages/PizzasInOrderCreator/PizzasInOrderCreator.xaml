@@ -15,44 +15,46 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
-    <StackPanel>
-        <TextBlock Text="Selected pizzas"
+    <ScrollViewer>
+        <StackPanel>
+            <TextBlock Text="Selected pizzas"
                    Style="{StaticResource TabelLabelTextBlockStyle}"/>
-        <tables:PizzasTable DataContext="{Binding SelectedPizzasViewModel}" 
-                            MaxHeight="300"/>
-        <TextBlock Text="Select pizzas"
+            <tables:PizzasTable DataContext="{Binding SelectedPizzasViewModel}" 
+                            MaxHeight="200"/>
+            <TextBlock Text="Select pizzas"
                    Style="{StaticResource TabelLabelTextBlockStyle}"/>
-        <StackPanel Orientation="Horizontal"
+            <StackPanel Orientation="Horizontal"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Center">
-            <StackPanel>
-                <TextBlock Text="Select a pizza"
+                <StackPanel>
+                    <TextBlock Text="Select a pizza"
                    Style="{StaticResource TabelLabelTextBlockStyle}"/>
-                <tables:PizzasTable DataContext="{Binding SearchPizzasViewModel}" 
+                    <tables:PizzasTable DataContext="{Binding SearchPizzasViewModel}" 
                                     Margin="20"
-                                    MaxHeight="500"/>
+                                    MaxHeight="200"/>
+                </StackPanel>
+                <StackPanel>
+                    <TextBlock Text="Select size"
+                               Style="{StaticResource TabelLabelTextBlockStyle}"/>
+                    <tables:SizesTable DataContext="{Binding SizesTableViewModel}"
+                                       Margin="20"
+                                       MaxHeight="200"/>
+                </StackPanel>
             </StackPanel>
-            <StackPanel>
-                <TextBlock Text="Select size"
-                   Style="{StaticResource TabelLabelTextBlockStyle}"/>
-                <tables:SizesTable DataContext="{Binding SizesTableViewModel}"
-                                   Margin="20"
-                                   MaxHeight="500"/>
-            </StackPanel>
-        </StackPanel>
-        <StackPanel Orientation="Horizontal"
+            <StackPanel Orientation="Horizontal"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Center">
-            <Button Content="Add pizza to order"
+                <Button Content="Add pizza to order"
                     Command="{Binding AddPizzaCommands}"
                     FontSize="18"/>
-            <Button Content="Remove pizza from order"
+                <Button Content="Remove pizza from order"
                      Command="{Binding RemovePizzaCommand}"
                      FontSize="18"/>
-            <Button Content="Clear"
+                <Button Content="Clear"
                      Command="{Binding ClearCommand}"
                      FontSize="18"/>
+            </StackPanel>
+            <screens:NetworkOperationProgressBar Width="200"/>
         </StackPanel>
-        <screens:NetworkOperationProgressBar Width="200"/>
-    </StackPanel>
+    </ScrollViewer>
 </UserControl>

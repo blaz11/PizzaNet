@@ -31,9 +31,6 @@
             <Button Content="{Binding NextStepButtonContent}"
                     Command="{Binding NextStepCommand}"
                     FontSize="18"/>
-            <Button Content="Reset"
-                    FontSize="18"
-                    Command="{Binding ResetCommand}"/>
         </StackPanel>
     </StackPanel>
 </UserControl>

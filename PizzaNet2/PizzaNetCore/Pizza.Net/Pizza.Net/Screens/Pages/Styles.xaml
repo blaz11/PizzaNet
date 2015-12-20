@@ -9,7 +9,7 @@
     </Style>
     <Style x:Key="LabelTextBlockStyle" TargetType="TextBlock">
         <Setter Property="Margin" Value="10,0,10,0"/>
-        <Setter Property="FontSize" Value="18"/>
+        <Setter Property="FontSize" Value="20"/>
         <Setter Property="Foreground" Value="Beige"/>
     </Style>
     <Style x:Key="TabelLabelTextBlockStyle" TargetType="TextBlock">

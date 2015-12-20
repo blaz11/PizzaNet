@@ -19,5 +19,6 @@ namespace Pizza.Net
 
         public bool TokenValid { get; set; } = false;
         public string Token { get; set; }
+        public string Username { get; set; }
     }
 }

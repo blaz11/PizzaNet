@@ -12,7 +12,7 @@ namespace Pizza.Net.RestAPIAccess
         {
             HttpClient client = new HttpClient();
             client.Timeout = TimeSpan.FromSeconds(5);
-            client.BaseAddress = new Uri("http://localhost:54432/token");
+            client.BaseAddress = new Uri(WebAPIData.BASE_TOKEN_ADDRESS);
             HttpResponseMessage response =
                 client.PostAsync("Token",
                     new StringContent(string.Format("grant_type=password&username={0}&password={1}",

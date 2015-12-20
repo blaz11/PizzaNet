@@ -336,9 +336,8 @@ namespace Pizza.Net.Screens.Pages
             }
         }
 
-        private NotifyTaskCompletion<string> _postTaskCompletion;
 
-        private void AcceptChanges()
+        private async Task AcceptChanges()
         {
             if(!AllPropertiesValid)
             {
@@ -353,18 +352,12 @@ namespace Pizza.Net.Screens.Pages
             _downloadedClient.FlatNumber = FlatNumber;
             _downloadedClient.PremiseNumber = PremiseNumber;
             var ac = new ClientAccess(_user);
-            _postTaskCompletion = new NotifyTaskCompletion<string>(ac.Post(_downloadedClient));
-            _postTaskCompletion.PropertyChanged += PostCompleted;
             ProgressBarText = "Sending your request...";
             ProgressBarVisibility = true;
-            _user.DownloadClientData();
-        }
-
-        private void PostCompleted(object sender, PropertyChangedEventArgs e)
-        {
-            _postTaskCompletion.PropertyChanged -= PostCompleted;
+            await ac.Post(_downloadedClient);
             ProgressBarVisibility = false;
             MessageBox.Show("Your info has beed updated");
+            _user.DownloadClientData();
         }
 
         private void CancelChanges()

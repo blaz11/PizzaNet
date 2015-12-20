@@ -85,21 +85,6 @@ namespace Pizza.Net.Screens.Pages
             }
         }
 
-        private ICommand _resetCommand;
-        public ICommand ResetCommand
-        {
-            get
-            {
-                if (_resetCommand == null)
-                {
-                    _resetCommand = new RelayCommand(
-                        execute => Reset());
-                }
-
-                return _resetCommand;
-            }
-        }
-
         public string PageName
         {
             get

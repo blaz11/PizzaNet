@@ -33,6 +33,7 @@ namespace Pizza.Net.Screens.Pages
                 var user = new LoggedUser();
                 user.TokenValid = true;
                 user.Token = token.AccessToken;
+                user.Username = Email;
                 user.DownloadClientData();
                 return user;
             }

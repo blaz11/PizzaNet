@@ -32,7 +32,8 @@
         <ContentControl Content="{Binding CurrentPageViewModel}" />
         <StackPanel Orientation="Horizontal"
                     VerticalAlignment="Center" 
-                    HorizontalAlignment="Center">
+                    HorizontalAlignment="Center"
+                    Margin="0,20,0,20">
             <Button Content="Login"
                     Command="{Binding ChangeToLoginScreen}"
                     FontSize="14" 

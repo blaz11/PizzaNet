@@ -7,8 +7,6 @@ namespace Pizza.Net.RestAPIAccess
 {
     public abstract class WebAccessService
     {
-        private const string ADDRESS = "http://localhost:54432/api/";
-
         public readonly HttpClient _httpClient;
         private readonly MediaTypeFormatter _formatter;
 
@@ -17,7 +15,7 @@ namespace Pizza.Net.RestAPIAccess
             _httpClient = HttpClientFactory.Create();
             _formatter = new JsonMediaTypeFormatter();
             _httpClient.BaseAddress =
-                new Uri(ADDRESS);
+                new Uri(WebAPIData.BASE_ADDRESS);
             _httpClient.Timeout = TimeSpan.FromSeconds(5);
         }
 

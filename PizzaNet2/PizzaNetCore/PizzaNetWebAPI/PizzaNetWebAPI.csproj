@@ -216,6 +216,9 @@
     <Compile Include="DatabaseAccess\ClientsDB.cs" />
     <Compile Include="DatabaseAccess\OrdersDB.cs" />
     <Compile Include="DatabaseAccess\PizzasDB.cs" />
+    <Compile Include="Email\EmailCreator.cs" />
+    <Compile Include="Email\EmailSender.cs" />
+    <Compile Include="Email\OrderConfirmationEmailCreator.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

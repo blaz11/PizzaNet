@@ -2,8 +2,8 @@
 {
     static class WebAPIData
     {
-        public static string BASE_ADDRESS = "";
-        public static string BASE_TOKEN_ADDRESS = "";
+        public static string BASE_ADDRESS = "http://localhost:54432/api/";
+        public static string BASE_TOKEN_ADDRESS = "http://localhost:54432/token";
     }
 
     static class ErrorsMessages
