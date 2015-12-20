@@ -1,6 +1,4 @@
-﻿using Pizza.Net.RestAPIAccess;
-using PizzaNetCore;
-using System.Threading.Tasks;
+﻿using PizzaNetCore;
 using System;
 using System.ComponentModel;
 using System.Text.RegularExpressions;
@@ -37,7 +35,6 @@ namespace Pizza.Net.Screens.Pages
                 _currentClient = value;
                 if (_currentClient == null)
                     return;
-
             }
         }
 

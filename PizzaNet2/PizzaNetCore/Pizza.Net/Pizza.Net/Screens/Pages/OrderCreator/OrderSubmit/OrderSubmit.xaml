@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Pizza.Net.Screens.Pages"
              xmlns:tables="clr-namespace:Pizza.Net.Screens.Tables"
+             xmlns:screens="clr-namespace:Pizza.Net.Screens"
              mc:Ignorable="d" 
              d:DesignHeight="1000" 
              d:DesignWidth="1000">
@@ -23,5 +24,6 @@
                    Style="{StaticResource TabelLabelTextBlockStyle}"/>
         <tables:PizzasTable DataContext="{Binding Pizzas}"
                             MaxHeight="800"/>
+        <screens:NetworkOperationProgressBar Width="200"/>
     </StackPanel>
 </UserControl>

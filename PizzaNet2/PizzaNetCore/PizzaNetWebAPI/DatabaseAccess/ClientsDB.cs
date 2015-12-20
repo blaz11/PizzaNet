@@ -30,9 +30,7 @@ namespace PizzaNetWebAPI.DatabaseAccess
             {
                 var d = db as DbOperationContext;
                 var cu = d.Entities.ClientsAspNetUsers.Where(p => p.AspNetUser.UserName == username);
-                if (cu.Count() != 1)
-                    return null;
-                return cu.First().Client;
+                return cu.FirstOrDefault().Client;
             });
             var result = dbACcess.ExecuteInTransaction(t);
             if (result == null)
@@ -72,27 +70,21 @@ namespace PizzaNetWebAPI.DatabaseAccess
                 db.Entities.ClientsAspNetUsers.Add(clientUser);
             });
         }
+
         static public void AlterClient(ClientModel cl, string username)
         {
             var dbACcess = new PizzaNetDbAccess();
             dbACcess.ExecuteInTransaction((db) =>
             {
-                var user = db.Entities.AspNetUsers.Where(p => p.UserName == username).First();
-                var client = new Pizza.Net.Domain.Client();
+                var client = db.Entities.ClientsAspNetUsers.Where(p => p.AspNetUser.UserName == username).First().Client;
                 client.FirstName = cl.FirstName;
                 client.LastName = cl.LastName;
                 client.PhoneNumber = cl.PhoneNumber;
                 client.PremiseNumber = cl.PremiseNumber;
+                client.FlatNumber = cl.FlatNumber;
                 client.City = cl.City;
                 client.Street = cl.Street;
                 client.ZipCode = cl.ZipCode;
-                client = db.Entities.Clients.Add(client);
-                var clientUser = new Pizza.Net.Domain.ClientsAspNetUser();
-                clientUser.AspNetUser = user;
-                clientUser.IdAspNetUsers = user.Id;
-                clientUser.Client = client;
-                clientUser.IDClient = client.IDClient;
-                db.Entities.ClientsAspNetUsers.Add(clientUser);
             });
         }
     }

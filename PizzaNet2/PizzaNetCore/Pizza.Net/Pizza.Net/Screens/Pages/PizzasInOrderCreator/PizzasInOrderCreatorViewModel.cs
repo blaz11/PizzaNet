@@ -1,4 +1,5 @@
-﻿using Pizza.Net.Screens.Tables;
+﻿using Pizza.Net.RestAPIAccess;
+using Pizza.Net.Screens.Tables;
 using PizzaNetCore;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
@@ -14,18 +15,70 @@ namespace Pizza.Net.Screens.Pages
         ISizesTableViewModel SizesTableViewModel { get; }
     }
 
-    class PizzasInOrderCreatorViewModel : IPizzasInOrderCreatorViewModel
+    class PizzasInOrderCreatorViewModel : ObservableObject, IPizzasInOrderCreatorViewModel
     {
         private readonly PizzasInOrderCreatorModel _currentPizzasInOrderCreatorModel;
-        public PizzasInOrderCreatorViewModel(PizzasInOrderCreatorModel newPizzasInOrderCreatorModel)
+        private LoggedUser _user;
+
+        public PizzasInOrderCreatorViewModel(PizzasInOrderCreatorModel newPizzasInOrderCreatorModel, LoggedUser user)
         {
+            _user = user;
             _currentPizzasInOrderCreatorModel = newPizzasInOrderCreatorModel;
             SearchPizzasViewModel = new PizzasTableViewModel();
             SelectedPizzasViewModel = new PizzasTableViewModel();
             SizesTableViewModel = new SizesTableViewModel();
-            Refresh();
+            Clear();
+            var pa = new PizzaAccess();
+            _getTaskCompletion = new NotifyTaskCompletion<MenuModel>(pa.Get());
+            _getTaskCompletion.PropertyChanged += GetMenuTaskCompleted;
+            ProgressBarText = "Getting menu...";
+            ProgressBarVisibility = true;
         }
 
+        private async void GetMenuTaskCompleted(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            _getTaskCompletion.PropertyChanged -= GetMenuTaskCompleted;
+            var menu = await _getTaskCompletion.Task;
+            var pizzaCollection = new ObservableCollection<PizzaModel>(menu.Pizzas);
+            SearchPizzasViewModel.Pizzas = pizzaCollection;
+            SizesTableViewModel.Sizes = new ObservableCollection<SizeModel>(menu.Sizes);
+            ProgressBarVisibility = false;
+        }
+
+        private NotifyTaskCompletion<MenuModel> _getTaskCompletion;
+
+        private bool _progressBarVisibility = true;
+        public bool ProgressBarVisibility
+        {
+            get
+            {
+                return _progressBarVisibility;
+            }
+            set
+            {
+                if (value != _progressBarVisibility)
+                {
+                    _progressBarVisibility = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private string _progressBarText;
+        public string ProgressBarText
+        {
+            get
+            {
+                return _progressBarText;
+            }
+            set
+            {
+                if (value == _progressBarText)
+                    return;
+                _progressBarText = value;
+                OnPropertyChanged();
+            }
+        }
 
         public ObservableCollection<SizeModel> Sizes { get; set; } = new ObservableCollection<SizeModel>();
 
@@ -69,30 +122,23 @@ namespace Pizza.Net.Screens.Pages
             }
         }
 
-        private ICommand _refreshCommand;
-        public ICommand RefreshCommand
+        private ICommand _clearCommand;
+        public ICommand ClearCommand
         {
             get
             {
-                if (_refreshCommand == null)
+                if (_clearCommand == null)
                 {
-                    _refreshCommand = new RelayCommand(
-                        param => Refresh());
+                    _clearCommand = new RelayCommand(
+                        param => Clear());
                 }
-                return _refreshCommand;
+                return _clearCommand;
             }
         }
 
-        private void Refresh()
+        private void Clear()
         {
-            SearchPizzasViewModel.Pizzas.Clear();
-            foreach (var v in _currentPizzasInOrderCreatorModel.GetPizza())
-                SearchPizzasViewModel.Pizzas.Add(v);
-            foreach (var v in SelectedPizzasViewModel.Pizzas)
-                SearchPizzasViewModel.Pizzas.Remove(v);
-            SizesTableViewModel.Sizes.Clear();
-            foreach (var v in _currentPizzasInOrderCreatorModel.GetSizes())
-                SizesTableViewModel.Sizes.Add(v);
+            SelectedPizzasViewModel.Pizzas.Clear();
         }
 
         private void AddPizza()
@@ -103,7 +149,6 @@ namespace Pizza.Net.Screens.Pages
             var item2 = SizesTableViewModel.SelectedSize;
             if (item2 == null)
                 return;
-            SearchPizzasViewModel.Pizzas.Remove(item);
             SelectedPizzasViewModel.Pizzas.Add(item);
             Sizes.Add(item2);
         }
@@ -115,7 +160,6 @@ namespace Pizza.Net.Screens.Pages
                 return;
             Sizes.RemoveAt(SelectedPizzasViewModel.Pizzas.IndexOf(item));
             SelectedPizzasViewModel.Pizzas.Remove(item);
-            SearchPizzasViewModel.Pizzas.Add(item);
         }
     }
 }

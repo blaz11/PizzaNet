@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using PizzaNetCore;
+﻿using PizzaNetCore;
 using Pizza.Net.Domain.DatabaseAccess;
 using System.Collections.Generic;
 
@@ -7,12 +6,13 @@ namespace PizzaNetWebAPI.DatabaseAccess
 {
     static public class PizzasDB
     {
-        static public async Task<MenuModel> GetMenu()
+        static public MenuModel GetMenu()
         {
             var menuModel = new MenuModel();
             var pizzaList = new List<PizzaModel>();
+            var sizeList = new List<SizeModel>();
             var dbAccess = new PizzaNetDbAccess();
-            await dbAccess.ExecuteInTransactionAsync((db) =>
+            dbAccess.ExecuteInTransaction((db) =>
             {
                 foreach(var item in db.Entities.Pizzas)
                 {
@@ -27,10 +27,21 @@ namespace PizzaNetWebAPI.DatabaseAccess
                         ingList.Add(ingModel);
                     }
                     model.Ingredients = ingList;
+                    model.ID = item.IDPizza;
                     pizzaList.Add(model);
+                }
+                foreach (var item in db.Entities.Sizes)
+                {
+                    var model = new SizeModel();
+                    model.ID = item.IDSize;
+                    model.Name = item.Name;
+                    model.PriceMultiplier = item.BasePriceMultiplier;
+                    model.Radius = item.RadiusInCm;
+                    sizeList.Add(model);
                 }
             });
             menuModel.Pizzas = pizzaList;
+            menuModel.Sizes = sizeList;
             return menuModel;
         }
     }

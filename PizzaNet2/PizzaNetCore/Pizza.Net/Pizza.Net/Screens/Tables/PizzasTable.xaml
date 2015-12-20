@@ -21,7 +21,13 @@
             <DataGridTemplateColumn Header="Ingredients">
                 <DataGridTemplateColumn.CellTemplate>
                     <DataTemplate>
-                        <ItemsControl ItemsSource="{Binding Ingredients}"/>
+                        <ItemsControl ItemsSource="{Binding Ingredients}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Name}" />
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
                     </DataTemplate>
                 </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>

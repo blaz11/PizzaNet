@@ -1,14 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
-using System.Threading.Tasks;
-using System;
-using System.Net.Http;
-using System.Threading.Tasks;
-using System.Net.Http.Formatting;
 
 namespace Pizza.Net.RestAPIAccess
 {
@@ -56,45 +48,52 @@ namespace Pizza.Net.RestAPIAccess
                 propertyChanged(this, new PropertyChangedEventArgs("Result"));
             }
         }
+
         public Task<TResult> Task { get; private set; }
         public TResult Result
         {
             get
             {
                 return (Task.Status == TaskStatus.RanToCompletion) ?
-Task.Result : default(TResult);
+                    Task.Result : default(TResult);
             }
         }
+
         public TaskStatus Status { get { return Task.Status; } }
         public bool IsCompleted { get { return Task.IsCompleted; } }
         public bool IsNotCompleted { get { return !Task.IsCompleted; } }
+
         public bool IsSuccessfullyCompleted
         {
             get
             {
                 return Task.Status ==
-TaskStatus.RanToCompletion;
+                    TaskStatus.RanToCompletion;
             }
         }
+
         public bool IsCanceled { get { return Task.IsCanceled; } }
         public bool IsFaulted { get { return Task.IsFaulted; } }
         public AggregateException Exception { get { return Task.Exception; } }
+
         public Exception InnerException
         {
             get
             {
                 return (Exception == null) ?
-null : Exception.InnerException;
+                    null : Exception.InnerException;
             }
         }
+
         public string ErrorMessage
         {
             get
             {
                 return (InnerException == null) ?
-null : InnerException.Message;
+                    null : InnerException.Message;
             }
         }
+
         public event PropertyChangedEventHandler PropertyChanged;
     }
 }

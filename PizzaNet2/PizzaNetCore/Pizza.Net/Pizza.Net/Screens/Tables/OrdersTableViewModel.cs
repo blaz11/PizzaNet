@@ -2,13 +2,7 @@
 
 namespace Pizza.Net.Screens.Tables
 {
-    interface IOrdersTableViewModel
-    {
-        ObservableCollection<OrderViewModel> Orders { get; set; }
-        OrderViewModel SelectedOrder { get; set; }
-    }
-
-    class OrdersTableViewModel : ObservableObject, IOrdersTableViewModel
+    class OrdersTableViewModel : ObservableObject
     {
         private ObservableCollection<OrderViewModel> _order = new ObservableCollection<OrderViewModel>();
         public ObservableCollection<OrderViewModel> Orders

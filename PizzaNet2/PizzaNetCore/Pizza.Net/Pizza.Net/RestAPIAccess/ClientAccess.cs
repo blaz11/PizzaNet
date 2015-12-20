@@ -4,18 +4,22 @@ using System.Threading.Tasks;
 
 namespace Pizza.Net.RestAPIAccess
 {
-    class ClientAccess : WebAccessService
+    class ClientAccess : TokenAuthenticatedWebServiceAccess
     {
-        public ClientAccess()
+        public ClientAccess(LoggedUser user): base(user)
         {
-            this._httpClient.DefaultRequestHeaders.Authorization =
-                new AuthenticationHeaderValue("Bearer", UserSingleton.Token);
         }
 
         public async Task<ClientModel> Get()
         {
             var url = "Client";
             return await this.Get<ClientModel>(url);
+        }
+
+        public async Task<string> Post(ClientModel model)
+        {
+            var url = "Client";
+            return await this.Post<ClientModel, string>(url, model);
         }
     }
 }

@@ -1,180 +1,98 @@
-﻿using Pizza.Net.Screens.Tables;
-using System;
+﻿using Pizza.Net.RestAPIAccess;
+using Pizza.Net.Screens.Tables;
+using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace Pizza.Net.Screens.Pages
 {
     interface IOrdersPageViewModel : IPageViewModel
     {
-        ICommand ClearCommand { get; }
-        string FirstName { get; set; }
-        DateTime? FromDate { get; set; }
-        uint? FromValue { get; set; }
-        string LastName { get; set; }
-        ICommand SearchCommand { get; }
-        DateTime? ToDate { get; set; }
-        uint? ToValue { get; set; }
-        IOrdersTableViewModel UnfinishedOrders { get; }
+        ICommand GetOrdersCommand { get; }
     }
 
     class OrdersPageViewModel : ObservableObject, IOrdersPageViewModel
     {
-        private readonly OrdersPageModel _currentOrdersPageModel;
-        public IOrdersTableViewModel UnfinishedOrders { get; private set; }
-        public OrdersPageViewModel(OrdersPageModel newOrdersPageModel)
+        private LoggedUser _user;
+        public OrdersPageViewModel(OrdersTableViewModel tableViewModel, LoggedUser user)
         {
-            _currentOrdersPageModel = newOrdersPageModel;
-            UnfinishedOrders = new OrdersTableViewModel(); ;
+            _user = user;
+            OrdersTable = tableViewModel;
+            GetOrders();
         }
+
+        public OrdersTableViewModel OrdersTable { get; set; }
 
         public string PageName
         {
             get
             {
-                return "Orders";
+                return "Your orders history";
             }
         }
 
-        public string FirstName
+        private ICommand _getOrdersCommand;
+        public ICommand GetOrdersCommand
         {
             get
             {
-                return _currentOrdersPageModel.FirstName;
+                if (_getOrdersCommand == null)
+                {
+                    _getOrdersCommand = new RelayCommand(
+                        param => GetOrders());
+                }
+                return _getOrdersCommand;
+            }
+        }
+
+        private bool _progressBarVisibility = true;
+        public bool ProgressBarVisibility
+        {
+            get
+            {
+                return _progressBarVisibility;
             }
             set
             {
-                if (value != _currentOrdersPageModel.FirstName)
+                if (value != _progressBarVisibility)
                 {
-                    _currentOrdersPageModel.FirstName = value;
+                    _progressBarVisibility = value;
                     OnPropertyChanged();
                 }
             }
         }
 
-        public string LastName
+        private string _progressBarText;
+        public string ProgressBarText
         {
             get
             {
-                return _currentOrdersPageModel.LastName;
+                return _progressBarText;
             }
             set
             {
-                if (value != _currentOrdersPageModel.LastName)
+                if (value == _progressBarText)
+                    return;
+                _progressBarText = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private async Task GetOrders()
+        {
+            ProgressBarText = "Getting your orders history...";
+            ProgressBarVisibility = true;
+            var orderAccess = new OrderAccess(_user);
+            var result = await orderAccess.Get();
+            if (result.Orders != null)
+            {
+                OrdersTable.Orders.Clear();
+                foreach (var item in result.Orders)
                 {
-                    _currentOrdersPageModel.LastName = value;
-                    OnPropertyChanged();
+                    OrdersTable.Orders.Add(new OrderViewModel(item));
                 }
             }
-        }
-
-        public DateTime? ToDate
-        {
-            get
-            {
-                return _currentOrdersPageModel.ToDate;
-            }
-            set
-            {
-                if (value != _currentOrdersPageModel.ToDate)
-                {
-                    _currentOrdersPageModel.ToDate = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        public DateTime? FromDate
-        {
-            get
-            {
-                return _currentOrdersPageModel.FromDate;
-            }
-            set
-            {
-                if (value != _currentOrdersPageModel.FromDate)
-                {
-                    _currentOrdersPageModel.FromDate = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        public uint? FromValue
-        {
-            get
-            {
-                return _currentOrdersPageModel.FromValue;
-            }
-            set
-            {
-                if (value != _currentOrdersPageModel.FromValue)
-                {
-                    _currentOrdersPageModel.FromValue = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        public uint? ToValue
-        {
-            get
-            {
-                return _currentOrdersPageModel.ToValue;
-            }
-            set
-            {
-                if (value != _currentOrdersPageModel.ToValue)
-                {
-                    _currentOrdersPageModel.ToValue = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        private ICommand _searchCommand;
-        public ICommand SearchCommand
-        {
-            get
-            {
-                if (_searchCommand == null)
-                {
-                    _searchCommand = new RelayCommand(
-                        param => Search());
-                }
-                return _searchCommand;
-            }
-        }
-
-        private ICommand _clearCommand;
-        public ICommand ClearCommand
-        {
-            get
-            {
-                if (_clearCommand == null)
-                {
-                    _clearCommand = new RelayCommand(
-                        param => Clear());
-                }
-                return _clearCommand;
-            }
-        }
-
-        private void Search()
-        {
-            UnfinishedOrders.Orders.Clear();
-            foreach (var v in _currentOrdersPageModel.Search())
-                UnfinishedOrders.Orders.Add(new OrderViewModel(v));
-        }
-
-        private void Clear()
-        {
-            ToValue = null;
-            FirstName = null;
-            LastName = null;
-            FromValue = null;
-            ToDate = null;
-            FromDate = null;
-            Search();
+            ProgressBarVisibility = false;
         }
     }
 }

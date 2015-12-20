@@ -12,10 +12,10 @@ namespace Pizza.Net.Screens.Pages
     {
         public event EventHandler<HarvestPasswordEventArgs> HarvestPassword;
 
-        public bool Login()
+        public LoggedUser Login()
         {
             if (HarvestPassword == null)
-                return false;
+                return null;
             var passwordArgs = new HarvestPasswordEventArgs();
             HarvestPassword(this, passwordArgs);
             TokenProvider.TokenRequestResult token = null;
@@ -26,18 +26,18 @@ namespace Pizza.Net.Screens.Pages
             catch(AggregateException)
             {
                 ErrorMessage = ErrorsMessages.CONNECTION_TIMEOUT;
-                return false;
+                return null;
             }
             if (token.AccessToken != null)
             {
-                UserSingleton.Email = Email;
-                UserSingleton.TokenValid = true;
-                UserSingleton.Token = token.AccessToken;
-                ErrorMessage = null;
-                return true;
+                var user = new LoggedUser();
+                user.TokenValid = true;
+                user.Token = token.AccessToken;
+                user.DownloadClientData();
+                return user;
             }
             ErrorMessage = token.ErrorDescription;
-            return false;
+            return null;
         }
 
         public string Email { get; set; }

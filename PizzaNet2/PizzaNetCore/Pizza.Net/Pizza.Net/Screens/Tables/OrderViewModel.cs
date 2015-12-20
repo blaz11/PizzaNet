@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 
 namespace Pizza.Net.Screens.Tables
 {
@@ -10,20 +9,12 @@ namespace Pizza.Net.Screens.Tables
     {
         public OrderViewModel(OrderModel order)
         {
-            Pizzas = new ObservableCollection<string>();
-            int sum= 0;
-            //using (PizzaNetEntities pne = new PizzaNetEntities())
-            //{
-            //    var c= pne.Clients.Find(order.IDClient);
-            //    Client = c.FirstName + " " + c.LastName;
-
-            //    var pi = pne.PizzaOrders.Where(p => p.IDOrder == order.IDOrder);
-            //    foreach(var v in pi)
-            //    {
-            //        Pizzas.Add(pne.Pizzas.Find(v.IDPizza).Name);
-            //        sum += (int)pne.Pizzas.Find(v.IDPizza).Price * v.Size.BasePriceMultiplier;
-            //    }
-            //}
+            Pizzas = new ObservableCollection<PizzaInOrderModel>(order.Pizzas);
+            double sum = 0;
+            foreach(var item in order.Pizzas)
+            {
+                sum += item.PizzaModel.Price * item.SizeModel.PriceMultiplier;
+            }
             OrderValue = sum;
             DateTime myDatetime = new DateTime(1800, 1, 1);
             StartDate = order.StartOrderDate.ToString();
@@ -32,17 +23,6 @@ namespace Pizza.Net.Screens.Tables
             else
                 FinishDate = order.FinishOrderDate.ToString();
             Order = order;
-        }
-
-        private ObservableCollection<string> ConvertFromPizzaOrderCollectionToStringCollection(ICollection<PizzaInOrderModel> pizzaOrder)
-        {
-            var converted = new ObservableCollection<string>();
-            foreach (var item in pizzaOrder)
-            {
-                string v = item.PizzaModel.Name + " " + item.SizeModel.Name + " " + item.PizzaModel.Price * item.SizeModel.PriceMultiplier;
-                converted.Add(v);
-            }
-            return converted;
         }
 
         public OrderModel Order { get; private set; }
@@ -64,8 +44,8 @@ namespace Pizza.Net.Screens.Tables
             }
         }
 
-        private ObservableCollection<string> _pizzas;
-        public ObservableCollection<string> Pizzas
+        private ObservableCollection<PizzaInOrderModel> _pizzas;
+        public ObservableCollection<PizzaInOrderModel> Pizzas
         {
             get
             {
@@ -131,6 +111,5 @@ namespace Pizza.Net.Screens.Tables
                 }
             }
         }
-
     }
 }

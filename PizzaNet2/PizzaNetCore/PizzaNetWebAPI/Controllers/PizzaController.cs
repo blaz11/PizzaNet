@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Web.Http;
-using PizzaNetCore;
+﻿using System.Web.Http;
+using PizzaNetWebAPI.DatabaseAccess;
 
 namespace PizzaNetWebAPI.Controllers
 {
@@ -13,15 +8,8 @@ namespace PizzaNetWebAPI.Controllers
         // GET: api/Pizza
         public IHttpActionResult Get()
         {
-            List<PizzaModel> ord = null;
-
-            if (ord == null)
-            {
-                return NotFound();
-            }
-            return Ok();
+            var model = PizzasDB.GetMenu();
+            return Ok(model);
         }
-
-     
     }
 }

@@ -5,17 +5,15 @@ using System;
 using System.ComponentModel;
 using System.Collections.Generic;
 using Pizza.Net.RestAPIAccess;
-using PizzaNetCore;
 using System.Threading.Tasks;
-using System;
-using System.ComponentModel;
-using System.Text.RegularExpressions;
+using System.Windows;
 
 namespace Pizza.Net.Screens.Pages
 {
     class ClientDataPageViewModel : ObservableObject, IPageViewModel, IDataErrorInfo
     {
         private ClientDataPageModel _model;
+
         public bool _editVisible = false;
         public bool EditVisible
         {
@@ -29,6 +27,7 @@ namespace Pizza.Net.Screens.Pages
                 base.OnPropertyChanged();
             }
         }
+
         public bool _viewVisible = true;
         public bool ViewVisible
         {
@@ -42,40 +41,52 @@ namespace Pizza.Net.Screens.Pages
                 base.OnPropertyChanged();
             }
         }
-        public ClientDataPageViewModel(ClientDataPageModel model)
-        {
-               _model = model;
-               _currentClient = new ClientModel();
-               _validProperties = new Dictionary<string, bool>();
-               _validProperties.Add("FirstName", false);
-               _validProperties.Add("LastName", false);
-               _validProperties.Add("City", false);
-               _validProperties.Add("ZipCode", false);
-               _validProperties.Add("Street", false);
-               _validProperties.Add("PhoneNumber", false);
-               _validProperties.Add("PremiseNumber", false);
-            model.CurrentClient = _currentClient;
-           var clientAccess = new ClientAccess();
-            mod= new NotifyTaskCompletion<ClientModel>(clientAccess.Get());
-        }
-        private NotifyTaskCompletion<ClientModel> _mod;
-        public NotifyTaskCompletion<ClientModel> mod{
-            get { return _mod; }
-            set
-            {
-                _mod = value;
-                base.OnPropertyChanged();
-            } }
 
-        private bool allPropertiesValid = false;
+        private LoggedUser _user;
+
+        public ClientDataPageViewModel(ClientDataPageModel model, LoggedUser user)
+        {
+            _model = model;
+            _user = user;
+            _validProperties = new Dictionary<string, bool>();
+            _validProperties.Add("FirstName", false);
+            _validProperties.Add("LastName", false);
+            _validProperties.Add("City", false);
+            _validProperties.Add("ZipCode", false);
+            _validProperties.Add("Street", false);
+            _validProperties.Add("PhoneNumber", false);
+            _validProperties.Add("PremiseNumber", false);
+            ProgressBarText = "Getting your data...";
+            GetClientData();
+        }
+
+        private async Task GetClientData()
+        {
+            _downloadedClient =  await _user.GetClientModelTaskCompletion.Task;
+            FirstName = _downloadedClient.FirstName;
+            LastName = _downloadedClient.LastName;
+            City = _downloadedClient.City;
+            ZipCode = _downloadedClient.ZipCode;
+            Street = _downloadedClient.Street;
+            PhoneNumber = _downloadedClient.PhoneNumber;
+            FlatNumber = _downloadedClient.FlatNumber;
+            PremiseNumber = _downloadedClient.PremiseNumber;
+            ProgressBarVisibility = false;
+            ViewVisible = !ViewVisible;
+            EditVisible = !EditVisible;
+        }
+
+        private ClientModel _downloadedClient;
+
+        private bool _allPropertiesValid = false;
         public bool AllPropertiesValid
         {
-            get { return allPropertiesValid; }
+            get { return _allPropertiesValid; }
             set
             {
-                if (allPropertiesValid != value)
+                if (_allPropertiesValid != value)
                 {
-                    allPropertiesValid = value;
+                    _allPropertiesValid = value;
                     base.OnPropertyChanged("AllPropertiesValid");
                 }
             }
@@ -111,6 +122,7 @@ namespace Pizza.Net.Screens.Pages
             }
             this.AllPropertiesValid = true;
         }
+
         private ICommand _okButtonClickCommand;
         public ICommand OkButtonClickCommand
         {
@@ -153,8 +165,6 @@ namespace Pizza.Net.Screens.Pages
             }
         }
 
-        private readonly ClientModel _currentClient;
-
         public string FirstName
         {
             get
@@ -170,7 +180,7 @@ namespace Pizza.Net.Screens.Pages
                 }
             }
         }
-        
+
 
         public string LastName
         {
@@ -267,7 +277,7 @@ namespace Pizza.Net.Screens.Pages
                 }
             }
         }
-  
+
 
         public string FlatNumber
         {
@@ -285,6 +295,39 @@ namespace Pizza.Net.Screens.Pages
             }
         }
 
+        private bool _progressBarVisibility = true;
+        public bool ProgressBarVisibility
+        {
+            get
+            {
+                return _progressBarVisibility;
+            }
+            set
+            {
+                if(value != _progressBarVisibility)
+                {
+                    _progressBarVisibility = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private string _progressBarText;
+        public string ProgressBarText
+        {
+            get
+            {
+                return _progressBarText;
+            }
+            set
+            {
+                if (value == _progressBarText)
+                    return;
+                _progressBarText = value;
+                OnPropertyChanged();
+            }
+        }
+
         public string PageName
         {
             get
@@ -293,15 +336,47 @@ namespace Pizza.Net.Screens.Pages
             }
         }
 
+        private NotifyTaskCompletion<string> _postTaskCompletion;
+
         private void AcceptChanges()
         {
-            ViewVisible = !ViewVisible;
-            EditVisible = !EditVisible;
+            if(!AllPropertiesValid)
+            {
+                MessageBox.Show("Fill in required fields!");
+            }
+            _downloadedClient.FirstName = FirstName;
+            _downloadedClient.LastName = LastName;
+            _downloadedClient.City = City;
+            _downloadedClient.ZipCode = ZipCode;
+            _downloadedClient.Street = Street;
+            _downloadedClient.PhoneNumber = PhoneNumber;
+            _downloadedClient.FlatNumber = FlatNumber;
+            _downloadedClient.PremiseNumber = PremiseNumber;
+            var ac = new ClientAccess(_user);
+            _postTaskCompletion = new NotifyTaskCompletion<string>(ac.Post(_downloadedClient));
+            _postTaskCompletion.PropertyChanged += PostCompleted;
+            ProgressBarText = "Sending your request...";
+            ProgressBarVisibility = true;
+            _user.DownloadClientData();
+        }
+
+        private void PostCompleted(object sender, PropertyChangedEventArgs e)
+        {
+            _postTaskCompletion.PropertyChanged -= PostCompleted;
+            ProgressBarVisibility = false;
+            MessageBox.Show("Your info has beed updated");
         }
 
         private void CancelChanges()
         {
-
+            FirstName = _downloadedClient.FirstName;
+            LastName = _downloadedClient.LastName;
+            City = _downloadedClient.City;
+            ZipCode = _downloadedClient.ZipCode;
+            Street = _downloadedClient.Street;
+            PhoneNumber = _downloadedClient.PhoneNumber;
+            FlatNumber = _downloadedClient.FlatNumber;
+            PremiseNumber = _downloadedClient.PremiseNumber;
         }
 
         private ChangePasswordWindow _changePasswordWindow;
@@ -311,7 +386,7 @@ namespace Pizza.Net.Screens.Pages
             if (_changePasswordWindow != null)
                 _changePasswordWindow.Close();
             _changePasswordWindow = new ChangePasswordWindow();
-            var context = new ChangePasswordWindowViewModel();
+            var context = new ChangePasswordWindowViewModel(_user);
             _changePasswordWindow.DataContext = context;
             _changePasswordWindow.Show();
         }

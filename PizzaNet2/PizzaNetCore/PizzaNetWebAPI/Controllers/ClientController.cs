@@ -19,8 +19,9 @@ namespace PizzaNetWebAPI.Controllers
 
             return Ok(client);
         }
-        // PUT: api/Client/5
-        public IHttpActionResult Put(ClientModel client)
+
+        // POST: api/Client
+        public IHttpActionResult Post(ClientModel client)
         {
             ClientsDB.AlterClient(client, User.Identity.Name);
             return Ok();

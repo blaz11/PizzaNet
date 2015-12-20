@@ -118,14 +118,20 @@
     </ApplicationDefinition>
     <Compile Include="Helpers\RelayCommand.cs" />
     <Compile Include="Helpers\ObservableObject.cs" />
+    <Compile Include="LoggedUser.cs" />
     <Compile Include="RestAPIAccess\ChangePasswordAccess.cs" />
     <Compile Include="RestAPIAccess\ClientAccess.cs" />
     <Compile Include="RestAPIAccess\NotifyTaskCompletion.cs" />
+    <Compile Include="RestAPIAccess\OrderAccess.cs" />
+    <Compile Include="RestAPIAccess\PizzaAccess.cs" />
     <Compile Include="RestAPIAccess\RegisterAccess.cs" />
+    <Compile Include="RestAPIAccess\TokenAuthenticatedWebServiceAccess.cs" />
     <Compile Include="RestAPIAccess\TokenProvider.cs" />
-    <Compile Include="RestAPIAccess\UserSingleton.cs" />
     <Compile Include="RestAPIAccess\WebAPIData.cs" />
     <Compile Include="RestAPIAccess\WebServiceAcces.cs" />
+    <Compile Include="Screens\Controls\NetworkOperationProgressBar.xaml.cs">
+      <DependentUpon>NetworkOperationProgressBar.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Screens\DesignTimeData\ClientsTable.cs" />
     <Compile Include="Screens\DesignTimeData\OrderItem.cs" />
     <Compile Include="Screens\DesignTimeData\OrdersTable.cs" />
@@ -146,7 +152,6 @@
     <Compile Include="Screens\Pages\Orders\OrdersPage.xaml.cs">
       <DependentUpon>OrdersPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Screens\Pages\Orders\OrdersPageModel.cs" />
     <Compile Include="Screens\Pages\Orders\OrdersPageViewModel.cs" />
     <Compile Include="Screens\Pages\PizzasInOrderCreator\PizzasInOrderCreatorModel.cs" />
     <Compile Include="Screens\Pages\PizzasInOrderCreator\PizzasInOrderCreatorViewModel.cs" />
@@ -199,14 +204,14 @@
     </Compile>
     <Compile Include="Screens\Pages\OrderCreator\OrderCreatorViewModel.cs" />
     <Compile Include="Screens\Windows\ChangingPagesBaseViewModel.cs" />
-    <Compile Include="Screens\Windows\OrdersHistory.xaml.cs">
-      <DependentUpon>OrdersHistory.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Screens\Windows\OrdersHistoryViewModel.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Screens\Controls\NetworkOperationProgressBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Screens\Pages\ClientDataPage\ClientDataPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -268,10 +273,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Screens\Pages\OrderCreator\OrderCreator.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Screens\Windows\OrdersHistory.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

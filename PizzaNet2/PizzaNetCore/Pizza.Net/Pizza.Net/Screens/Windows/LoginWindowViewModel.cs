@@ -67,18 +67,19 @@ namespace Pizza.Net.Screens.Windows
 
         private async void HandleLogin()
         {
-            if (await Task.Run(() => (PageViewModels[0] as LoginPageViewModel).Login()))
-                LoginSuccesful();
+            var user = await Task.Run(() => (PageViewModels[0] as LoginPageViewModel).Login());
+            if (user != null)
+                LoginSuccesful(user);
         }
 
-        private void LoginSuccesful()
+        private void LoginSuccesful(LoggedUser user)
         {
-            var app = new MainApplicationWindow();
-            var context = new MainApplicationWindowViewModel();
+            var window = new MainApplicationWindow();
+            var context = new MainApplicationWindowViewModel(user);
             OnClosingRequest();
-            app.DataContext = context;
-            app.Title = "Pizza.Net";
-            app.Show();
+            window.DataContext = context;
+            window.Title = "Pizza.Net";
+            window.Show();
         }
     }
 }

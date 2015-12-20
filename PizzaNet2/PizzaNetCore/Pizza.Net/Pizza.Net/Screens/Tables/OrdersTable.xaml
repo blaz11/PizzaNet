@@ -16,12 +16,16 @@
               MaxWidth="635"
               IsReadOnly="True">
         <DataGrid.Columns>
-            <DataGridTextColumn Binding="{Binding Client}" 
-                                Header="Client" />
             <DataGridTemplateColumn Header="Pizzas">
                 <DataGridTemplateColumn.CellTemplate>
                     <DataTemplate>
-                        <ItemsControl ItemsSource="{Binding Pizzas}"/>
+                        <ItemsControl ItemsSource="{Binding Pizzas}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding PizzaModel.Name}" />
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
                     </DataTemplate>
                 </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>

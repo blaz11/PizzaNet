@@ -1,17 +1,18 @@
 ﻿using PizzaNetCore;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace Pizza.Net.Screens.Pages
 {
     class OrderCreatorViewModel : ChangingPagesBaseViewModel, IPageViewModel
     {
-        public OrderCreatorViewModel(IPizzasInOrderCreatorViewModel pizzasPageViewModel)
+        public OrderCreatorViewModel(IPizzasInOrderCreatorViewModel pizzasPageViewModel, IOrderSubmitViewModel orderSubmitViewModel)
         {
             PageViewModels.Add(pizzasPageViewModel);
             _nextStepButtonContents.Add("Add pizzas");
-            PageViewModels.Add(new OrderSubmitViewModel());
+            PageViewModels.Add(orderSubmitViewModel);
             _nextStepButtonContents.Add("Submit Order");
             AdvanceToNextStep();
         }
@@ -103,11 +104,11 @@ namespace Pizza.Net.Screens.Pages
         {
             get
             {
-                return "Create order";
+                return "Make an order";
             }
         }
 
-        private void AdvanceToNextStep()
+        private async Task AdvanceToNextStep()
         {
             var orderSubmitViewModel = (PageViewModels[1] as OrderSubmitViewModel);
             switch (_currentStepIndex)
@@ -122,13 +123,14 @@ namespace Pizza.Net.Screens.Pages
                     }
                     orderSubmitViewModel.Sizes = (CurrentPageViewModel as PizzasInOrderCreatorViewModel).Sizes;
                     ObservableCollection<PizzaModel> pizzas = new ObservableCollection<PizzaModel>();
+                    orderSubmitViewModel.Pizzas.Pizzas.Clear();
                     foreach (var v in selectedPizzasViewModel.Pizzas)
                     {
                         orderSubmitViewModel.Pizzas.Pizzas.Add(v);
                     }
                     break;
                 case 2:
-                    orderSubmitViewModel.Submit();
+                    await orderSubmitViewModel.Submit();
                     Reset();
                     return;
             }

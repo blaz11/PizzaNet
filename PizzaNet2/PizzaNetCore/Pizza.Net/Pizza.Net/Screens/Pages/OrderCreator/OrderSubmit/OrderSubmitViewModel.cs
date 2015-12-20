@@ -1,6 +1,11 @@
-﻿using Pizza.Net.Screens.Tables;
+﻿using Pizza.Net.RestAPIAccess;
+using Pizza.Net.Screens.Tables;
 using PizzaNetCore;
+using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
+using System.Windows;
 
 namespace Pizza.Net.Screens.Pages
 {
@@ -8,10 +13,27 @@ namespace Pizza.Net.Screens.Pages
     {
         ClientsTableViewModel Client { get; set; }
         PizzasTableViewModel Pizzas { get; set; }
+        Task GetClientData();
     }
 
     class OrderSubmitViewModel : ObservableObject, IOrderSubmitViewModel
     {
+        private LoggedUser _user;
+
+        public OrderSubmitViewModel(LoggedUser user)
+        {
+            _user = user;
+            GetClientData();
+            ProgressBarVisibility = false;
+        }
+
+        public async Task GetClientData()
+        {
+            var client = await _user.GetClientModelTaskCompletion.Task;
+            Client.Clients.Clear();
+            Client.Clients.Add(client);
+        }
+
         public string PageName
         {
             get
@@ -26,31 +48,61 @@ namespace Pizza.Net.Screens.Pages
 
         public PizzasTableViewModel Pizzas { get; set; } = new PizzasTableViewModel();
 
-        public void Submit()
+        public async Task Submit()
         {
-            //using (PizzaNetEntities pne = new PizzaNetEntities())
-            //{
-            //    Order o = new Order();
-            //    var client = Client.Clients.First();
-            //    o.Client = pne.Clients.Find(client.IDClient);
-            //    o.IDClient = client.IDClient;
-            //    o.StartOrderDate = DateTime.Now;
-            //    o.FinishOrderDate = new DateTime(1800, 1, 1);
-            //    pne.Orders.Add(o);
-            //    pne.SaveChanges();
-            //    int i = 0;
-            //    foreach (var v in Pizzas.Pizzas)
-            //    {
-            //        pne.PizzaOrders.Add(new PizzaOrder
-            //        {
-            //            Pizza = pne.Pizzas.Find(v.Pizza.IDPizza),
-            //            Order = pne.Orders.Find(o.IDOrder),
-            //            Size = pne.Sizes.Find(Sizes[i].IDSize)
-            //        });
-            //        i++;
-            //    }
-            //    pne.SaveChanges();
-            //}
+            var orderModel = new OrderModel();
+            orderModel.StartOrderDate = DateTime.Now;
+            var list = new List<PizzaInOrderModel>();
+
+            int i = 0;
+            foreach(var item in Pizzas.Pizzas)
+            {
+                var model = new PizzaInOrderModel();
+                model.PizzaModel = item;
+                model.SizeModel = Sizes[i];
+                i++;
+                list.Add(model);
+            }
+            orderModel.Pizzas = list;
+            var oa = new OrderAccess(_user);
+            ProgressBarVisibility = true;
+            ProgressBarText = "Sending your order...";
+            await oa.Post(orderModel);
+            ProgressBarVisibility = false;
+            MessageBox.Show("Order submitted successfuly. Email confirmation has been sent.");
+        }
+
+        private bool _progressBarVisibility = true;
+        public bool ProgressBarVisibility
+        {
+            get
+            {
+                return _progressBarVisibility;
+            }
+            set
+            {
+                if (value != _progressBarVisibility)
+                {
+                    _progressBarVisibility = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private string _progressBarText;
+        public string ProgressBarText
+        {
+            get
+            {
+                return _progressBarText;
+            }
+            set
+            {
+                if (value == _progressBarText)
+                    return;
+                _progressBarText = value;
+                OnPropertyChanged();
+            }
         }
     }
 }

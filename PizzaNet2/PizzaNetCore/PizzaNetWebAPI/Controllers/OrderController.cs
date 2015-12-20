@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Web.Http;
+﻿using System.Web.Http;
 using PizzaNetCore;
+using PizzaNetWebAPI.DatabaseAccess;
 
 namespace PizzaNetWebAPI.Controllers
 {
@@ -14,24 +10,15 @@ namespace PizzaNetWebAPI.Controllers
         // GET: api/Order
         public IHttpActionResult Get()
         {
-            List<OrderModel> ord = null;
-
-            if (ord == null)
-            {
-                return NotFound();
-            }
-            return Ok();
+            var model = OrdersDB.GetAllClientsOrders(User.Identity.Name);
+            return Ok(model);
         }
-
 
         // POST: api/Order
-        public IHttpActionResult Post([FromBody]string value)
+        public IHttpActionResult Post([FromBody]OrderModel value)
         {
-            OrderModel ord = new OrderModel();
-
+            OrdersDB.AddOrder(value, User.Identity.Name);
             return Ok();
-
         }
-
     }
 }

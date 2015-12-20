@@ -8,6 +8,13 @@ namespace Pizza.Net.Screens.Windows
 {
     class ChangePasswordWindowViewModel : CloseableViewModel
     {
+        private LoggedUser _user;
+
+        public ChangePasswordWindowViewModel(LoggedUser user)
+        {
+            _user = user;
+        }
+
         public event EventHandler<HarvestPasswordEventArgs> HarvestOldPassword;
 
         public event EventHandler<HarvestPasswordEventArgs> HarvestNewPassword;
@@ -58,7 +65,7 @@ namespace Pizza.Net.Screens.Windows
                 return;
             }
             ChangePasswordResponse result;
-            var changePasswordAccess = new ChangePasswordAccess();
+            var changePasswordAccess = new ChangePasswordAccess(_user);
             try
             {
                 result = await changePasswordAccess.Post(oldPasswordArgs.Password, newPassowrdArgs.Password);

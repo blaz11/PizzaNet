@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Pizza.Net.RestAPIAccess
 {
-    class ChangePasswordAccess : WebAccessService
+    class ChangePasswordAccess : TokenAuthenticatedWebServiceAccess
     {
         private class ChangePasswordRequestData
         {
@@ -14,10 +14,8 @@ namespace Pizza.Net.RestAPIAccess
             public string ConfirmPassword { get; set; }
         }
 
-        public ChangePasswordAccess()
+        public ChangePasswordAccess(LoggedUser user): base(user)
         {
-            this._httpClient.DefaultRequestHeaders.Authorization =
-                new AuthenticationHeaderValue("Bearer", UserSingleton.Token);
         }
 
         public async Task<ChangePasswordResponse> Post(string oldPassword, string newPassword)

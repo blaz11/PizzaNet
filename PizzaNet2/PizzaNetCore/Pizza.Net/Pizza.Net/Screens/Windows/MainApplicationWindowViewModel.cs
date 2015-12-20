@@ -7,9 +7,9 @@ namespace Pizza.Net.Screens
 {
     class MainApplicationWindowViewModel : ChangingPagesBaseViewModel
     {
-        public MainApplicationWindowViewModel()
+        public MainApplicationWindowViewModel(LoggedUser user)
         {
-            InitializeApplication();
+            InitializeApplication(user);
         }
 
         private ICommand _changePageCommand;
@@ -36,20 +36,19 @@ namespace Pizza.Net.Screens
                 .FirstOrDefault(vm => vm == viewModel);
         }
 
-        private void InitializeApplication()
+        private void InitializeApplication(LoggedUser user)
         {
-            var clientsTableViewModel = new ClientsTableViewModel();
             var ordersTableViewModel = new OrdersTableViewModel();
-            var pizzasTableViewModel = new PizzasTableViewModel();
-            var pizzasInOrderCreatorViewModel = new PizzasInOrderCreatorViewModel(new PizzasInOrderCreatorModel());
-
+            var pizzasInOrderCreatorViewModel = new PizzasInOrderCreatorViewModel(new PizzasInOrderCreatorModel(), user);
+            var orderSubmitViewModel = new OrderSubmitViewModel(user);
             var clientDataPageModel = new ClientDataPageModel();
-            var clientPage = new ClientDataPageViewModel(clientDataPageModel);
+
+            var clientPage = new ClientDataPageViewModel(clientDataPageModel, user);
 
             // Add available pages
             PageViewModels.Add(clientPage);
-            PageViewModels.Add(new OrdersPageViewModel(new OrdersPageModel()));
-            PageViewModels.Add(new OrderCreatorViewModel(pizzasInOrderCreatorViewModel));
+            PageViewModels.Add(new OrdersPageViewModel(ordersTableViewModel, user));
+            PageViewModels.Add(new OrderCreatorViewModel(pizzasInOrderCreatorViewModel, orderSubmitViewModel));
 
             // Set starting page
             CurrentPageViewModel = PageViewModels[0];

@@ -23,6 +23,7 @@ namespace PizzaNetCore
 
     public class SizeModel
     {
+        public int ID { get; set; }
         public string Name { get; set; }
         public double Radius { get; set; }
         public double PriceMultiplier { get; set; }

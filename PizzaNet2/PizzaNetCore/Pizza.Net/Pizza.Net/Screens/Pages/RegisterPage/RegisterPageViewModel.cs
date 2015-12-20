@@ -1,12 +1,9 @@
 ﻿using Pizza.Net.RestAPIAccess;
 using System;
 using System.Threading.Tasks;
-using Pizza.Net.Screens.Windows;
-using PizzaNetCore;
 using System.Windows.Input;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System;
 
 namespace Pizza.Net.Screens.Pages
 {
@@ -45,6 +42,11 @@ namespace Pizza.Net.Screens.Pages
         {
             if (HarvestPassword == null || HarvestConfirmPassword == null)
                 return;
+            if(!AllPropertiesValid)
+            {
+                Message = "Please provide valid email!";
+                return;
+            }
             var passwordArgs = new HarvestPasswordEventArgs();
             HarvestPassword(this, passwordArgs);
             var confirmPasswordArgs = new HarvestPasswordEventArgs();
@@ -133,15 +135,15 @@ namespace Pizza.Net.Screens.Pages
             this.AllPropertiesValid = true;
         }
 
-        private bool allPropertiesValid = false;
+        private bool _allPropertiesValid = false;
         public bool AllPropertiesValid
         {
-            get { return allPropertiesValid; }
+            get { return _allPropertiesValid; }
             set
             {
-                if (allPropertiesValid != value)
+                if (_allPropertiesValid != value)
                 {
-                    allPropertiesValid = value;
+                    _allPropertiesValid = value;
                     base.OnPropertyChanged("AllPropertiesValid");
                 }
             }
